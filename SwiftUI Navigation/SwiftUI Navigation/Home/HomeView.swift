@@ -6,61 +6,55 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var navigationStack = [NavLink]()
+    @State private var isSwiftUINaviPresented = false
+    @State private var isUIKitNaviPresented = false
+    @State private var isViewStateNaviPresented = false
 
     var body: some View {
-        NavigationStack(
-            path: .init(
-                get: {
-                    navigationStack
-                },
-                set: { stack in
-                    navigationStack = stack
+        VStack(spacing: 30) {
+            Spacer()
+            Text("SwiftUI\nNavigation Showcase")
+                .font(.title)
+                .multilineTextAlignment(.center)
+                .bold()
+            Text("Tap a link to explore one of the options:")
+            Spacer()
+            VStack(spacing: 15) {
+                Divider()
+                Button("Nav Stack + Router SwiftUI navigation") {
+                    isSwiftUINaviPresented.toggle()
                 }
-            )
-        ) {
-                VStack(spacing: 30) {
-                    Spacer()
-                    Text("SwiftUI\nNavigation Showcase")
-                        .font(.title)
-                        .multilineTextAlignment(.center)
-                        .bold()
-                    Text("Tap a link to explore one of the options:")
-                    Spacer()
-                    VStack(spacing: 15) {
-                        Divider()
-                        NavigationLink(value: NavLink.swiftUIRouter) {
-                            Text("Nav Stack + Router SwiftUI navigation")
-                        }
-                        Divider()
-                        NavigationLink(value: NavLink.uikit) {
-                            Text("UIKit navigation (UINavController + Router)")
-                        }
-                        Divider()
-                        NavigationLink(value: NavLink.viewState) {
-                            Text("View State (drill-down) navigation")
-                        }
-                        Divider()
-                    }
-                    Spacer()
+                .fullScreenCover(isPresented: $isSwiftUINaviPresented) {
+                    SwiftUIRouterHomeView(router: DefaultNavigationRouter())
                 }
-                .navigationDestination(for: NavLink.self) { navLink in
-                    switch navLink {
-                    case .uikit:
-                        EmptyView()
-                    case .viewState:
-                        EmptyView()
-                    case .swiftUIRouter:
-                        EmptyView()
-                    }
-                }
-        }
-    }
-}
 
-extension HomeView {
-    enum NavLink: Hashable {
-        case uikit, viewState, swiftUIRouter
+                Divider()
+                Button("UIKit navigation (UINavController + Router)") {
+                    isUIKitNaviPresented.toggle()
+                }
+                .fullScreenCover(isPresented: $isUIKitNaviPresented) {
+                    // TODO: show UIKit navi showcase
+                    Button("Back") {
+                        isUIKitNaviPresented = false
+                    }
+                }
+
+                Divider()
+                Button("View State (drill-down) navigation") {
+                    isViewStateNaviPresented.toggle()
+                }
+                .fullScreenCover(isPresented: $isViewStateNaviPresented) {
+                    // TODO: show SwiftUI View state-based navi showcase
+                    Button("Back") {
+                        isViewStateNaviPresented = false
+                    }
+                }
+
+                Divider()
+            }
+
+            Spacer()
+        }
     }
 }
 
