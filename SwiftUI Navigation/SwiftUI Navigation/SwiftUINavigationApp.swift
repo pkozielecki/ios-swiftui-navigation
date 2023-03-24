@@ -1,15 +1,15 @@
 //
-//  SwiftUI_NavigationApp.swift
+//  SwiftUINavigationApp.swift
 //  KISS Views
 //
 
 import SwiftUI
 
 @main
-struct SwiftUI_NavigationApp: App {
+struct SwiftUINavigationApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
