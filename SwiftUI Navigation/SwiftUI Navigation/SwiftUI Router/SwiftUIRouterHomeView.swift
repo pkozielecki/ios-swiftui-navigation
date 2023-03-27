@@ -31,13 +31,24 @@ struct SwiftUIRouterHomeView<Router: NavigationRouter>: View {
                         }
                     }
                 }
-        }
-        .navigationDestination(for: NavigationRoute.self) { route in
-            //  Handling app screens, pushed to the navigation stack:
-            switch route.screen {
-            case .editAsset:
-                EditAssetView()
-            }
+                .navigationDestination(for: NavigationRoute.self) { route in
+                    //  Handling app screens, pushed to the navigation stack:
+                    switch route.screen {
+                    case let .editAsset(id):
+                        Text("Editing asset: \(id)")
+                    case let .assetCharts(id):
+                        Text("Charts for asset: \(id)")
+                    }
+                }
+                .sheet(item: $router.presentedPopup) { _ in
+                    if let $popup = Binding($router.presentedPopup) {
+                        //  Handling app popups, presented as sheets:
+                        switch $popup.wrappedValue.popup {
+                        case .addAsset:
+                            Text("Adding new asset")
+                        }
+                    }
+                }
         }
     }
 }
