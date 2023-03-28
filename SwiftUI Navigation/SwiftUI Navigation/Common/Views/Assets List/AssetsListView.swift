@@ -50,9 +50,8 @@ private extension AssetsListView {
         router.push(screen: .editAsset(id))
     }
 
-    func onAssetRemovalRequest(id: String) {
-        // TODO: Show configuration alert on router
-        print("Asset selected for removal: \(id)")
+    func onAssetRemovalRequest(data: AssetCellView.Data) {
+        router.show(alert: .deleteAsset(assetId: data.id, assetName: data.title))
     }
 }
 

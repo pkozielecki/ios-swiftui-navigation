@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E5F6640F0B7D7B35954CD55 /* SwiftUINavigationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6906889C57FA4B4B18AD /* SwiftUINavigationHelpers.swift */; };
 		1E5F66A2F0689032EAED2041 /* PreviewFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6B574E96AB1C8DC47384 /* PreviewFixtures.swift */; };
 		1E5F674324488CED3B65E96D /* PopupRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6978DB94ED509A012D9D /* PopupRoute.swift */; };
 		1E5F68000B7C9986CD5511E6 /* NavigationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66A82E08E494DAA212F9 /* NavigationRoute.swift */; };
 		1E5F6AA966C0CC94BE5433B8 /* PresentationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A1A009372F471C0AB01 /* PresentationMode.swift */; };
+		1E5F6BCFDC480A9A3F864042 /* AlertRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A1E0878E6FB97E1BB64 /* AlertRoute.swift */; };
 		1E5F6DA01451D2A011DF4BEF /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F632AA3F3569832746D24 /* NavigationRouter.swift */; };
 		1E5F6DBC85296315FB439966 /* AssetsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F596DF0A16DE19852D7 /* AssetsListView.swift */; };
 		22A240EB29CD884E0062221A /* SwiftUINavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A240EA29CD884E0062221A /* SwiftUINavigationApp.swift */; };
@@ -36,8 +38,10 @@
 /* Begin PBXFileReference section */
 		1E5F632AA3F3569832746D24 /* NavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		1E5F66A82E08E494DAA212F9 /* NavigationRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
+		1E5F6906889C57FA4B4B18AD /* SwiftUINavigationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUINavigationHelpers.swift; sourceTree = "<group>"; };
 		1E5F6978DB94ED509A012D9D /* PopupRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupRoute.swift; sourceTree = "<group>"; };
 		1E5F6A1A009372F471C0AB01 /* PresentationMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationMode.swift; sourceTree = "<group>"; };
+		1E5F6A1E0878E6FB97E1BB64 /* AlertRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertRoute.swift; sourceTree = "<group>"; };
 		1E5F6B574E96AB1C8DC47384 /* PreviewFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewFixtures.swift; sourceTree = "<group>"; };
 		1E5F6F596DF0A16DE19852D7 /* AssetsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsListView.swift; sourceTree = "<group>"; };
 		22A240E729CD884E0062221A /* SwiftUI Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI Navigation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +81,7 @@
 				1E5F6978DB94ED509A012D9D /* PopupRoute.swift */,
 				1E5F6A1A009372F471C0AB01 /* PresentationMode.swift */,
 				1E5F66A82E08E494DAA212F9 /* NavigationRoute.swift */,
+				1E5F6A1E0878E6FB97E1BB64 /* AlertRoute.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -98,6 +103,14 @@
 			path = "Preview Fixtures";
 			sourceTree = "<group>";
 		};
+		1E5F68317382932CA98AD561 /* SwiftUI Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F6906889C57FA4B4B18AD /* SwiftUINavigationHelpers.swift */,
+			);
+			path = "SwiftUI Helpers";
+			sourceTree = "<group>";
+		};
 		1E5F689E67F27902A4692485 /* SwiftUI Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				1E5F6CC09EB870FC8EF411FB /* Views */,
+				1E5F68317382932CA98AD561 /* SwiftUI Helpers */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -314,6 +328,8 @@
 				1E5F68000B7C9986CD5511E6 /* NavigationRoute.swift in Sources */,
 				1E5F66A2F0689032EAED2041 /* PreviewFixtures.swift in Sources */,
 				1E5F6DBC85296315FB439966 /* AssetsListView.swift in Sources */,
+				1E5F6BCFDC480A9A3F864042 /* AlertRoute.swift in Sources */,
+				1E5F6640F0B7D7B35954CD55 /* SwiftUINavigationHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

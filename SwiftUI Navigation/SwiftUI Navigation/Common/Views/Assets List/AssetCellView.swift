@@ -9,7 +9,7 @@ struct AssetCellView: View {
     let data: AssetCellView.Data
     let onSelectTapped: ((String) -> Void)?
     let onEditTapped: ((String) -> Void)?
-    let onDeleteTapped: ((String) -> Void)?
+    let onDeleteTapped: ((AssetCellView.Data) -> Void)?
 
     var body: some View {
         Button(data.title) {
@@ -17,7 +17,7 @@ struct AssetCellView: View {
         }
         .swipeActions {
             Button {
-                onDeleteTapped?(data.id)
+                onDeleteTapped?(data)
             } label: {
                 Image(systemName: "trash")
             }

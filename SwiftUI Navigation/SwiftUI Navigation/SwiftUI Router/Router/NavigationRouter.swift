@@ -16,6 +16,11 @@ protocol NavigationRouter: AnyObject, ObservableObject {
     var presentedPopupPublished: Published<PopupRoute?> { get }
     var presentedPopupPublisher: Published<PopupRoute?>.Publisher { get }
 
+    /// A currently presented alert.
+    var presentedAlert: AlertRoute? { get set }
+    var presentedAlertPublished: Published<AlertRoute?> { get }
+    var presentedAlertPublisher: Published<AlertRoute?>.Publisher { get }
+
     /// A currently presented navigation route.
     var navigationRoute: NavigationRoute? { get }
 
@@ -46,6 +51,14 @@ protocol NavigationRouter: AnyObject, ObservableObject {
 
     /// Dismisses current popup.
     func dismiss()
+
+    /// Shows an alert.
+    ///
+    /// - Parameter alert: an alert to show.
+    func show(alert: AlertRoute.Alert)
+
+    /// Removes currently displayed alert from the navigation stack.
+    func hideCurrentAlert()
 }
 
 /// A default implementation of NavigationRouter.
@@ -54,11 +67,17 @@ final class DefaultNavigationRouter: NavigationRouter {
     var presentedPopupPublished: Published<PopupRoute?> { _presentedPopup }
     var presentedPopupPublisher: Published<PopupRoute?>.Publisher { $presentedPopup }
 
+    @Published var presentedAlert: AlertRoute?
+    var presentedAlertPublished: Published<AlertRoute?> { _presentedAlert }
+    var presentedAlertPublisher: Published<AlertRoute?>.Publisher { $presentedAlert }
+
     var navigationRoute: NavigationRoute? {
         navigationStack.last
     }
 
     private(set) var navigationStack: [NavigationRoute] = []
+
+    // MARK: - Popups:
 
     func present(popup: PopupRoute.Popup) {
         presentedPopup = .makePopup(named: popup)
@@ -67,6 +86,8 @@ final class DefaultNavigationRouter: NavigationRouter {
     func dismiss() {
         presentedPopup = nil
     }
+
+    // MARK: - Inline navigation:
 
     func push(screen: NavigationRoute.Screen) {
         let route = NavigationRoute.makeScreen(named: screen)
@@ -88,5 +109,15 @@ final class DefaultNavigationRouter: NavigationRouter {
     func set(navigationStack: [NavigationRoute]) {
         self.navigationStack = navigationStack
         objectWillChange.send()
+    }
+
+    // MARK: - Alerts:
+
+    func show(alert: AlertRoute.Alert) {
+        presentedAlert = .makeAlert(named: alert)
+    }
+
+    func hideCurrentAlert() {
+        presentedAlert = nil
     }
 }

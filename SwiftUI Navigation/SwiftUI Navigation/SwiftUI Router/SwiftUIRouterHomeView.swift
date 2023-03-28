@@ -49,11 +49,23 @@ struct SwiftUIRouterHomeView<Router: NavigationRouter>: View {
                         }
                     }
                 }
+                .alert(
+                    presenting: $router.presentedAlert,
+                    confirmationActionTitle: "Delete",
+                    confirmationActionCallback: { alertRoute in
+                        //  Handling app alert confirmation action:
+                        switch alertRoute.alert {
+                        case let .deleteAsset(assetId, assetName):
+                            print("asset \(assetId) \(assetName) removed")
+                            // TODO: Remove an asset from favourites
+                        }
+                    }
+                )
         }
     }
 }
 
-struct SwiftUIRouterHome_Previews: PreviewProvider {
+struct SwiftUIRouterHomeView_Previews: PreviewProvider {
     static var previews: some View {
         SwiftUIRouterHomeView(
             router: PreviewNavigationRouter()

@@ -18,6 +18,10 @@ final class PreviewNavigationRouter: NavigationRouter {
     var presentedPopupPublished: Published<PopupRoute?> { _presentedPopup }
     var presentedPopupPublisher: Published<PopupRoute?>.Publisher { $presentedPopup }
 
+    @Published var presentedAlert: AlertRoute?
+    var presentedAlertPublished: Published<AlertRoute?> { _presentedAlert }
+    var presentedAlertPublisher: Published<AlertRoute?>.Publisher { $presentedAlert }
+
     func set(navigationStack: [NavigationRoute]) {}
 
     func present(popup: PopupRoute.Popup) {}
@@ -26,4 +30,7 @@ final class PreviewNavigationRouter: NavigationRouter {
     func push(screen: NavigationRoute.Screen) {}
     func pop() {}
     func popAll() {}
+
+    func show(alert: AlertRoute.Alert) {}
+    func hideCurrentAlert() {}
 }
