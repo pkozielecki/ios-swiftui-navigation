@@ -1,15 +1,15 @@
 //
-//  AssetCellView.swift
+//  FavouriteAssetCellView.swift
 //  KISS Views
 //
 
 import SwiftUI
 
-struct AssetCellView: View {
-    let data: AssetCellView.Data
+struct FavouriteAssetCellView: View {
+    let data: FavouriteAssetCellView.Data
     let onSelectTapped: ((String) -> Void)?
     let onEditTapped: ((String) -> Void)?
-    let onDeleteTapped: ((AssetCellView.Data) -> Void)?
+    let onDeleteTapped: ((FavouriteAssetCellView.Data) -> Void)?
 
     var body: some View {
         Button(data.title) {
@@ -33,7 +33,7 @@ struct AssetCellView: View {
     }
 }
 
-extension AssetCellView {
+extension FavouriteAssetCellView {
 
     struct Data: Hashable {
         let id: String
@@ -41,9 +41,9 @@ extension AssetCellView {
     }
 }
 
-struct AssetCellView_Previews: PreviewProvider {
+struct FavouriteAssetCellView_Previews: PreviewProvider {
     static var previews: some View {
-        AssetCellView(
+        FavouriteAssetCellView(
             data: .init(id: "AU", title: "Gold"),
             onSelectTapped: nil,
             onEditTapped: nil,

@@ -34,3 +34,20 @@ final class PreviewNavigationRouter: NavigationRouter {
     func show(alert: AlertRoute.Alert) {}
     func hideCurrentAlert() {}
 }
+
+final class PreviewAddAssetViewModel: AddAssetViewModel {
+    @Published var viewState: AddAssetViewState
+    var viewStatePublished: Published<AddAssetViewState> { _viewState }
+    var viewStatePublisher: Published<AddAssetViewState>.Publisher { $viewState }
+    @Published var searchPhrase: String = ""
+    var searchPhrasePublished: Published<String> { _searchPhrase }
+    var searchPhrasePublisher: Published<String>.Publisher { $searchPhrase }
+    var selectedAssetsIds: [String] = []
+
+    init(state: AddAssetViewState) {
+        viewState = state
+    }
+
+    func onAssetTapped(id: String) {}
+    func onAssetsSelectionConfirmed() {}
+}

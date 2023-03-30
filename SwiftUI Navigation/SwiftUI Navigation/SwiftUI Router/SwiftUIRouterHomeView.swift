@@ -45,7 +45,7 @@ struct SwiftUIRouterHomeView<Router: NavigationRouter>: View {
                         //  Handling app popups, presented as sheets:
                         switch $popup.wrappedValue.popup {
                         case .addAsset:
-                            Text("Adding new asset")
+                            makeAddAssetView()
                         }
                     }
                 }
@@ -62,6 +62,15 @@ struct SwiftUIRouterHomeView<Router: NavigationRouter>: View {
                     }
                 )
         }
+    }
+}
+
+private extension SwiftUIRouterHomeView {
+
+    func makeAddAssetView() -> some View {
+        let assetsProvider = DefaultAssetsProvider()
+        let viewModel = DefaultAddAssetViewModel(assetsProvider: assetsProvider)
+        return AddAssetView(viewModel: viewModel)
     }
 }
 

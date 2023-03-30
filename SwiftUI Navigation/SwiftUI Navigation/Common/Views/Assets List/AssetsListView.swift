@@ -23,7 +23,7 @@ struct AssetsListView<Router: NavigationRouter>: View {
                     .padding(.bottom, 10)
                 }
             ) {
-                AssetCellView(
+                FavouriteAssetCellView(
                     data: .init(id: "AU", title: "Gold"),
                     onSelectTapped: onAssetSelected,
                     onEditTapped: onEditAssetSelected,
@@ -50,7 +50,7 @@ private extension AssetsListView {
         router.push(screen: .editAsset(id))
     }
 
-    func onAssetRemovalRequest(data: AssetCellView.Data) {
+    func onAssetRemovalRequest(data: FavouriteAssetCellView.Data) {
         router.show(alert: .deleteAsset(assetId: data.id, assetName: data.title))
     }
 }
