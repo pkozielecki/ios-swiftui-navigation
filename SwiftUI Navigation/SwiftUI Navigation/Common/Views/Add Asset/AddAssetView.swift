@@ -25,6 +25,7 @@ struct AddAssetView<ViewModel>: View where ViewModel: AddAssetViewModel {
                                 AssetCellView(data: data) { _ in
                                     viewModel.onAssetTapped(id: data.id)
                                 }
+                                .noInsetsCell()
                             }
                             if !hasFilteredAssets {
                                 Text("Couldn't find any assets matching the search criteria")

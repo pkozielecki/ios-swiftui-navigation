@@ -97,7 +97,7 @@ private extension DefaultAddAssetViewModel {
             .removeDuplicates()
             .dropFirst()
             .sink { [weak self] phrase in
-                self?.filterAssets(phrase: phrase)
+                self?.filterAssets(phrase: phrase.lowercased())
                 self?.composeViewState()
             }
             .store(in: &cancellables)
@@ -111,7 +111,7 @@ private extension DefaultAddAssetViewModel {
 
         filteredAssets = allAssets
             .filter { asset in
-                asset.id.contains(phrase) || asset.name.contains(phrase)
+                asset.id.lowercased().contains(phrase) || asset.name.lowercased().contains(phrase)
             }
     }
 
@@ -121,9 +121,13 @@ private extension DefaultAddAssetViewModel {
             return
         }
 
-        let cellData = filteredAssets.map {
-            AssetCellView.Data(id: $0.id, title: $0.name, isSelected: selectedAssetsIds.contains($0.id))
-        }
+        let cellData = filteredAssets
+            .sorted {
+                $0.id < $1.id
+            }
+            .map {
+                AssetCellView.Data(id: $0.id, title: $0.name, isSelected: selectedAssetsIds.contains($0.id))
+            }
         viewState = .loaded(cellData)
     }
 }

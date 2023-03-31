@@ -10,13 +10,26 @@ struct AssetCellView: View {
     let onSelectTapped: ((String) -> Void)?
 
     var body: some View {
-        ZStack {
-            withAnimation {
-                Color(data.isSelected ? .red : .clear)
-            }
-            Button(data.title) {
+        ZStack(alignment: .leading) {
+
+            Color(data.isSelected ? .lightGray : .clear)
+                .animation(.easeInOut(duration: 0.2), value: data.isSelected)
+
+            Button(action: {
                 onSelectTapped?(data.id)
-            }
+            }, label: {
+                HStack {
+                    Text(data.id)
+                        .padding(.leading, 20)
+                        .frame(minWidth: 60)
+                        .fontWeight(.bold)
+                    Text(data.title)
+                        .lineLimit(1)
+                    Spacer()
+                }
+                .background(Color("CellTappableBackground"))
+            })
+            .plain()
         }
     }
 }
@@ -35,10 +48,11 @@ struct AssetCellView_Previews: PreviewProvider {
         AssetCellView(
             data: .init(id: "AU", title: "Gold", isSelected: false),
             onSelectTapped: nil
-        )
+        ).frame(width: .infinity, height: 50)
         AssetCellView(
             data: .init(id: "AU", title: "Gold", isSelected: true),
             onSelectTapped: nil
         )
+        .frame(width: .infinity, height: 50)
     }
 }

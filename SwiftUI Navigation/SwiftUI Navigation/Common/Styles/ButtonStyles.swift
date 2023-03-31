@@ -10,7 +10,7 @@ extension Button {
         buttonStyle(.borderedProminent)
     }
 
-    func secondaryButton() -> some View {
-        buttonStyle(.borderless)
+    func plain() -> some View {
+        buttonStyle(.plain)
     }
 }

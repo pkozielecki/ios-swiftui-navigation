@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E5F607D6CFF4E3B2F043FE9 /* AssetsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6ED10B46873CECD4E769 /* AssetsProvider.swift */; };
+		1E5F621225E06818D1EA2C4C /* CellStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66B7C599512A61C0AF02 /* CellStyles.swift */; };
 		1E5F629F4FA4352566D43781 /* GetAllAssetsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F643C13E91E6B9CD3C121 /* GetAllAssetsRequest.swift */; };
 		1E5F62F61DA12BE05DA65BC3 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62B96BA2BD6CF1B6A96F /* AppConfiguration.swift */; };
 		1E5F64E11B13700DEBD34FCD /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A2ADAD32E86720C4618 /* LoaderView.swift */; };
@@ -60,6 +61,7 @@
 		1E5F643C13E91E6B9CD3C121 /* GetAllAssetsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllAssetsRequest.swift; sourceTree = "<group>"; };
 		1E5F649A8C7F147629FC911A /* ButtonStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		1E5F66A82E08E494DAA212F9 /* NavigationRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
+		1E5F66B7C599512A61C0AF02 /* CellStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellStyles.swift; sourceTree = "<group>"; };
 		1E5F66D232288278ED1B8C3A /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		1E5F67DF69D3D515021129E4 /* NetworkingFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingFactory.swift; sourceTree = "<group>"; };
 		1E5F6906889C57FA4B4B18AD /* SwiftUINavigationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUINavigationHelpers.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				1E5F6A45A82E6F2FF3B52058 /* TextStyles.swift */,
 				1E5F649A8C7F147629FC911A /* ButtonStyles.swift */,
+				1E5F66B7C599512A61C0AF02 /* CellStyles.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				1E5F6D3C65B8FA92365E6A5F /* AssetCellView.swift in Sources */,
 				1E5F6D811BA324B2FF7D704D /* AddApiKeyAction.swift in Sources */,
 				1E5F6C05C4D39B39C2ECC368 /* SwiftUISearchBar.swift in Sources */,
+				1E5F621225E06818D1EA2C4C /* CellStyles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
