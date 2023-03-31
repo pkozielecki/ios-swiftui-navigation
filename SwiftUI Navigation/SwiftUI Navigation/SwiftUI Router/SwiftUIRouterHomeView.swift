@@ -68,8 +68,11 @@ struct SwiftUIRouterHomeView<Router: NavigationRouter>: View {
 private extension SwiftUIRouterHomeView {
 
     func makeAddAssetView() -> some View {
-        let assetsProvider = DefaultAssetsProvider()
-        let viewModel = DefaultAddAssetViewModel(assetsProvider: assetsProvider)
+        let viewModel = DefaultAddAssetViewModel(
+            assetsProvider: DefaultAssetsProvider(),
+            favouriteAssetsManager: DefaultFavouriteAssetsManager(),
+            router: router
+        )
         return AddAssetView(viewModel: viewModel)
     }
 }

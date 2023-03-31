@@ -42,6 +42,9 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
     private(set) var selectedAssetsIds = [String]()
 
     private let assetsProvider: AssetsProvider
+    private let favouriteAssetsManager: FavouriteAssetsManager
+    private let router: any NavigationRouter
+
     private var cancellables = [AnyCancellable]()
     private var allAssets = [Asset]()
     private var filteredAssets = [Asset]()
@@ -49,12 +52,19 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
     /// A default initializer for AddAssetViewModel.
     ///
     /// - Parameter assetsProvider: an assets provider.
-    init(assetsProvider: AssetsProvider) {
+    /// - Parameter favouriteAssetsManager: a favourite assets manager.
+    /// - Parameter router: a navigation router.
+    init(
+        assetsProvider: AssetsProvider,
+        favouriteAssetsManager: FavouriteAssetsManager,
+        router: any NavigationRouter
+    ) {
         self.assetsProvider = assetsProvider
-        loadInitialAssets()
+        self.favouriteAssetsManager = favouriteAssetsManager
+        self.router = router
         retrieveSelectedAssets()
+        loadInitialAssets()
         setupAssetFiltering()
-        // TODO: Pass navigation router
     }
 
     func onAssetTapped(id: String) {
@@ -67,8 +77,9 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
     }
 
     func onAssetsSelectionConfirmed() {
-        print("----- SELECTED: \(selectedAssetsIds)")
-        // TODO: Save selected assets and close the popup.
+        let assets = allAssets.filter { selectedAssetsIds.contains($0.id) }
+        favouriteAssetsManager.store(favouriteAssets: assets)
+        router.dismiss()
     }
 }
 
@@ -82,13 +93,19 @@ private extension DefaultAddAssetViewModel {
         Task { @MainActor [weak self] in
             let assets = await assetsProvider.getAllAssets()
             self?.allAssets = assets
-            self?.filteredAssets = assets
+            self?.filteredAssets = assets.sorted {
+                $0.id < $1.id
+            }
             self?.composeViewState()
         }
     }
 
     func retrieveSelectedAssets() {
-        // TODO: Get selected assets.
+        selectedAssetsIds = favouriteAssetsManager
+            .retrieveFavouriteAssets()
+            .map {
+                $0.id
+            }
     }
 
     func setupAssetFiltering() {
@@ -122,9 +139,6 @@ private extension DefaultAddAssetViewModel {
         }
 
         let cellData = filteredAssets
-            .sorted {
-                $0.id < $1.id
-            }
             .map {
                 AssetCellView.Data(id: $0.id, title: $0.name, isSelected: selectedAssetsIds.contains($0.id))
             }
