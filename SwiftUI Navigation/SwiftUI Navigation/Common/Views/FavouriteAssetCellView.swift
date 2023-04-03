@@ -9,15 +9,32 @@ struct FavouriteAssetCellView: View {
     let data: FavouriteAssetCellView.Data
     let onSelectTapped: ((String) -> Void)?
     let onEditTapped: ((String) -> Void)?
-    let onDeleteTapped: ((FavouriteAssetCellView.Data) -> Void)?
+    let onDeleteTapped: ((String) -> Void)?
 
     var body: some View {
-        Button(data.title) {
+        Button(action: {
             onSelectTapped?(data.id)
-        }
+        }, label: {
+            HStack {
+                Text(data.id)
+                    .padding(.leading, 20)
+                    .frame(minWidth: 60)
+                    .fontWeight(.bold)
+                Text(data.title)
+                    .lineLimit(1)
+                Spacer()
+                if let value = data.value {
+                    Text(value)
+                        .padding(.trailing, 20)
+                        .fontWeight(.heavy)
+                }
+            }
+            .background(Color("CellTappableBackground"))
+        })
+        .plain()
         .swipeActions {
             Button {
-                onDeleteTapped?(data)
+                onDeleteTapped?(data.id)
             } label: {
                 Image(systemName: "trash")
             }
@@ -35,16 +52,17 @@ struct FavouriteAssetCellView: View {
 
 extension FavouriteAssetCellView {
 
-    struct Data: Hashable {
+    struct Data: Identifiable, Hashable, Equatable {
         let id: String
         let title: String
+        let value: String?
     }
 }
 
 struct FavouriteAssetCellView_Previews: PreviewProvider {
     static var previews: some View {
         FavouriteAssetCellView(
-            data: .init(id: "AU", title: "Gold"),
+            data: .init(id: "AU", title: "Gold", value: "3.4"),
             onSelectTapped: nil,
             onEditTapped: nil,
             onDeleteTapped: nil

@@ -45,7 +45,7 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
     private let favouriteAssetsManager: FavouriteAssetsManager
     private let router: any NavigationRouter
 
-    private var cancellables = [AnyCancellable]()
+    private var cancellables = Set<AnyCancellable>()
     private var allAssets = [Asset]()
     private var filteredAssets = [Asset]()
 
@@ -91,7 +91,7 @@ private extension DefaultAddAssetViewModel {
 
     func loadInitialAssets() {
         Task { @MainActor [weak self] in
-            let assets = await assetsProvider.getAllAssets()
+            let assets = await self?.assetsProvider.getAllAssets() ?? []
             self?.allAssets = assets
             self?.filteredAssets = assets.sorted {
                 $0.id < $1.id

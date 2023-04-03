@@ -3,6 +3,7 @@
 //  KISS Views
 //
 
+import Combine
 import Foundation
 
 /// An abstraction providing list of favourite assets.
@@ -10,6 +11,8 @@ protocol FavouriteAssetsProvider: AnyObject {
 
     /// Provides list of favourite assets.
     func retrieveFavouriteAssets() -> [Asset]
+
+    var didChange: AnyPublisher<Void, Never> { get }
 }
 
 /// An abstraction allowing to store favourite assets.
@@ -29,7 +32,12 @@ protocol FavouriteAssetsManager: FavouriteAssetsProvider, FavouriteAssetsStorage
 
 /// A default FavouriteAssetsManager implementation.
 final class DefaultFavouriteAssetsManager: FavouriteAssetsManager {
+    var didChange: AnyPublisher<Void, Never> {
+        didChangeSubject.eraseToAnyPublisher()
+    }
+
     private let localStorage: LocalStorage
+    private let didChangeSubject = PassthroughSubject<Void, Never>()
 
     /// A DefaultFavouriteAssetsManager initializer.
     ///
@@ -47,11 +55,13 @@ final class DefaultFavouriteAssetsManager: FavouriteAssetsManager {
     /// - SeeAlso: FavouriteAssetsManager.store(assets:)
     func store(favouriteAssets assets: [Asset]) {
         localStorage.set(assets.data, forKey: Const.Key)
+        didChangeSubject.send(())
     }
 
     /// - SeeAlso: FavouriteAssetsManager.clear()
     func clear() {
         localStorage.removeObject(forKey: Const.Key)
+        didChangeSubject.send(())
     }
 }
 

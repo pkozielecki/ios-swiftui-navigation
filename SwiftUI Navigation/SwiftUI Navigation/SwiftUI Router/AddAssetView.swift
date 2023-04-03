@@ -33,7 +33,7 @@ struct AddAssetView<ViewModel>: View where ViewModel: AddAssetViewModel {
                         }
 
                         //  A footer with add assets button:
-                        PrimaryButton(label: "Add selected asset(s) to ❤️") {
+                        PrimaryButton(label: "Add selected \(formattedSelectedAssetsCount)asset(s) to ❤️") {
                             viewModel.onAssetsSelectionConfirmed()
                         }
                         .disabled(viewModel.selectedAssetsIds.isEmpty)
@@ -50,6 +50,14 @@ struct AddAssetView<ViewModel>: View where ViewModel: AddAssetViewModel {
 }
 
 private extension AddAssetView {
+
+    var selectedAssetsCount: Int {
+        viewModel.selectedAssetsIds.count
+    }
+
+    var formattedSelectedAssetsCount: String {
+        selectedAssetsCount == 0 ? "" : "\(selectedAssetsCount) "
+    }
 
     var assetCellsData: [AssetCellView.Data] {
         if case let .loaded(assets) = viewModel.viewState {

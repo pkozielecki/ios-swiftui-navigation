@@ -25,7 +25,14 @@ struct HomeView: View {
                     isSwiftUINaviPresented.toggle()
                 }
                 .fullScreenCover(isPresented: $isSwiftUINaviPresented) {
-                    SwiftUIRouterHomeView(router: DefaultNavigationRouter())
+                    let router = DefaultNavigationRouter()
+                    SwiftUIRouterHomeView(
+                        viewModel: DefaultSwiftUIRouterHomeViewModel(
+                            favouriteAssetsManager: DefaultFavouriteAssetsManager(),
+                            router: router
+                        ),
+                        router: router
+                    )
                 }
 
                 Divider()

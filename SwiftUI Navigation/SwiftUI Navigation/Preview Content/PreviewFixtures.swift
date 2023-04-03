@@ -51,3 +51,26 @@ final class PreviewAddAssetViewModel: AddAssetViewModel {
     func onAssetTapped(id: String) {}
     func onAssetsSelectionConfirmed() {}
 }
+
+final class PreviewAssetsListViewModel: AssetsListViewModel {
+    @Published var viewState: AssetsListViewState
+    var viewStatePublished: Published<AssetsListViewState> { _viewState }
+    var viewStatePublisher: Published<AssetsListViewState>.Publisher { $viewState }
+
+    init(state: AssetsListViewState) {
+        viewState = state
+    }
+
+    func onAddNewAssetTapped() {}
+    func onAssetSelected(id: String) {}
+    func removeAssetFromFavourites(id: String) {}
+    func onAssetSelectedToBeEdited(id: String) {}
+    func onAssetSelectedForRemoval(id: String) {}
+}
+
+final class PreviewSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
+    let favouriteAssetsManager: FavouriteAssetsManager = DefaultFavouriteAssetsManager()
+
+    func removeAssetFromFavourites(id: String) {}
+    func editAssets(id: String) {}
+}
