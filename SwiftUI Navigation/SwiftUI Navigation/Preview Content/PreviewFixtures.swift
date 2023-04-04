@@ -66,6 +66,7 @@ final class PreviewAssetsListViewModel: AssetsListViewModel {
     func removeAssetFromFavourites(id: String) {}
     func onAssetSelectedToBeEdited(id: String) {}
     func onAssetSelectedForRemoval(id: String) {}
+    func onRefreshRequested() {}
 }
 
 final class PreviewSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {

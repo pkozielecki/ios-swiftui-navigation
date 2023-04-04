@@ -12,7 +12,7 @@ struct GetAllAssetsResponse: Codable, Equatable {
 
 extension GetAllAssetsResponse {
 
-    /// Convenience field conversing retrieved assets into app internal format.
+    /// Convenience field converting retrieved assets into app internal format.
     var assets: [Asset] {
         symbols.map { key, value in
             Asset(id: key, name: value)

@@ -24,6 +24,7 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
             AssetsListView(
                 viewModel: DefaultAssetsListViewModel(
                     favouriteAssetsManager: viewModel.favouriteAssetsManager,
+                    assetsRatesProvider: DefaultAssetsRatesProvider(favouriteAssetsProvider: viewModel.favouriteAssetsManager),
                     router: router
                 )
             )

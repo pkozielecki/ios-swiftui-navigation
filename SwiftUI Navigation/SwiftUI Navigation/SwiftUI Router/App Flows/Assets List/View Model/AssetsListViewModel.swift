@@ -10,7 +10,7 @@ import Foundation
 enum AssetsListViewState {
     case noFavouriteAssets
     case loading([FavouriteAssetCellView.Data])
-    case loaded([FavouriteAssetCellView.Data])
+    case loaded([FavouriteAssetCellView.Data], String)
 }
 
 /// An abstraction describing a View Model for .
@@ -19,6 +19,9 @@ protocol AssetsListViewModel: ObservableObject {
     var viewState: AssetsListViewState { get }
     var viewStatePublished: Published<AssetsListViewState> { get }
     var viewStatePublisher: Published<AssetsListViewState>.Publisher { get }
+
+    /// Triggered on manual refresh requested.
+    func onRefreshRequested()
 
     /// Triggerred on tapping Add Asset button.
     func onAddNewAssetTapped()
@@ -48,31 +51,29 @@ final class DefaultAssetsListViewModel: AssetsListViewModel {
     @Published var viewState: AssetsListViewState
 
     private let router: any NavigationRouter
-    private let favouriteAssetsManager: any FavouriteAssetsManager
+    private let favouriteAssetsManager: FavouriteAssetsManager
+    private let assetsRatesProvider: AssetsRatesProvider
     private var favouriteAssets: [Asset]
     private var cancellables = Set<AnyCancellable>()
 
     /// A default initializer for DefaultSwiftUIRouterHomeViewModel.
     ///
     /// - Parameter favouriteAssetsManager: a favourite assets manager.
+    /// - Parameter assetsRatesProvider: an assets rates provider.
     /// - Parameter router: a navigation router.
     init(
-        favouriteAssetsManager: any FavouriteAssetsManager,
+        favouriteAssetsManager: FavouriteAssetsManager,
+        assetsRatesProvider: AssetsRatesProvider,
         router: any NavigationRouter
     ) {
         self.favouriteAssetsManager = favouriteAssetsManager
+        self.assetsRatesProvider = assetsRatesProvider
         self.router = router
         let favouriteAssets = favouriteAssetsManager.retrieveFavouriteAssets()
         viewState = DefaultAssetsListViewModel.composeViewState(favouriteAssets: favouriteAssets)
         self.favouriteAssets = favouriteAssets
         subscribeToFavouriteAssetsUpdates()
-        // TODO: load assets performance data
-    }
-
-    func removeAssetFromFavourites(id: String) {
-        favouriteAssets.removeAll { $0.id == id }
-        favouriteAssetsManager.store(favouriteAssets: favouriteAssets)
-        objectWillChange.send()
+        getAssetRates()
     }
 
     func onAssetSelected(id: String) {
@@ -88,13 +89,21 @@ final class DefaultAssetsListViewModel: AssetsListViewModel {
     }
 
     func onAssetSelectedForRemoval(id: String) {
-        guard let asset = favouriteAssets.filter({
-            $0.id == id
-        })
-        .first else {
+        guard let asset = favouriteAssets.filter({ $0.id == id }).first else {
             return
         }
+
         router.show(alert: .deleteAsset(assetId: asset.id, assetName: asset.name))
+    }
+
+    func removeAssetFromFavourites(id: String) {
+        favouriteAssets.removeAll { $0.id == id }
+        favouriteAssetsManager.store(favouriteAssets: favouriteAssets)
+        getAssetRates()
+    }
+
+    func onRefreshRequested() {
+        getAssetRates()
     }
 }
 
@@ -114,14 +123,32 @@ private extension DefaultAssetsListViewModel {
             .didChange
             .sink(receiveValue: { [weak self] _ in
                 self?.refreshViewState()
+                self?.getAssetRates()
             })
             .store(in: &cancellables)
+    }
+
+    func getAssetRates() {
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+
+            let rates = await self.assetsRatesProvider.getAssetRates()
+            let dateFormatter = DateFormatter.fullDateFormatter
+            if !rates.isEmpty {
+                let lastUpdated = rates.first?.price?.date ?? Date()
+                let lastUpdatedString = dateFormatter.string(from: lastUpdated)
+                let data = rates.map {
+                    FavouriteAssetCellView.Data(id: $0.id, title: $0.name, value: $0.price?.formattedPrice)
+                }
+                self.viewState = .loaded(data, lastUpdatedString)
+            }
+        }
     }
 }
 
 extension FavouriteAssetCellView.Data {
     init(asset: Asset) {
-        self.init(id: asset.id, title: asset.name, value: nil)
+        self.init(id: asset.id, title: asset.name, value: "...")
     }
 }
 

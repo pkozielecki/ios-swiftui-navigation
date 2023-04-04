@@ -12,6 +12,7 @@ protocol FavouriteAssetsProvider: AnyObject {
     /// Provides list of favourite assets.
     func retrieveFavouriteAssets() -> [Asset]
 
+    /// A publisher notifying about changes in the favourite assets collection.
     var didChange: AnyPublisher<Void, Never> { get }
 }
 
@@ -32,10 +33,6 @@ protocol FavouriteAssetsManager: FavouriteAssetsProvider, FavouriteAssetsStorage
 
 /// A default FavouriteAssetsManager implementation.
 final class DefaultFavouriteAssetsManager: FavouriteAssetsManager {
-    var didChange: AnyPublisher<Void, Never> {
-        didChangeSubject.eraseToAnyPublisher()
-    }
-
     private let localStorage: LocalStorage
     private let didChangeSubject = PassthroughSubject<Void, Never>()
 
@@ -62,6 +59,14 @@ final class DefaultFavouriteAssetsManager: FavouriteAssetsManager {
     func clear() {
         localStorage.removeObject(forKey: Const.Key)
         didChangeSubject.send(())
+    }
+}
+
+extension DefaultFavouriteAssetsManager {
+
+    /// - SeeAlso: FavouriteAssetsProvider.didChange
+    var didChange: AnyPublisher<Void, Never> {
+        didChangeSubject.eraseToAnyPublisher()
     }
 }
 

@@ -41,7 +41,8 @@ struct AssetsListView<ViewModel: AssetsListViewModel>: View {
                             }
                             .padding(.top, 10)
                             .padding(.bottom, 10)
-                        }
+                        }, footer:
+                        Text("Last updated: \(lastUpdated)")
                     ) {
                         ForEach(assets) { data in
                             FavouriteAssetCellView(
@@ -55,6 +56,9 @@ struct AssetsListView<ViewModel: AssetsListViewModel>: View {
                     }
                 }
                 .navigationTitle("Assets list")
+                .refreshable {
+                    viewModel.onRefreshRequested()
+                }
             }
         }
     }
@@ -71,10 +75,19 @@ private extension AssetsListView {
 
     var assets: [FavouriteAssetCellView.Data] {
         switch viewModel.viewState {
-        case let .loaded(assets), let .loading(assets):
+        case let .loaded(assets, _), let .loading(assets):
             return assets
         default:
             return []
+        }
+    }
+
+    var lastUpdated: String {
+        switch viewModel.viewState {
+        case let .loaded(_, date):
+            return date
+        default:
+            return ""
         }
     }
 
@@ -99,7 +112,7 @@ struct AssetsListView_Previews: PreviewProvider {
     static var previews: some View {
 //        let state = AssetsListViewState.noFavouriteAssets
 //        let state = AssetsListViewState.loading([.init(id: "EUR", title: "Euro", value: nil), .init(id: "BTC", title: "Bitcoin", value: nil)])
-        let state = AssetsListViewState.loaded([.init(id: "EUR", title: "Euro", value: "1.2"), .init(id: "BTC", title: "Bitcoin", value: "28872")])
+        let state = AssetsListViewState.loaded([.init(id: "EUR", title: "Euro", value: "1.2"), .init(id: "BTC", title: "Bitcoin", value: "28872")], "2023-05-10 12:30:12")
         AssetsListView(viewModel: PreviewAssetsListViewModel(state: state))
     }
 }

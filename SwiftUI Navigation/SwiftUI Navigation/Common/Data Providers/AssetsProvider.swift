@@ -10,7 +10,7 @@ import NgNetworkModuleCore
 /// An abstraction providing all available assets.
 protocol AssetsProvider: Actor {
 
-    /// Retrieves assets/
+    /// Retrieves assets.
     ///
     /// - Returns: an asset collection.
     func getAllAssets() async -> [Asset]
