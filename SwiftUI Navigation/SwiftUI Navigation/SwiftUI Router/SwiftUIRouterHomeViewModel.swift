@@ -9,13 +9,17 @@ import Foundation
 /// An abstraction describing a View Model for .
 protocol SwiftUIRouterHomeViewModel: ObservableObject {
     var favouriteAssetsManager: FavouriteAssetsManager { get }
+    var canRestoreNavState: Bool { get }
     func removeAssetFromFavourites(id: String)
-
+    func getRandomFavouriteAsset() -> Asset?
     func editAssets(id: String)
 }
 
 final class DefaultSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
     let favouriteAssetsManager: FavouriteAssetsManager
+    var canRestoreNavState: Bool {
+        !favouriteAssetsManager.retrieveFavouriteAssets().isEmpty
+    }
 
     private let router: any NavigationRouter
 
@@ -40,5 +44,9 @@ final class DefaultSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
 
     func editAssets(id: String) {
         router.push(screen: .editAsset(id))
+    }
+
+    func getRandomFavouriteAsset() -> Asset? {
+        favouriteAssetsManager.retrieveFavouriteAssets().first
     }
 }

@@ -77,7 +77,7 @@ final class DefaultAssetsListViewModel: AssetsListViewModel {
     }
 
     func onAssetSelected(id: String) {
-        router.push(screen: .assetCharts(id))
+        router.push(screen: .assetDetails(id))
     }
 
     func onAssetSelectedToBeEdited(id: String) {

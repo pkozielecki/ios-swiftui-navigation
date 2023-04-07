@@ -71,7 +71,33 @@ final class PreviewAssetsListViewModel: AssetsListViewModel {
 
 final class PreviewSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
     let favouriteAssetsManager: FavouriteAssetsManager = DefaultFavouriteAssetsManager()
+    var canRestoreNavState: Bool = true
 
     func removeAssetFromFavourites(id: String) {}
     func editAssets(id: String) {}
+    func getRandomFavouriteAsset() -> Asset? { nil }
+}
+
+final class PreviewAssetDetailsViewModel: AssetDetailsViewModel {
+    @Published var viewState: AssetDetailsViewState
+    var viewStatePublished: Published<AssetDetailsViewState> { _viewState }
+    var viewStatePublisher: Published<AssetDetailsViewState>.Publisher { $viewState }
+    var assetId: String = ""
+
+    init(state: AssetDetailsViewState) {
+        viewState = state
+    }
+}
+
+final class PreviewEditAssetViewModel: EditAssetViewModel {
+    @Published var viewState: EditAssetViewState
+    var viewStatePublished: Published<EditAssetViewState> { _viewState }
+    var viewStatePublisher: Published<EditAssetViewState>.Publisher { $viewState }
+    var assetId: String = ""
+
+    init(state: EditAssetViewState) {
+        viewState = state
+    }
+
+    func popToRoot() {}
 }

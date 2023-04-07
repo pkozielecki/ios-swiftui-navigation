@@ -31,6 +31,14 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
             .toolbar {
                 ToolbarItem {
                     Button {
+                        restoreNavState()
+                    } label: {
+                        Image(systemName: "icloud.and.arrow.down.fill")
+                    }
+                    .disabled(!viewModel.canRestoreNavState)
+                }
+                ToolbarItem {
+                    Button {
                         dismiss()
                     } label: {
                         Image(systemName: "x.circle")
@@ -41,9 +49,9 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
                 //  Handling app screens, pushed to the navigation stack:
                 switch route.screen {
                 case let .editAsset(id):
-                    Text("Editing asset: \(id)")
-                case let .assetCharts(id):
-                    Text("Charts for asset: \(id)")
+                    makeEditAssetView(id: id)
+                case let .assetDetails(id):
+                    makeAssetDetailsView(id: id)
                 }
             }
             .sheet(item: $router.presentedPopup) { _ in
@@ -72,6 +80,17 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
 
 private extension SwiftUIRouterHomeView {
 
+    func restoreNavState() {
+        guard let asset = viewModel.getRandomFavouriteAsset() else {
+            return
+        }
+
+        router.set(navigationStack: [
+            .makeScreen(named: .assetDetails(asset.id)),
+            .makeScreen(named: .editAsset(asset.id))
+        ])
+    }
+
     func makeAddAssetView() -> some View {
         let viewModel = DefaultAddAssetViewModel(
             assetsProvider: DefaultAssetsProvider(),
@@ -79,6 +98,22 @@ private extension SwiftUIRouterHomeView {
             router: router
         )
         return AddAssetView(viewModel: viewModel)
+    }
+
+    func makeEditAssetView(id: String) -> some View {
+        let viewModel = DefaultEditAssetViewModel(
+            assetId: id,
+            router: router
+        )
+        return EditAssetView(viewModel: viewModel)
+    }
+
+    func makeAssetDetailsView(id: String) -> some View {
+        let viewModel = DefaultAssetDetailsViewModel(
+            assetId: id,
+            router: router
+        )
+        return AssetDetailsView(viewModel: viewModel)
     }
 }
 

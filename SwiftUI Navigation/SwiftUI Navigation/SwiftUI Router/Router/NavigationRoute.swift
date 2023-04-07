@@ -26,7 +26,7 @@ extension NavigationRoute {
 
     enum Screen: Hashable, Codable {
 
-        case assetCharts(String)
+        case assetDetails(String)
         case editAsset(String)
     }
 }
