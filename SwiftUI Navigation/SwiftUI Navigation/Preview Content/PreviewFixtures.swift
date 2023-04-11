@@ -6,7 +6,6 @@
 import Combine
 import Foundation
 import SwiftUI
-import UIKit
 
 final class PreviewNavigationRouter: NavigationRouter {
     @Published var navigationRoute: NavigationRoute?
@@ -100,4 +99,5 @@ final class PreviewEditAssetViewModel: EditAssetViewModel {
     }
 
     func popToRoot() {}
+    func saveChanges(assetData: EditAssetViewData) {}
 }

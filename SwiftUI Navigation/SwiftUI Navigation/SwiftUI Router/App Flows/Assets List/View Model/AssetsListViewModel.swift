@@ -132,23 +132,25 @@ private extension DefaultAssetsListViewModel {
         Task { @MainActor [weak self] in
             guard let self else { return }
 
-            let rates = await self.assetsRatesProvider.getAssetRates()
             let dateFormatter = DateFormatter.fullDateFormatter
-            if !rates.isEmpty {
-                let lastUpdated = rates.first?.price?.date ?? Date()
-                let lastUpdatedString = dateFormatter.string(from: lastUpdated)
-                let data = rates.map {
-                    FavouriteAssetCellView.Data(id: $0.id, title: $0.name, value: $0.price?.formattedPrice)
-                }
-                self.viewState = .loaded(data, lastUpdatedString)
+            let rates = await self.assetsRatesProvider.getAssetRates()
+            guard !rates.isEmpty else { return }
+
+            let lastUpdated = rates.first?.price?.date ?? Date()
+            let lastUpdatedString = dateFormatter.string(from: lastUpdated)
+            let data = favouriteAssets.map { favouriteAsset -> FavouriteAssetCellView.Data in
+                let rate = rates.first { $0.id == favouriteAsset.id }
+                let formattedValue = rate?.price?.formattedPrice
+                return FavouriteAssetCellView.Data(asset: favouriteAsset, formattedValue: formattedValue)
             }
+            self.viewState = .loaded(data, lastUpdatedString)
         }
     }
 }
 
 extension FavouriteAssetCellView.Data {
     init(asset: Asset) {
-        self.init(id: asset.id, title: asset.name, value: "...")
+        self.init(id: asset.id, title: asset.name, color: asset.color, value: "...")
     }
 }
 

@@ -15,7 +15,7 @@ extension GetAllAssetsResponse {
     /// Convenience field converting retrieved assets into app internal format.
     var assets: [Asset] {
         symbols.map { key, value in
-            Asset(id: key, name: value)
+            Asset(id: key, name: value, colorCode: nil)
         }
     }
 }

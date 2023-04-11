@@ -63,6 +63,6 @@ private extension DefaultBaseAssetManager {
 
     enum Const {
         static let Key = "baseAsset"
-        static let USD = Asset(id: "USD", name: "United States Dollar")
+        static let USD = Asset(id: "USD", name: "United States Dollar", colorCode: "FF0000")
     }
 }

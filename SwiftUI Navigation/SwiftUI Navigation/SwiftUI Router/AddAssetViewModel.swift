@@ -77,8 +77,20 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
     }
 
     func onAssetsSelectionConfirmed() {
-        let assets = allAssets.filter { selectedAssetsIds.contains($0.id) }
-        favouriteAssetsManager.store(favouriteAssets: assets)
+        //  Discussion: We want to retain all the modifications users made to favourite assets...
+        //  ... so we can't just replace the assets stored in the manager with the selected ones.
+        let favouriteAssets = favouriteAssetsManager.retrieveFavouriteAssets()
+        let favouriteAssetsIds = Set(favouriteAssets.map { $0.id })
+        let selectedAssetsIds = Set(selectedAssetsIds)
+
+        //  Combining assets to retain and to add in a single collection to store:
+        let retainedAssetsIds = selectedAssetsIds.intersection(favouriteAssetsIds)
+        let newAssetsIds = selectedAssetsIds.subtracting(retainedAssetsIds)
+        let assetsToAdd = Set(allAssets.filter { newAssetsIds.contains($0.id) })
+        let assetsToRetain = Set(favouriteAssets.filter { retainedAssetsIds.contains($0.id) })
+        let assetsToStore = Array(assetsToRetain) + Array(assetsToAdd)
+
+        favouriteAssetsManager.store(favouriteAssets: assetsToStore)
         router.dismiss()
     }
 }

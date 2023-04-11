@@ -103,6 +103,7 @@ private extension SwiftUIRouterHomeView {
     func makeEditAssetView(id: String) -> some View {
         let viewModel = DefaultEditAssetViewModel(
             assetId: id,
+            favouriteAssetsManager: viewModel.favouriteAssetsManager,
             router: router
         )
         return EditAssetView(viewModel: viewModel)

@@ -112,7 +112,7 @@ struct AssetsListView_Previews: PreviewProvider {
     static var previews: some View {
 //        let state = AssetsListViewState.noFavouriteAssets
 //        let state = AssetsListViewState.loading([.init(id: "EUR", title: "Euro", value: nil), .init(id: "BTC", title: "Bitcoin", value: nil)])
-        let state = AssetsListViewState.loaded([.init(id: "EUR", title: "Euro", value: "1.2"), .init(id: "BTC", title: "Bitcoin", value: "28872")], "2023-05-10 12:30:12")
+        let state = AssetsListViewState.loaded([.init(id: "EUR", title: "Euro", color: .primary, value: "1.2"), .init(id: "BTC", title: "Bitcoin", color: .primary, value: "28872")], "2023-05-10 12:30:12")
         AssetsListView(viewModel: PreviewAssetsListViewModel(state: state))
     }
 }

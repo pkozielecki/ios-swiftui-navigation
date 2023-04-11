@@ -23,11 +23,13 @@ struct AssetCellView: View {
                         .padding(.leading, 20)
                         .frame(minWidth: 60)
                         .fontWeight(.bold)
+
                     Text(data.title)
                         .lineLimit(1)
+
                     Spacer()
                 }
-                .background(Color("CellTappableBackground"))
+                .background(.secondary.opacity(0.0001))
             })
             .plain()
         }
