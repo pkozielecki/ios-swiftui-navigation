@@ -112,6 +112,7 @@ private extension SwiftUIRouterHomeView {
     func makeAssetDetailsView(id: String) -> some View {
         let viewModel = DefaultAssetDetailsViewModel(
             assetId: id,
+            favouriteAssetsManager: viewModel.favouriteAssetsManager,
             router: router
         )
         return AssetDetailsView(viewModel: viewModel)

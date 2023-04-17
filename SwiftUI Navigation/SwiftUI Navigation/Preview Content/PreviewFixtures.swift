@@ -81,11 +81,14 @@ final class PreviewAssetDetailsViewModel: AssetDetailsViewModel {
     @Published var viewState: AssetDetailsViewState
     var viewStatePublished: Published<AssetDetailsViewState> { _viewState }
     var viewStatePublisher: Published<AssetDetailsViewState>.Publisher { $viewState }
-    var assetId: String = ""
+    var assetData: AssetDetailsViewData = .init(id: "BTC", name: "Bitcoin")
 
     init(state: AssetDetailsViewState) {
         viewState = state
     }
+
+    func edit(asset assetID: String) {}
+    func reloadChart(scope: ChartView.Scope) {}
 }
 
 final class PreviewEditAssetViewModel: EditAssetViewModel {

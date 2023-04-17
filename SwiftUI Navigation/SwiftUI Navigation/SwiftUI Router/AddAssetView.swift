@@ -11,7 +11,7 @@ struct AddAssetView<ViewModel>: View where ViewModel: AddAssetViewModel {
     var body: some View {
         ZStack {
             if showPreloader {
-                LoaderView()
+                LoaderView(configuration: .default)
             } else if hasAssets {
                 VStack(alignment: .center) {
                     List {
