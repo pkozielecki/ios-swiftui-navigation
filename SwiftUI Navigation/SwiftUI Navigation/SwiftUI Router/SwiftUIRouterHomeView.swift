@@ -31,6 +31,20 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
             .toolbar {
                 ToolbarItem {
                     Button {
+                        showEmbeddedHomeView()
+                    } label: {
+                        Image(systemName: "character.duployan")
+                    }
+                }
+                ToolbarItem {
+                    Button {
+                        showPopupHomeView()
+                    } label: {
+                        Image(systemName: "note")
+                    }
+                }
+                ToolbarItem {
+                    Button {
                         restoreNavState()
                     } label: {
                         Image(systemName: "icloud.and.arrow.down.fill")
@@ -52,6 +66,8 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
                     makeEditAssetView(id: id)
                 case let .assetDetails(id):
                     makeAssetDetailsView(id: id)
+                case .embeddedHomeView:
+                    makeEmbeddableHomeView()
                 }
             }
             .sheet(item: $router.presentedPopup) { _ in
@@ -60,6 +76,8 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
                     switch $popup.wrappedValue.popup {
                     case .addAsset:
                         makeAddAssetView()
+                    case .homeView:
+                        makePopupHomeView()
                     }
                 }
             }
@@ -91,6 +109,14 @@ private extension SwiftUIRouterHomeView {
         ])
     }
 
+    func showEmbeddedHomeView() {
+        router.push(screen: .embeddedHomeView)
+    }
+
+    func showPopupHomeView() {
+        router.present(popup: .homeView)
+    }
+
     func makeAddAssetView() -> some View {
         let viewModel = DefaultAddAssetViewModel(
             assetsProvider: DefaultAssetsProvider(),
@@ -116,6 +142,27 @@ private extension SwiftUIRouterHomeView {
             router: router
         )
         return AssetDetailsView(viewModel: viewModel)
+    }
+
+    func makeEmbeddableHomeView() -> some View {
+        //  Discussion: Navigation Stack does not work well with another Navigation Stacks embedded within it...
+        //  ... therefore we need reuse the router we have connected to the original Home View...
+        //  ... this way, all the navigation requests will be handled by the original Nav Stack, and not the "new" one.
+        //  TLDR: I think this has to be changed sooner or later as embedded navigation stack is a must-have feature!
+        SwiftUIRouterHomeView<ViewModel, Router>(viewModel: viewModel, router: router)
+    }
+
+    func makePopupHomeView() -> some View {
+        //  Discussion: Apparently, a Navigation Stack displayed on a sheet does not interfere with the "main" Nav Stack...
+        //  ... therefore we can create a new router to handle that Nav Stack:
+        let router = DefaultNavigationRouter()
+        return SwiftUIRouterHomeView<DefaultSwiftUIRouterHomeViewModel, DefaultNavigationRouter>(
+            viewModel: DefaultSwiftUIRouterHomeViewModel(
+                favouriteAssetsManager: viewModel.favouriteAssetsManager,
+                router: router
+            ),
+            router: router
+        )
     }
 }
 

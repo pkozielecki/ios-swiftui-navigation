@@ -7,8 +7,11 @@ import Foundation
 
 /// A structure describing an app alert route.
 struct AlertRoute: Hashable, Codable, Identifiable {
-    let id: UUID
     let alert: Alert
+
+    var id: Int {
+        alert.hashValue
+    }
 }
 
 protocol AlertRoutePresentable {
@@ -20,7 +23,7 @@ protocol AlertRoutePresentable {
 extension AlertRoute {
 
     static func makeAlert(named alert: AlertRoute.Alert) -> AlertRoute {
-        AlertRoute(id: UUID(), alert: alert)
+        AlertRoute(alert: alert)
     }
 }
 
