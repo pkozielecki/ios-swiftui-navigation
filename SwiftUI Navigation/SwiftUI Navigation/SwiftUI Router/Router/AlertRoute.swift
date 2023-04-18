@@ -18,6 +18,8 @@ protocol AlertRoutePresentable {
     var item: any Hashable { get }
     var title: String { get }
     var message: String? { get }
+    var confirmationActionText: String { get }
+    var cancellationActionText: String { get }
 }
 
 extension AlertRoute {
@@ -53,5 +55,16 @@ extension AlertRoute: AlertRoutePresentable {
 
     var message: String? {
         nil
+    }
+
+    var confirmationActionText: String {
+        switch alert {
+        case .deleteAsset:
+            return "Delete"
+        }
+    }
+
+    var cancellationActionText: String {
+        "Cancel"
     }
 }

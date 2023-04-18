@@ -32,20 +32,18 @@ extension View {
     ///
     /// - Parameters:
     ///   - data: a binding to data the alert is presenting. The data must conform to `AlertRoutePresentable` protocol.
-    ///   - confirmationActionTitle: a confirmation action title. Defaults to `Confirm`.
-    ///   - cancellationActionTitle: a cancellation action title. Defaults to `Cancel`.
     ///   - confirmationActionCallback: a confirmation action callback. Called when user taps on a `Confirm` button.
     ///   - cancellationActionCallback: a cancellation action callback. Called when user taps on a `Cancel` button.
     /// - Returns: an alert view.
     func alert<T>(
         presenting data: Binding<T?>,
-        confirmationActionTitle: String = "Confirm",
-        cancellationActionTitle: String = "Cancel",
         confirmationActionCallback: @escaping (_ alert: T) -> Void,
         cancellationActionCallback: ((_ alert: T) -> Void)? = nil
     ) -> some View where T: AlertRoutePresentable {
         let title = data.wrappedValue?.title ?? ""
         let message = data.wrappedValue?.message ?? ""
+        let confirmationActionTitle = data.wrappedValue?.confirmationActionText ?? "Confirm"
+        let cancellationActionTitle = data.wrappedValue?.cancellationActionText ?? "Cancel"
         return alert(
             Text(title),
             isPresented: data.isPresent(),

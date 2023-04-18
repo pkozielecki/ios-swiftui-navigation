@@ -83,7 +83,6 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
             }
             .alert(
                 presenting: $router.presentedAlert,
-                confirmationActionTitle: "Delete",
                 confirmationActionCallback: { alertRoute in
                     //  Handling app alert confirmation action:
                     switch alertRoute.alert {
