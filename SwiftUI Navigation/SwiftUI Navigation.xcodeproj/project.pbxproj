@@ -23,6 +23,7 @@
 		1E5F65268F5915DA83C6C07B /* DateFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F621D2D85C1D85A7AA6EB /* DateFormatterExtensions.swift */; };
 		1E5F6536C581CAE320B433C4 /* EditAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F65D84A758222B712E64C /* EditAssetView.swift */; };
 		1E5F6558A524D1A3E6A530C5 /* AssetHistoricalRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F68A8E8FD64DB4034812A /* AssetHistoricalRate.swift */; };
+		1E5F65AD89483BFA15C4A631 /* XCTestCaseSnapshotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66FB4102C86221E00D50 /* XCTestCaseSnapshotExtensions.swift */; };
 		1E5F660E0EA31ED2D6BF4AC8 /* PreviewFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6DB75761609FE4E69ACF /* PreviewFixtures.swift */; };
 		1E5F6640F0B7D7B35954CD55 /* SwiftUINavigationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6906889C57FA4B4B18AD /* SwiftUINavigationHelpers.swift */; };
 		1E5F6677B6C419E56E874B90 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6ACF56D04137AD3CEF1A /* PrimaryButton.swift */; };
@@ -35,6 +36,7 @@
 		1E5F692819ACB45F55BA9731 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62EC10A006551AC82D61 /* EncodableExtensions.swift */; };
 		1E5F697C7F49C976D0FA2707 /* GetHistoricalAssetRatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6E94E3D62B5565DE45B6 /* GetHistoricalAssetRatesRequest.swift */; };
 		1E5F699109A2FBA4CAF53A5D /* EditAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6DDB576D67F31F020BD7 /* EditAssetViewModel.swift */; };
+		1E5F6A7A1599F4FEC3DFC5F5 /* NavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */; };
 		1E5F6A82F9662B725628332C /* BindingExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6AF430C47F2B0BACFD9F /* BindingExtenstions.swift */; };
 		1E5F6AB3D5E6A0992833CC62 /* SwiftUIRouterHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64FD9731162973BCC07F /* SwiftUIRouterHomeViewModel.swift */; };
 		1E5F6B1A494ADEE4D5D339A0 /* AssetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F60AC3539DC38DF1B5CBE /* AssetCellView.swift */; };
@@ -61,11 +63,11 @@
 		22A240EB29CD884E0062221A /* SwiftUINavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A240EA29CD884E0062221A /* SwiftUINavigationApp.swift */; };
 		22A240EF29CD884F0062221A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A240EE29CD884F0062221A /* Assets.xcassets */; };
 		22A240F229CD884F0062221A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A240F129CD884F0062221A /* Preview Assets.xcassets */; };
-		22A240FC29CD884F0062221A /* SwiftUI_NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A240FB29CD884F0062221A /* SwiftUI_NavigationTests.swift */; };
 		22A2411629CDB3D70062221A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2411529CDB3D70062221A /* HomeView.swift */; };
 		22A2411829CDBF210062221A /* SwiftUIRouterHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2411729CDBF210062221A /* SwiftUIRouterHomeView.swift */; };
 		22A2412129D2D6B10062221A /* ConcurrentNgNetworkModule in Frameworks */ = {isa = PBXBuildFile; productRef = 22A2412029D2D6B10062221A /* ConcurrentNgNetworkModule */; };
 		22A2412329D2D6B10062221A /* NgNetworkModuleCore in Frameworks */ = {isa = PBXBuildFile; productRef = 22A2412229D2D6B10062221A /* NgNetworkModuleCore */; };
+		22EF8E0F29F2B375005039EF /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 22EF8E0E29F2B375005039EF /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,7 @@
 		1E5F62B96BA2BD6CF1B6A96F /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		1E5F62CB7AFAC634BC18399F /* AssetsRatesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsRatesProvider.swift; sourceTree = "<group>"; };
 		1E5F62EC10A006551AC82D61 /* EncodableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
+		1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouterTests.swift; sourceTree = "<group>"; };
 		1E5F632AA3F3569832746D24 /* NavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		1E5F643C13E91E6B9CD3C121 /* GetAllAssetsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllAssetsRequest.swift; sourceTree = "<group>"; };
 		1E5F649A8C7F147629FC911A /* ButtonStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 		1E5F66B7C599512A61C0AF02 /* CellStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellStyles.swift; sourceTree = "<group>"; };
 		1E5F66D232288278ED1B8C3A /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		1E5F66D7C71D4118FD020D09 /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		1E5F66FB4102C86221E00D50 /* XCTestCaseSnapshotExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseSnapshotExtensions.swift; sourceTree = "<group>"; };
 		1E5F670E98336DFA8D9386CC /* AssetsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsListView.swift; sourceTree = "<group>"; };
 		1E5F6756B29F085E048BE334 /* HistoricalAssetRatesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalAssetRatesProvider.swift; sourceTree = "<group>"; };
 		1E5F678251E7C86105EEF14B /* GetAssetsRatesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAssetsRatesRequest.swift; sourceTree = "<group>"; };
@@ -135,7 +139,6 @@
 		22A240EE29CD884F0062221A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A240F129CD884F0062221A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22A240F729CD884F0062221A /* SwiftUI NavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUI NavigationTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		22A240FB29CD884F0062221A /* SwiftUI_NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_NavigationTests.swift; sourceTree = "<group>"; };
 		22A2411529CDB3D70062221A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		22A2411729CDBF210062221A /* SwiftUIRouterHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterHomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22EF8E0F29F2B375005039EF /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +315,14 @@
 			path = "SwiftUI Helpers";
 			sourceTree = "<group>";
 		};
+		1E5F684ACBAD512CBA88AFD0 /* SwiftUI Router */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */,
+			);
+			path = "SwiftUI Router";
+			sourceTree = "<group>";
+		};
 		1E5F689E67F27902A4692485 /* SwiftUI Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +402,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		1E5F6DE3C4432923A3DE8FC0 /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F66FB4102C86221E00D50 /* XCTestCaseSnapshotExtensions.swift */,
+			);
+			path = "Test Helpers";
+			sourceTree = "<group>";
+		};
 		1E5F6E1D704E38295BAE6071 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,7 +481,8 @@
 		22A240FA29CD884F0062221A /* SwiftUI NavigationTests */ = {
 			isa = PBXGroup;
 			children = (
-				22A240FB29CD884F0062221A /* SwiftUI_NavigationTests.swift */,
+				1E5F684ACBAD512CBA88AFD0 /* SwiftUI Router */,
+				1E5F6DE3C4432923A3DE8FC0 /* Test Helpers */,
 			);
 			path = "SwiftUI NavigationTests";
 			sourceTree = "<group>";
@@ -505,6 +526,9 @@
 				22A240F929CD884F0062221A /* PBXTargetDependency */,
 			);
 			name = "SwiftUI NavigationTests";
+			packageProductDependencies = (
+				22EF8E0E29F2B375005039EF /* SnapshotTesting */,
+			);
 			productName = "SwiftUI NavigationTests";
 			productReference = 22A240F729CD884F0062221A /* SwiftUI NavigationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -539,6 +563,7 @@
 			mainGroup = 22A240DE29CD884E0062221A;
 			packageReferences = (
 				22A2411F29D2D6B10062221A /* XCRemoteSwiftPackageReference "ng-ios-network-module" */,
+				22EF8E0D29F2B375005039EF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 22A240E829CD884E0062221A /* Products */;
 			projectDirPath = "";
@@ -657,7 +682,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22A240FC29CD884F0062221A /* SwiftUI_NavigationTests.swift in Sources */,
+				1E5F6A7A1599F4FEC3DFC5F5 /* NavigationRouterTests.swift in Sources */,
+				1E5F65AD89483BFA15C4A631 /* XCTestCaseSnapshotExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,6 +963,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		22EF8E0D29F2B375005039EF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -949,6 +983,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22A2411F29D2D6B10062221A /* XCRemoteSwiftPackageReference "ng-ios-network-module" */;
 			productName = NgNetworkModuleCore;
+		};
+		22EF8E0E29F2B375005039EF /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22EF8E0D29F2B375005039EF /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
