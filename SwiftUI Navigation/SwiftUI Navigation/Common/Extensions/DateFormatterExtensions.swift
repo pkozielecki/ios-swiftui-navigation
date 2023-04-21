@@ -13,6 +13,13 @@ extension DateFormatter {
         formatter.timeZone = .current
         return formatter
     }()
+
+    /// A year, month and day date formatter.
+    static let dayMonthYearFormatter: DateFormatter = {
+        let formatter = makeDateFormatter(dateFormat: "yyyy-MM-dd")
+        formatter.timeZone = .current
+        return formatter
+    }()
 }
 
 private extension DateFormatter {

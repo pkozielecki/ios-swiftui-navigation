@@ -42,6 +42,6 @@ extension ChartView {
 
     /// A helper enumeration describing a chart time scopes.
     enum Scope: String, CaseIterable {
-        case day, week, month, quarter, year
+        case week, month, quarter, year
     }
 }

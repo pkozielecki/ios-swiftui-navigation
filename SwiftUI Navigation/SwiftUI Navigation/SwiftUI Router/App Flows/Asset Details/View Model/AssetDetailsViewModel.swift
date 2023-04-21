@@ -31,7 +31,10 @@ protocol AssetDetailsViewModel: ObservableObject {
     /// Triggers reloading of a chart.
     ///
     /// - Parameter scope: a selected chart timing scope.
-    func reloadChart(scope: ChartView.Scope)
+    func reloadChart(scope: ChartView.Scope) async
+
+    /// Shows initial asset performance chart.
+    func showInitialChart() async
 }
 
 /// A default AssetDetailsViewModel implementation.
@@ -41,23 +44,26 @@ final class DefaultAssetDetailsViewModel: AssetDetailsViewModel {
 
     private let router: any NavigationRouter
     private let favouriteAssetsManager: FavouriteAssetsManager
+    private let historicalAssetRatesProvider: HistoricalAssetRatesProvider
 
     /// A default initializer for AssetDetailsViewModel.
     ///
     /// - Parameter assetId: an asset id.
     /// - Parameter favouriteAssetsManager: a favourite assets manager.
+    /// - Parameter historicalAssetRatesProvider: a historical asset rates provder.
     /// - Parameter router: a navigation router.
     init(
         assetId: String,
         favouriteAssetsManager: FavouriteAssetsManager,
+        historicalAssetRatesProvider: HistoricalAssetRatesProvider,
         router: any NavigationRouter
     ) {
         let asset = favouriteAssetsManager.retrieveFavouriteAssets().filter { $0.id == assetId }.first
         assetData = asset?.toAssetDetailsViewData() ?? .empty
         self.favouriteAssetsManager = favouriteAssetsManager
+        self.historicalAssetRatesProvider = historicalAssetRatesProvider
         self.router = router
         viewState = .loading
-        loadAssetChart()
     }
 
     /// - SeeAlso: AssetDetailsViewModel.edit(assetID:)
@@ -66,32 +72,24 @@ final class DefaultAssetDetailsViewModel: AssetDetailsViewModel {
     }
 
     /// - SeeAlso: AssetDetailsViewModel.reloadChart(scope:)
-    func reloadChart(scope: ChartView.Scope) {
-        loadAssetChart()
+    func reloadChart(scope: ChartView.Scope) async {
+        await loadAssetChart(scope: scope)
+    }
+
+    /// - SeeAlso: AssetDetailsViewModel.showInitialChart()
+    func showInitialChart() async {
+        await loadAssetChart(scope: .week)
     }
 }
 
 private extension DefaultAssetDetailsViewModel {
 
-    func loadAssetChart() {
-
-        // TODO: Replace with a call to actual BE.
-
-        Task { @MainActor in
-            try await Task.sleep(nanoseconds: 2000000000)
-            var data: [ChartView.ChartPoint] = [
-                .init(label: "jan/22", value: 5),
-                .init(label: "feb/22", value: 4),
-                .init(label: "mar/22", value: 7),
-                .init(label: "apr/22", value: 15),
-                .init(label: "may/22", value: 14),
-                .init(label: "jun/22", value: 27),
-                .init(label: "jul/22", value: 27)
-            ]
-            data.remove(at: Int.random(in: 0...data.count - 1))
-            data.remove(at: Int.random(in: 0...data.count - 1))
-            viewState = .loaded(data)
+    @MainActor func loadAssetChart(scope: ChartView.Scope) async {
+        let rates = await historicalAssetRatesProvider.getHistoricalRates(for: assetData.id, range: scope)
+        let data = rates.map {
+            ChartView.ChartPoint(label: $0.date, value: $0.value)
         }
+        viewState = .loaded(data)
     }
 }
 

@@ -89,6 +89,7 @@ final class PreviewAssetDetailsViewModel: AssetDetailsViewModel {
 
     func edit(asset assetID: String) {}
     func reloadChart(scope: ChartView.Scope) {}
+    func showInitialChart() {}
 }
 
 final class PreviewEditAssetViewModel: EditAssetViewModel {

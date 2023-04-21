@@ -35,12 +35,14 @@ struct AssetDetailsView<ViewModel>: View where ViewModel: AssetDetailsViewModel 
                 if let chartData {
 
                     //  Chart view:
+                    // TODO: Fix date labels!
+                    // TODO: Fix Y axis
                     ChartView(data: chartData, xAxisName: "Data", yAxisName: "Price")
                         .frame(height: 200)
                         .padding(.top, 10)
 
                     //  Chart scope selector:
-                    Picker("", selection: .init(currentValue: $scope, initialValue: ChartView.Scope.day.rawValue)) {
+                    Picker("", selection: .init(currentValue: $scope, initialValue: ChartView.Scope.week.rawValue)) {
                         ForEach(ChartView.Scope.allCases, id: \.rawValue) { scope in
                             Text("\(scope.rawValue)")
                         }
@@ -76,7 +78,14 @@ struct AssetDetailsView<ViewModel>: View where ViewModel: AssetDetailsViewModel 
         }
         .onChange(of: scope) { scope in
             if let scope, let chartScope = ChartView.Scope(rawValue: scope) {
-                viewModel.reloadChart(scope: chartScope)
+                Task {
+                    await viewModel.reloadChart(scope: chartScope)
+                }
+            }
+        }
+        .onAppear {
+            Task {
+                await viewModel.showInitialChart()
             }
         }
     }
