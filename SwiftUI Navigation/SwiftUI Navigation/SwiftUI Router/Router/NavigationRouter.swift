@@ -63,11 +63,11 @@ protocol NavigationRouter: AnyObject, ObservableObject {
 
 /// A default implementation of NavigationRouter.
 final class DefaultNavigationRouter: NavigationRouter {
-    @Published var presentedPopup: PopupRoute?
+    @Published var presentedPopup: PopupRoute? = nil
     var presentedPopupPublished: Published<PopupRoute?> { _presentedPopup }
     var presentedPopupPublisher: Published<PopupRoute?>.Publisher { $presentedPopup }
 
-    @Published var presentedAlert: AlertRoute?
+    @Published var presentedAlert: AlertRoute? = nil
     var presentedAlertPublished: Published<AlertRoute?> { _presentedAlert }
     var presentedAlertPublisher: Published<AlertRoute?>.Publisher { $presentedAlert }
 

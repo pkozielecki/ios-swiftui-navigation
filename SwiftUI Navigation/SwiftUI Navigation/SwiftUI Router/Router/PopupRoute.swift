@@ -27,5 +27,6 @@ extension PopupRoute {
 
         case addAsset
         case homeView
+        case appInfo // A placeholder popup screen - mostly for tests.
     }
 }

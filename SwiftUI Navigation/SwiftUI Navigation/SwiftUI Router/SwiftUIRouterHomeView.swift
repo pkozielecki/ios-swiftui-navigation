@@ -74,6 +74,8 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
                 if let $popup = Binding($router.presentedPopup) {
                     //  Handling app popups, presented as sheets:
                     switch $popup.wrappedValue.popup {
+                    case .appInfo:
+                        Text("SwiftUI Navigation v 0.1")
                     case .addAsset:
                         makeAddAssetView()
                     case .homeView:
