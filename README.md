@@ -3,12 +3,17 @@
 Welcome to the demonstration of **different ways** to implement **scalable navigation** in **SwiftUI** projects.
 
 ## Main Features
-Showcase of 3 most reliable, currently available ways to implement SwiftUI navigation to be:
-* precise - we can define precisely which view (and how) will be shown 
-* scalable - as the application grows, the navigation component allows adding new views and app flows 
-* stateful - it is possible to set up or restore the entire navigation stack (e.g. when activating a deep link)
-* self-dismissible - a popup or a view can be dismissed / popped programmatically 
-* testable
+Showcase of 3 most reliable, currently available ways to implement SwiftUI navigation:
+* using **SwiftUIRouter** component
+* modelling navigation as a part of **View state**
+* using **UIKit-based navigation**
+
+The grounds on which to assess the navigation solutions are:
+* **precision** - we can define precisely which view (and how) will be shown 
+* **scalability** - as the application grows, the navigation component allows adding new views and app flows 
+* **being stateful** - it is possible to set up or restore the entire navigation stack (e.g. when activating a deep link)
+* an ability to **self-dismiss** - a popup or a view can be dismissed / popped programmatically 
+* **testability** - it is possible to test the navigation component in isolation
 
 ## Integration
 
@@ -29,6 +34,10 @@ Utilises iOS 16 `Navigation Stack` and `navigationDestination` API to handle nav
 * Uses `Router` component to execute navigation commands (e.g. push, pop, present, etc.)
 * The `Router` is bound strictly with the View implementing `Navigation Stack`
 * API very similar to `UINavigationController`
+
+| ![](External Resources/push_pop.gif) |![](External Resources/present_dismiss.gif)   | ![](External Resources/alert.gif) | ![](External Resources/drill_down.gif) | ![](External Resources/inline_inception.gif) | ![](External Resources/popup_inception.gif) |
+|--------------------------------------|---|-----------------------------------|----------------------------------------|----------------------------------------------|---------------------------------------------|
+
 
 ### Navigation modelled as a part of View state
 
