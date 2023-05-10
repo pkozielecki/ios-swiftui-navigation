@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// A structure describing an app alert route.
+/// A structure describing a route for an alert.
 struct AlertRoute: Hashable, Codable, Identifiable {
     let alert: Alert
 
@@ -14,6 +14,7 @@ struct AlertRoute: Hashable, Codable, Identifiable {
     }
 }
 
+/// An abstraction describing a presentable alert route.
 protocol AlertRoutePresentable {
     var item: any Hashable { get }
     var title: String { get }
@@ -24,6 +25,7 @@ protocol AlertRoutePresentable {
 
 extension AlertRoute {
 
+    /// A helper method for creating an alert route.
     static func makeAlert(named alert: AlertRoute.Alert) -> AlertRoute {
         AlertRoute(alert: alert)
     }
@@ -31,6 +33,7 @@ extension AlertRoute {
 
 extension AlertRoute {
 
+    /// An enumeration describing an alert types.
     enum Alert: Hashable, Codable {
 
         case deleteAsset(assetId: String, assetName: String)
@@ -39,6 +42,7 @@ extension AlertRoute {
 
 extension AlertRoute: AlertRoutePresentable {
 
+    /// - SeeAlso: AlertRoutePresentable.item
     var item: any Hashable {
         switch alert {
         case let .deleteAsset(assetId, _):
@@ -46,6 +50,7 @@ extension AlertRoute: AlertRoutePresentable {
         }
     }
 
+    /// - SeeAlso: AlertRoutePresentable.title
     var title: String {
         switch alert {
         case let .deleteAsset(_, assetName):
@@ -53,10 +58,12 @@ extension AlertRoute: AlertRoutePresentable {
         }
     }
 
+    /// - SeeAlso: AlertRoutePresentable.message
     var message: String? {
         nil
     }
 
+    /// - SeeAlso: AlertRoutePresentable.confirmationActionText
     var confirmationActionText: String {
         switch alert {
         case .deleteAsset:
@@ -64,6 +71,7 @@ extension AlertRoute: AlertRoutePresentable {
         }
     }
 
+    /// - SeeAlso: AlertRoutePresentable.cancellationActionText
     var cancellationActionText: String {
         "Cancel"
     }

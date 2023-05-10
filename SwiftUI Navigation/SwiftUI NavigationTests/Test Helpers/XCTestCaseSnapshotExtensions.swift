@@ -76,12 +76,12 @@ extension XCTestCase {
     // Discussion: Introducing slight delay to allow display list to redraw before making a snapshot"
     func waitForDisplayListRedraw(delay: Double = 0.1) {
         let expectation = expectation(description: "waitForDisplayListRedraw")
-
+    
         //  when:
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             expectation.fulfill()
         }
-
+    
         //  then:
         wait(for: [expectation])
     }
