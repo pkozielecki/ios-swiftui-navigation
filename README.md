@@ -35,7 +35,7 @@ Utilises iOS 16 `Navigation Stack` and `navigationDestination` API to handle nav
 * The `Router` is bound strictly with the View implementing `Navigation Stack`
 * API very similar to `UINavigationController`
 
-| ![](External Resources/push_pop.gif) |![](External Resources/present_dismiss.gif)   | ![](External Resources/alert.gif) | ![](External Resources/drill_down.gif) | ![](External Resources/inline_inception.gif) | ![](External Resources/popup_inception.gif) |
+| ![](External%20Resources/push_pop.gif) |![](External%20Resources/present_dismiss.gif)   | ![](External%20Resources/alert.gif) | ![](External%20Resources/drill_down.gif) | ![](External%20Resources/inline_inception.gif) | ![](External%20Resources/popup_inception.gif) |
 |--------------------------------------|---|-----------------------------------|----------------------------------------|----------------------------------------------|---------------------------------------------|
 
 
