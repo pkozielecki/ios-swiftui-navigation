@@ -48,6 +48,7 @@
 		1E5F6AB3D5E6A0992833CC62 /* SwiftUIRouterHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64FD9731162973BCC07F /* SwiftUIRouterHomeViewModel.swift */; };
 		1E5F6AF94AD3F6192B5A550B /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F607D5A7DF73D95BAD380 /* UIViewControllerExtensions.swift */; };
 		1E5F6B1A494ADEE4D5D339A0 /* AssetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F60AC3539DC38DF1B5CBE /* AssetCellView.swift */; };
+		1E5F6B3CCF0DA2812D33E053 /* UIKitRouterHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F63068B9F1DA391B3F0A2 /* UIKitRouterHomeView.swift */; };
 		1E5F6BCFDC480A9A3F864042 /* AlertRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A1E0878E6FB97E1BB64 /* AlertRoute.swift */; };
 		1E5F6BE26A2B7DCB536D4E62 /* AssetPerfromance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6D63394BAFC5740E6D04 /* AssetPerfromance.swift */; };
 		1E5F6C05C4D39B39C2ECC368 /* SwiftUISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F603897308982FC8A888B /* SwiftUISearchBar.swift */; };
@@ -65,6 +66,7 @@
 		1E5F6E4EB4450803E9C918A3 /* GetAssetsRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F69C745B13D00EC884E65 /* GetAssetsRatesResponse.swift */; };
 		1E5F6EEC19B4D8B29EE3D898 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6805DDEB00513279C1B5 /* ChartView.swift */; };
 		1E5F6EEDE9D460E07419B6B4 /* BaseAssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F65AD420335232E62C3E0 /* BaseAssetManager.swift */; };
+		1E5F6F1766C92764CB33B2CD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66FF8E0ECC21C8423800 /* RootViewController.swift */; };
 		1E5F6F527C264548EF03622D /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66D232288278ED1B8C3A /* Asset.swift */; };
 		1E5F6F75C743FBFF50B2AA89 /* EditAssetViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64D5933F176216B04FAE /* EditAssetViewData.swift */; };
 		1E5F6FA3EF112F30B935634A /* FakeSwiftUIRouterHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64F0B61F8CD1F9DC5D2D /* FakeSwiftUIRouterHomeViewModel.swift */; };
@@ -104,6 +106,7 @@
 		1E5F62E795571331164C7710 /* ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		1E5F62EC10A006551AC82D61 /* EncodableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
 		1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouterTests.swift; sourceTree = "<group>"; };
+		1E5F63068B9F1DA391B3F0A2 /* UIKitRouterHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterHomeView.swift; sourceTree = "<group>"; };
 		1E5F632AA3F3569832746D24 /* NavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		1E5F63C5B93C64ECFD7B250D /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		1E5F643C13E91E6B9CD3C121 /* GetAllAssetsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllAssetsRequest.swift; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 		1E5F66D232288278ED1B8C3A /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		1E5F66D7C71D4118FD020D09 /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		1E5F66FB4102C86221E00D50 /* XCTestCaseSnapshotExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseSnapshotExtensions.swift; sourceTree = "<group>"; };
+		1E5F66FF8E0ECC21C8423800 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		1E5F670E98336DFA8D9386CC /* AssetsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsListView.swift; sourceTree = "<group>"; };
 		1E5F6756B29F085E048BE334 /* HistoricalAssetRatesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalAssetRatesProvider.swift; sourceTree = "<group>"; };
 		1E5F67597A450FA03D79FBD4 /* FakeNavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationRouter.swift; sourceTree = "<group>"; };
@@ -284,6 +288,15 @@
 				1E5F6B78E8E410DF7653692C /* GetHistoricalAssetRatesResponse.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		1E5F634DB07B94396D547DC7 /* UIKit Router */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F63068B9F1DA391B3F0A2 /* UIKitRouterHomeView.swift */,
+				1E5F66FF8E0ECC21C8423800 /* RootViewController.swift */,
+			);
+			path = "UIKit Router";
 			sourceTree = "<group>";
 		};
 		1E5F63A6282C15F72FC20F65 /* Asset Details */ = {
@@ -499,6 +512,7 @@
 				1E5F689E67F27902A4692485 /* SwiftUI Router */,
 				1E5F6A63C041153C418F8AF3 /* Common */,
 				1E5F6CAE9AD3EB1720F24803 /* Model */,
+				1E5F634DB07B94396D547DC7 /* UIKit Router */,
 			);
 			path = "SwiftUI Navigation";
 			sourceTree = "<group>";
@@ -710,6 +724,8 @@
 				1E5F674483DB660ABA0D5066 /* HistoricalAssetRatesProvider.swift in Sources */,
 				1E5F6558A524D1A3E6A530C5 /* AssetHistoricalRate.swift in Sources */,
 				1E5F64EEE83605707C061341 /* DateProvider.swift in Sources */,
+				1E5F6B3CCF0DA2812D33E053 /* UIKitRouterHomeView.swift in Sources */,
+				1E5F6F1766C92764CB33B2CD /* RootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,8 +40,7 @@ struct HomeView: View {
                     isUIKitNaviPresented.toggle()
                 }
                 .fullScreenCover(isPresented: $isUIKitNaviPresented) {
-                    // TODO: show UIKit navi showcase
-                    Button("Back") {
+                    UIKitRouterHomeView {
                         isUIKitNaviPresented = false
                     }
                 }
