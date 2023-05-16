@@ -29,7 +29,7 @@ protocol EditAssetViewModel: ObservableObject {
 final class DefaultEditAssetViewModel: EditAssetViewModel {
     @Published var viewState: EditAssetViewState
 
-    private let router: any NavigationRouter
+    private let router: any SwiftUINavigationRouter
     private let favouriteAssetsManager: FavouriteAssetsManager
 
     /// A default initializer for EditAssetViewModel.
@@ -40,7 +40,7 @@ final class DefaultEditAssetViewModel: EditAssetViewModel {
     init(
         assetId: String,
         favouriteAssetsManager: FavouriteAssetsManager,
-        router: any NavigationRouter
+        router: any SwiftUINavigationRouter
     ) {
         self.favouriteAssetsManager = favouriteAssetsManager
         self.router = router

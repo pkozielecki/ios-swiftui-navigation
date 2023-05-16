@@ -1,56 +1,15 @@
 //
-//  AssetsListViewModel.swift
+//  SwiftUIRouterAssetsListViewModel.swift
 //  KISS Views
 //
 
 import Combine
-import Foundation
+import UIKit
 
-/// An enumeration describing Add Asset View state.
-enum AssetsListViewState {
-    case noFavouriteAssets
-    case loading([FavouriteAssetCellView.Data])
-    case loaded([FavouriteAssetCellView.Data], String)
-}
-
-/// An abstraction describing a View Model for .
-protocol AssetsListViewModel: ObservableObject {
-    /// A view state.
-    var viewState: AssetsListViewState { get }
-    var viewStatePublished: Published<AssetsListViewState> { get }
-    var viewStatePublisher: Published<AssetsListViewState>.Publisher { get }
-
-    /// Triggered on manual refresh requested.
-    func onRefreshRequested()
-
-    /// Triggerred on tapping Add Asset button.
-    func onAddNewAssetTapped()
-
-    /// Triggered on selecting an asset cell.
-    ///
-    /// - Parameter id: a selected asset id.
-    func onAssetSelected(id: String)
-
-    /// Triggered when user confirmed removal of an asset
-    ///
-    /// - Parameter id: an asset id.
-    func removeAssetFromFavourites(id: String)
-
-    /// Triggered on selecting an asset to be edited.
-    ///
-    /// - Parameter id: a selected asset id.
-    func onAssetSelectedToBeEdited(id: String)
-
-    /// Triggered on selecting an asset for removal.
-    ///
-    /// - Parameter id: a selected asset id.
-    func onAssetSelectedForRemoval(id: String)
-}
-
-final class DefaultAssetsListViewModel: AssetsListViewModel {
+final class SwiftUIRouterAssetsListViewModel: AssetsListViewModel {
     @Published var viewState: AssetsListViewState
 
-    private let router: any NavigationRouter
+    private let router: any SwiftUINavigationRouter
     private let favouriteAssetsManager: FavouriteAssetsManager
     private let assetsRatesProvider: AssetsRatesProvider
     private var favouriteAssets: [Asset]
@@ -64,13 +23,13 @@ final class DefaultAssetsListViewModel: AssetsListViewModel {
     init(
         favouriteAssetsManager: FavouriteAssetsManager,
         assetsRatesProvider: AssetsRatesProvider,
-        router: any NavigationRouter
+        router: any SwiftUINavigationRouter
     ) {
         self.favouriteAssetsManager = favouriteAssetsManager
         self.assetsRatesProvider = assetsRatesProvider
         self.router = router
         let favouriteAssets = favouriteAssetsManager.retrieveFavouriteAssets()
-        viewState = DefaultAssetsListViewModel.composeViewState(favouriteAssets: favouriteAssets)
+        viewState = SwiftUIRouterAssetsListViewModel.composeViewState(favouriteAssets: favouriteAssets)
         self.favouriteAssets = favouriteAssets
         subscribeToFavouriteAssetsUpdates()
         getAssetRates()
@@ -107,7 +66,7 @@ final class DefaultAssetsListViewModel: AssetsListViewModel {
     }
 }
 
-private extension DefaultAssetsListViewModel {
+private extension SwiftUIRouterAssetsListViewModel {
 
     static func composeViewState(favouriteAssets: [Asset]) -> AssetsListViewState {
         favouriteAssets.isEmpty ? .noFavouriteAssets : .loading(favouriteAssets.map { FavouriteAssetCellView.Data(asset: $0) })
@@ -115,7 +74,7 @@ private extension DefaultAssetsListViewModel {
 
     func refreshViewState() {
         favouriteAssets = favouriteAssetsManager.retrieveFavouriteAssets()
-        viewState = DefaultAssetsListViewModel.composeViewState(favouriteAssets: favouriteAssets)
+        viewState = SwiftUIRouterAssetsListViewModel.composeViewState(favouriteAssets: favouriteAssets)
     }
 
     func subscribeToFavouriteAssetsUpdates() {
@@ -148,13 +107,7 @@ private extension DefaultAssetsListViewModel {
     }
 }
 
-extension FavouriteAssetCellView.Data {
-    init(asset: Asset) {
-        self.init(id: asset.id, title: asset.name, color: asset.color, value: "...")
-    }
-}
-
-extension DefaultAssetsListViewModel {
+extension SwiftUIRouterAssetsListViewModel {
     var viewStatePublished: Published<AssetsListViewState> { _viewState }
     var viewStatePublisher: Published<AssetsListViewState>.Publisher { $viewState }
 }

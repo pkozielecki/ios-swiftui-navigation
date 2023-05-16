@@ -7,7 +7,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-final class PreviewNavigationRouter: NavigationRouter {
+final class PreviewSwiftUINavigationRouter: SwiftUINavigationRouter {
     @Published var navigationRoute: NavigationRoute?
     var navigationPathPublished: Published<NavigationRoute?> { _navigationRoute }
     var navigationPathPublisher: Published<NavigationRoute?>.Publisher { $navigationRoute }

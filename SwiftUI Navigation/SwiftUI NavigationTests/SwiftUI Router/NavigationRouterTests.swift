@@ -12,10 +12,10 @@ import XCTest
 @testable import SwiftUI_Navigation
 
 final class DefaultNavigationRouterTest: XCTestCase {
-    var sut: DefaultNavigationRouter!
+    var sut: DefaultSwiftUINavigationRouter!
 
     override func setUp() {
-        sut = DefaultNavigationRouter()
+        sut = DefaultSwiftUINavigationRouter()
     }
 
     func test_whenInitialisingNavigationStack_itShouldStartEmpty() {

@@ -21,7 +21,7 @@ final class DefaultSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
         !favouriteAssetsManager.retrieveFavouriteAssets().isEmpty
     }
 
-    private let router: any NavigationRouter
+    private let router: any SwiftUINavigationRouter
 
     /// A default initializer for DefaultSwiftUIRouterHomeViewModel.
     ///
@@ -29,7 +29,7 @@ final class DefaultSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
     /// - Parameter router: a navigation router.
     init(
         favouriteAssetsManager: FavouriteAssetsManager,
-        router: any NavigationRouter
+        router: any SwiftUINavigationRouter
     ) {
         self.favouriteAssetsManager = favouriteAssetsManager
         self.router = router

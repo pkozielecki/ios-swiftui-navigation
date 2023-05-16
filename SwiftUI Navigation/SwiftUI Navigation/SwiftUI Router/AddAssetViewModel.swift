@@ -43,7 +43,7 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
 
     private let assetsProvider: AssetsProvider
     private let favouriteAssetsManager: FavouriteAssetsManager
-    private let router: any NavigationRouter
+    private let router: any SwiftUINavigationRouter
 
     private var cancellables = Set<AnyCancellable>()
     private var allAssets = [Asset]()
@@ -57,7 +57,7 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
     init(
         assetsProvider: AssetsProvider,
         favouriteAssetsManager: FavouriteAssetsManager,
-        router: any NavigationRouter
+        router: any SwiftUINavigationRouter
     ) {
         self.assetsProvider = assetsProvider
         self.favouriteAssetsManager = favouriteAssetsManager

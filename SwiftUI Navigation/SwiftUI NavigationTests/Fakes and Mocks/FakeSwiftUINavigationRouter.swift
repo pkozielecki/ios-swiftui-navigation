@@ -1,5 +1,5 @@
 //
-//  FakeNavigationRouter.swift
+//  FakeSwiftUINavigationRouter.swift
 //  KISS Views
 //
 
@@ -7,7 +7,7 @@ import Foundation
 
 @testable import SwiftUI_Navigation
 
-final class FakeNavigationRouter: NavigationRouter {
+final class FakeSwiftUINavigationRouter: SwiftUINavigationRouter {
     @Published var navigationRoute: NavigationRoute?
     @Published var presentedPopup: PopupRoute?
     @Published var presentedAlert: AlertRoute?
@@ -19,7 +19,7 @@ final class FakeNavigationRouter: NavigationRouter {
     }
 }
 
-extension FakeNavigationRouter {
+extension FakeSwiftUINavigationRouter {
     var navigationPathPublished: Published<NavigationRoute?> { _navigationRoute }
     var navigationPathPublisher: Published<NavigationRoute?>.Publisher { $navigationRoute }
     var presentedPopupPublished: Published<PopupRoute?> { _presentedPopup }

@@ -42,7 +42,7 @@ final class DefaultAssetDetailsViewModel: AssetDetailsViewModel {
     @Published var viewState = AssetDetailsViewState.loading
     let assetData: AssetDetailsViewData
 
-    private let router: any NavigationRouter
+    private let router: any SwiftUINavigationRouter
     private let favouriteAssetsManager: FavouriteAssetsManager
     private let historicalAssetRatesProvider: HistoricalAssetRatesProvider
 
@@ -56,7 +56,7 @@ final class DefaultAssetDetailsViewModel: AssetDetailsViewModel {
         assetId: String,
         favouriteAssetsManager: FavouriteAssetsManager,
         historicalAssetRatesProvider: HistoricalAssetRatesProvider,
-        router: any NavigationRouter
+        router: any SwiftUINavigationRouter
     ) {
         let asset = favouriteAssetsManager.retrieveFavouriteAssets().filter { $0.id == assetId }.first
         assetData = asset?.toAssetDetailsViewData() ?? .empty

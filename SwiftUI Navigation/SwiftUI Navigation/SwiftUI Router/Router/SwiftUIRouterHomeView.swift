@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: NavigationRouter>: View {
+struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: SwiftUINavigationRouter>: View {
     @ObservedObject var viewModel: ViewModel
     @ObservedObject var router: Router
 
@@ -22,7 +22,7 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Navi
                 })
         ) {
             AssetsListView(
-                viewModel: DefaultAssetsListViewModel(
+                viewModel: SwiftUIRouterAssetsListViewModel(
                     favouriteAssetsManager: viewModel.favouriteAssetsManager,
                     assetsRatesProvider: DefaultAssetsRatesProvider(favouriteAssetsProvider: viewModel.favouriteAssetsManager),
                     router: router
@@ -157,8 +157,8 @@ private extension SwiftUIRouterHomeView {
     func makePopupHomeView() -> some View {
         //  Discussion: Apparently, a Navigation Stack displayed on a sheet does not interfere with the "main" Nav Stack...
         //  ... therefore we can create a new router to handle that Nav Stack:
-        let router = DefaultNavigationRouter()
-        return SwiftUIRouterHomeView<DefaultSwiftUIRouterHomeViewModel, DefaultNavigationRouter>(
+        let router = DefaultSwiftUINavigationRouter()
+        return SwiftUIRouterHomeView<DefaultSwiftUIRouterHomeViewModel, DefaultSwiftUINavigationRouter>(
             viewModel: DefaultSwiftUIRouterHomeViewModel(
                 favouriteAssetsManager: viewModel.favouriteAssetsManager,
                 router: router
@@ -172,7 +172,7 @@ struct SwiftUIRouterHomeView_Previews: PreviewProvider {
     static var previews: some View {
         SwiftUIRouterHomeView(
             viewModel: PreviewSwiftUIRouterHomeViewModel(),
-            router: PreviewNavigationRouter()
+            router: PreviewSwiftUINavigationRouter()
         )
     }
 }
