@@ -128,7 +128,7 @@ private extension SwiftUIRouterHomeView {
     }
 
     func makeEditAssetView(id: String) -> some View {
-        let viewModel = DefaultEditAssetViewModel(
+        let viewModel = SwiftUIRouterEditAssetViewModel(
             assetId: id,
             favouriteAssetsManager: viewModel.favouriteAssetsManager,
             router: router
@@ -137,7 +137,7 @@ private extension SwiftUIRouterHomeView {
     }
 
     func makeAssetDetailsView(id: String) -> some View {
-        let viewModel = DefaultAssetDetailsViewModel(
+        let viewModel = SwiftUIRouterAssetDetailsViewModel(
             assetId: id,
             favouriteAssetsManager: viewModel.favouriteAssetsManager,
             historicalAssetRatesProvider: DefaultHistoricalAssetRatesProvider(),

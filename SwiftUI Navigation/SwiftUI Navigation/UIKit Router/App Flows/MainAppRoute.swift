@@ -39,9 +39,6 @@ extension MainAppRoute: Route {
 
     /// - SeeAlso: Route.isPopup
     var isPopup: Bool {
-        if case .editAsset = self {
-            return true
-        }
-        return false
+        false
     }
 }

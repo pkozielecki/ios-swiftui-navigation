@@ -64,8 +64,11 @@ final class MainAppFlowCoordinator: FlowCoordinator {
         case .assetsList:
             return makeAssetListViewController()
 
-        default:
-            fatalError("Route \(route) is not supported by MainAppFlowCoordinator")
+        case let .assetDetails(assetId):
+            return makeAssetDetailsViewController(assetId: assetId)
+
+        case let .editAsset(assetId):
+            return makeEditAssetViewController(assetId: assetId)
         }
     }
 
@@ -83,7 +86,32 @@ private extension MainAppFlowCoordinator {
             assetsRatesProvider: dependencyProvider.assetsRatesProvider,
             router: dependencyProvider.router
         )
-        let view = AssetsListView(viewModel: viewModel)
-        return UIHostingController(rootView: view)
+        return AssetsListView(viewModel: viewModel).viewController
+    }
+
+    func makeAssetDetailsViewController(assetId: String) -> UIViewController {
+        let viewModel = UIKitRouterAssetDetailsViewModel(
+            assetId: assetId,
+            favouriteAssetsManager: dependencyProvider.favouriteAssetsManager,
+            historicalAssetRatesProvider: dependencyProvider.historicalAssetRatesProvider,
+            router: dependencyProvider.router
+        )
+        return AssetDetailsView(viewModel: viewModel).viewController
+    }
+
+    func makeEditAssetViewController(assetId: String) -> UIViewController {
+        let viewModel = UIKitRouterEditAssetViewModel(
+            assetId: assetId,
+            favouriteAssetsManager: dependencyProvider.favouriteAssetsManager,
+            router: dependencyProvider.router
+        )
+        return EditAssetView(viewModel: viewModel).viewController
+    }
+}
+
+extension View {
+
+    var viewController: UIViewController {
+        UIHostingController(rootView: self)
     }
 }

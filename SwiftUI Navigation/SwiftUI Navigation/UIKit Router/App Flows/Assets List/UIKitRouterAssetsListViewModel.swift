@@ -38,7 +38,7 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
     }
 
     func onAssetSelected(id: String) {
-        print("Asset selected")
+        router.show(route: MainAppRoute.assetDetails(assetId: id), withData: nil)
     }
 
     func onAssetSelectedToBeEdited(id: String) {

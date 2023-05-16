@@ -1,35 +1,16 @@
 //
-//  EditAssetViewModel.swift
+//  UIKitRouterEditAssetViewModel.swift
 //  KISS Views
 //
 
 import Combine
 import SwiftUI
 
-/// An enumeration describing EditAssetView state.
-enum EditAssetViewState {
-    case editAsset(EditAssetViewData)
-    case assetNotFound
-}
-
-/// An abstraction describing a View Model for EditAssetView.
-protocol EditAssetViewModel: ObservableObject {
-    /// A view state.
-    var viewState: EditAssetViewState { get }
-    var viewStatePublished: Published<EditAssetViewState> { get }
-    var viewStatePublisher: Published<EditAssetViewState>.Publisher { get }
-
-    /// Saves current changes.
-    ///
-    /// - Parameter assetData: an asset data.
-    func saveChanges(assetData: EditAssetViewData)
-}
-
 /// A default EditAssetViewModel implementation.
-final class DefaultEditAssetViewModel: EditAssetViewModel {
+final class UIKitRouterEditAssetViewModel: EditAssetViewModel {
     @Published var viewState: EditAssetViewState
 
-    private let router: any SwiftUINavigationRouter
+    private let router: UIKitNavigationRouter
     private let favouriteAssetsManager: FavouriteAssetsManager
 
     /// A default initializer for EditAssetViewModel.
@@ -40,11 +21,11 @@ final class DefaultEditAssetViewModel: EditAssetViewModel {
     init(
         assetId: String,
         favouriteAssetsManager: FavouriteAssetsManager,
-        router: any SwiftUINavigationRouter
+        router: UIKitNavigationRouter
     ) {
         self.favouriteAssetsManager = favouriteAssetsManager
         self.router = router
-        viewState = DefaultEditAssetViewModel.calculateViewState(
+        viewState = UIKitRouterEditAssetViewModel.calculateViewState(
             favouriteAssetsManager: favouriteAssetsManager,
             assetId: assetId
         )
@@ -57,11 +38,11 @@ final class DefaultEditAssetViewModel: EditAssetViewModel {
         assets.removeAll { $0.id == assetData.id }
         assets.insert(asset, at: assetData.position.currentPosition - 1)
         favouriteAssetsManager.store(favouriteAssets: assets)
-        router.pop()
+        router.navigateBack(animated: true)
     }
 }
 
-private extension DefaultEditAssetViewModel {
+private extension UIKitRouterEditAssetViewModel {
 
     static func calculateViewState(
         favouriteAssetsManager: FavouriteAssetsManager,
@@ -79,7 +60,7 @@ private extension DefaultEditAssetViewModel {
     }
 }
 
-extension DefaultEditAssetViewModel {
+extension UIKitRouterEditAssetViewModel {
     var viewStatePublished: Published<EditAssetViewState> { _viewState }
     var viewStatePublisher: Published<EditAssetViewState>.Publisher { $viewState }
 }
