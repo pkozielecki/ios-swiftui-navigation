@@ -32,7 +32,9 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.start(animated:)
     func start(animated: Bool) {
-        let assetsList = makeViewComponent(forRoute: MainAppRoute.assetsList, withData: nil)
+        let initialRoute = MainAppRoute.assetsList
+        let assetsList = makeViewComponent(forRoute: initialRoute, withData: nil)
+        assetsList.route = initialRoute
         navigator.setViewControllers([assetsList.viewController], animated: animated)
     }
 
@@ -41,15 +43,22 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.show(route:withData:)
     func canShow(route: any Route) -> Bool {
-        //  TODO: Implement
-        true
+        route as? MainAppRoute != nil
     }
 
     /// - SeeAlso: FlowCoordinator.navigateBack(animated:)
-    func navigateBack(animated: Bool) {}
+    func navigateBack(animated: Bool) {
+        guard navigator.viewControllers.count > 1 else {
+            return
+        }
+
+        _ = navigator.popViewController(animated: animated)
+    }
 
     /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:)
-    func navigateBackToRoot(animated: Bool) {}
+    func navigateBackToRoot(animated: Bool) {
+        _ = navigator.popToRootViewController(animated: animated)
+    }
 
     /// - SeeAlso: FlowCoordinator.navigateBack(toRoute:animated:)
     func navigateBack(toRoute route: any Route, animated: Bool) {}
@@ -62,7 +71,9 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 
         switch route {
         case .assetsList:
-            return makeAssetListViewController()
+            let assetListViewController = makeAssetListViewController()
+            addNavigationBarButtons(uiViewController: assetListViewController)
+            return assetListViewController
 
         case let .assetDetails(assetId):
             return makeAssetDetailsViewController(assetId: assetId)
@@ -79,6 +90,21 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 }
 
 private extension MainAppFlowCoordinator {
+
+    @objc func embeddedNavigationButtonTapped() {
+        print("embeddedNavigationButtonTapped")
+    }
+
+    @objc func popupNavigationButtonTapped() {
+        print("popupNavigationButtonTapped")
+    }
+
+    @objc func restoreNavigationButtonTapped() {
+        print("restoreNavigationButtonTapped")
+    }
+
+    //  Discussion: This can be moved to a dedicated factory / view builder in the future.
+    //  This way we can reuse the code to make these views in other places.
 
     func makeAssetListViewController() -> UIViewController {
         let viewModel = UIKitRouterAssetsListViewModel(
@@ -107,11 +133,26 @@ private extension MainAppFlowCoordinator {
         )
         return EditAssetView(viewModel: viewModel).viewController
     }
-}
 
-extension View {
-
-    var viewController: UIViewController {
-        UIHostingController(rootView: self)
+    func addNavigationBarButtons(uiViewController: UIViewController) {
+        let embeddedNavigationButton = UIBarButtonItem(
+            image: UIImage(systemName: "character.duployan"),
+            style: .plain,
+            target: self,
+            action: #selector(embeddedNavigationButtonTapped)
+        )
+        let popupNavigationButton = UIBarButtonItem(
+            image: UIImage(systemName: "note"),
+            style: .plain,
+            target: self,
+            action: #selector(popupNavigationButtonTapped)
+        )
+        let restoreNavigationButton = UIBarButtonItem(
+            image: UIImage(systemName: "icloud.and.arrow.down.fill"),
+            style: .plain,
+            target: self,
+            action: #selector(restoreNavigationButtonTapped)
+        )
+        uiViewController.navigationItem.leftBarButtonItems = [embeddedNavigationButton, popupNavigationButton, restoreNavigationButton]
     }
 }

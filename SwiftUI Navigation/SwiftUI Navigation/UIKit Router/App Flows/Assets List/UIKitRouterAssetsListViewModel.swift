@@ -42,7 +42,7 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
     }
 
     func onAssetSelectedToBeEdited(id: String) {
-        print("Edit asset tapped")
+        router.show(route: MainAppRoute.editAsset(assetId: id), withData: nil)
     }
 
     func onAddNewAssetTapped() {

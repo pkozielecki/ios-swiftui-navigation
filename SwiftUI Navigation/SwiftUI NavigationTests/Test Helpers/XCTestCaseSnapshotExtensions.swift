@@ -21,7 +21,7 @@ extension XCTestCase {
         line: UInt = #line
     ) {
         executeSnapshotTests(
-            forViewController: view.wrappedInHostingViewController(),
+            forViewController: view.viewController,
             named: name,
             precision: precision,
             isRecording: isRecording,

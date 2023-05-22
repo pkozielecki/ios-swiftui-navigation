@@ -35,13 +35,12 @@ final class RootViewController: UINavigationController {
 private extension RootViewController {
 
     @objc func closeButtonTapped() {
-
         completion?()
     }
 
     func arrangeNavigationBar() {
         let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonTapped))
-        navigationBar.topItem?.rightBarButtonItem = closeButton
+        topViewController?.navigationItem.rightBarButtonItems = [closeButton]
         navigationBar.prefersLargeTitles = true
     }
 }

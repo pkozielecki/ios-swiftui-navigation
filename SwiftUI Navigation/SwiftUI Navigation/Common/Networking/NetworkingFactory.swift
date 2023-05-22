@@ -15,7 +15,7 @@ enum NetworkingFactory {
     /// - Returns: a network client.
     static func makeNetworkingModule() -> NetworkModule {
         let builder = DefaultRequestBuilder(baseURL: AppConfiguration.baseURL)
-        let apiKeyAction = AddApiKeyNetworkModuleAction(authenticationTokenProvider: AppConfiguration.apiKey)
+        let apiKeyAction = AddApiKeyNetworkModuleAction(authenticationTokenProvider: isRunningTests ? "" : AppConfiguration.apiKey)
         return DefaultNetworkModule(requestBuilder: builder, actions: [apiKeyAction])
     }
 }

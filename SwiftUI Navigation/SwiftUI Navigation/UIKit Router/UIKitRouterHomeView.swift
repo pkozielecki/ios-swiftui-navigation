@@ -10,16 +10,21 @@ import UIKit
 struct UIKitRouterHomeView: UIViewControllerRepresentable {
     typealias UIViewControllerType = RootViewController
 
-    private var rootViewController: RootViewController
-    private var dependencyProvider: DependencyProvider
+    private let dependencyProvider: DependencyProvider
+    private let rootViewController: RootViewController
 
     /// A default initializer for UIKitRouterHomeView.
     ///
-    /// - Parameter completion: a completion callback.
-    init(completion: (() -> Void)?) {
-        // TODO: Stop current flow coordinator.
-        rootViewController = RootViewController(completion: completion)
-        dependencyProvider = DefaultDependencyProvider(rootViewController: rootViewController)
+    /// - Parameters:
+    ///   - dependencyProvider: a dependency provider.
+    ///   - rootViewController: a root view controller.
+    init(
+        dependencyProvider: DependencyProvider,
+        rootViewController: RootViewController
+    ) {
+        self.dependencyProvider = dependencyProvider
+        self.rootViewController = rootViewController
+        // TODO: Stop current flow coordinator when the completion is called.
     }
 
     func makeUIViewController(context: Context) -> UIViewControllerType {

@@ -5,6 +5,8 @@
 
 import SwiftUI
 
+// private var dependencyProvider: DependencyProvider?
+
 struct HomeView: View {
     @State private var isSwiftUINaviPresented = false
     @State private var isUIKitNaviPresented = false
@@ -40,9 +42,11 @@ struct HomeView: View {
                     isUIKitNaviPresented.toggle()
                 }
                 .fullScreenCover(isPresented: $isUIKitNaviPresented) {
-                    UIKitRouterHomeView {
+                    let rootViewController = RootViewController {
                         isUIKitNaviPresented = false
                     }
+                    let dependencyProvider = DefaultDependencyProvider(rootViewController: rootViewController)
+                    UIKitRouterHomeView(dependencyProvider: dependencyProvider, rootViewController: rootViewController)
                 }
 
                 Divider()
