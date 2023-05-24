@@ -5,6 +5,8 @@
 
 import Foundation
 
+// MARK: - UIKitNavigationRouter
+
 /// An abstraction describing a UIKit navigation router.
 protocol UIKitNavigationRouter: AnyObject {
 
@@ -45,11 +47,13 @@ protocol UIKitNavigationRouter: AnyObject {
     func startInitialFlow(dependencyProvider: DependencyProvider, animated: Bool)
 }
 
+// MARK: - DefaultUIKitNavigationRouter
+
 /// A default implementation of UIKitNavigationRouter.
 final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
     private let navigator: Navigator
     private var dependencyProvider: DependencyProvider?
-    private var currentFlow: FlowCoordinator?
+    private var initialFlow: FlowCoordinator?
 
     /// A default initializer for DefaultUIKitNavigationRouter.
     ///
@@ -63,8 +67,8 @@ final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
     /// - SeeAlso: UIKitNavigationRouter.startInitialFlow(dependencyProvider:animated:)
     func startInitialFlow(dependencyProvider: DependencyProvider, animated: Bool) {
         self.dependencyProvider = dependencyProvider
-        currentFlow = MainAppFlowCoordinator(navigator: navigator, dependencyProvider: dependencyProvider)
-        currentFlow?.start(animated: animated)
+        initialFlow = MainAppFlowCoordinator(navigator: navigator, dependencyProvider: dependencyProvider)
+        initialFlow?.start(animated: animated)
     }
 
     /// - SeeAlso: UIKitNavigationRouter.show(route:withData:)
@@ -99,6 +103,21 @@ final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
     /// - SeeAlso: UIKitNavigationRouter.stop()
     func stop() {
         currentFlow?.stop()
-        currentFlow = nil
+    }
+}
+
+// MARK: - Private
+
+private extension DefaultUIKitNavigationRouter {
+
+    var currentFlow: FlowCoordinator? {
+        getCurrentFlow(base: initialFlow)
+    }
+
+    func getCurrentFlow(base: FlowCoordinator?) -> FlowCoordinator? {
+        if let child = base?.child {
+            return getCurrentFlow(base: child)
+        }
+        return base
     }
 }

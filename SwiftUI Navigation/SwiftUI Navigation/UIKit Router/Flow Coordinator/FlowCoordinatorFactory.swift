@@ -12,7 +12,8 @@ protocol FlowCoordinatorFactory {
     ///
     /// - Parameters:
     ///   - route: a route.
+    ///   - navigator: a navigator.
     ///   - withData: an additional data.
     /// - Returns: a flow coordinator.
-    func makeFlowCoordinator(forRoute route: any Route, withData: AnyHashable?) -> FlowCoordinator
+    func makeFlowCoordinator(forRoute route: any Route, navigator: Navigator, withData: AnyHashable?) -> FlowCoordinator
 }

@@ -10,13 +10,22 @@ import UIKit
 private var FlowCoordinatorRouteKey: UInt8 = 234
 
 /// An abstraction describing a navigation flow.
-protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFactory {
+protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFactory, UIAdaptivePresentationControllerDelegate {
 
     /// A navigator the flow operates on.
     var navigator: Navigator { get }
 
     /// A parent flow coordinator.
     var parent: FlowCoordinator? { get }
+
+    /// A child flow coordinator.
+    var child: FlowCoordinator? { get }
+
+    /// A presentation delegate.
+    var adaptivePresentationDelegate: UIAdaptivePresentationControllerDelegate? { get set }
+
+    /// A coordinator completion callback.
+    var completionCallback: (() -> Void)? { get set }
 
     /// A starts the flow.
     ///
@@ -25,6 +34,9 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
 
     /// Stops the flow.
     func stop()
+
+    /// Handles situation when child flow has finished.
+    func handleChildCoordinatorFinished()
 
     /// Shows a route in the flow.
     ///
@@ -83,17 +95,17 @@ extension FlowCoordinator {
         }
 
         if route.isFlow {
-            let flowCoordinator = makeFlowCoordinator(forRoute: route, withData: withData)
-            flowCoordinator.route = route
-            // TODO: If route starts as a popup, make sure to create new navigation controller and use it as nav base!
-            flowCoordinator.start()
-        } else {
-            let viewComponent = makeViewComponent(forRoute: route, withData: withData)
-            viewComponent.route = route
             if route.isPopup {
-                navigator.present(viewComponent.viewController, animated: true, completion: nil)
+                createAndStartFlowOnPopup(withData: withData, route: route)
             } else {
-                navigator.pushViewController(viewComponent.viewController, animated: true)
+                createAndStartInlineFlow(withData: withData, route: route)
+            }
+        } else {
+            let viewComponents = makeViewComponents(forRoute: route, withData: withData)
+            if viewComponents.count == 1, let viewComponent = viewComponents.first {
+                show(viewComponent: viewComponent, route: route)
+            } else {
+                show(viewComponents: viewComponents, route: route)
             }
         }
     }
@@ -125,5 +137,64 @@ extension FlowCoordinator {
 
     func navigateBack(toRoute route: any Route) {
         navigateBack(toRoute: route, animated: true)
+    }
+}
+
+private extension FlowCoordinator {
+
+    func createAndStartInlineFlow(withData: AnyHashable?, route: any Route) {
+        let flowCoordinator = makeFlowCoordinator(
+            forRoute: route,
+            navigator: navigator,
+            withData: withData
+        )
+        flowCoordinator.start(animated: true)
+        flowCoordinator.route = route
+        flowCoordinator.completionCallback = { [weak self] in
+            self?.handleChildCoordinatorFinished()
+        }
+    }
+
+    func createAndStartFlowOnPopup(withData: AnyHashable?, route: any Route) {
+        let navigationController = UINavigationController()
+        //  TODO: Handle fullscreen and popover presentation styles: navigationController.modalPresentationStyle = .fullScreen
+        let flowCoordinator = makeFlowCoordinator(
+            forRoute: route,
+            navigator: navigationController,
+            withData: withData
+        )
+        flowCoordinator.start(animated: false)
+        navigator.present(navigationController, animated: true, completion: nil)
+        navigationController.presentationController?.delegate = self
+        flowCoordinator.route = route
+        flowCoordinator.completionCallback = { [weak self] in
+            self?.handleChildCoordinatorFinished()
+        }
+    }
+
+    func show(viewComponents: [ViewComponent], route: any Route) {
+        if route.isPopup {
+            //  Discussion: showing only the last view as popup.
+            guard let last = viewComponents.last else {
+                return
+            }
+            last.route = route
+            navigator.present(last.viewController, animated: true, completion: nil)
+        } else {
+            var vcs = navigator.viewControllers
+            let viewControllers = viewComponents.map { $0.viewController }
+            viewControllers.forEach { $0.route = route }
+            vcs.append(contentsOf: viewControllers)
+            navigator.setViewControllers(vcs, animated: true)
+        }
+    }
+
+    func show(viewComponent: ViewComponent, route: any Route) {
+        viewComponent.route = route
+        if route.isPopup {
+            navigator.present(viewComponent.viewController, animated: true, completion: nil)
+        } else {
+            navigator.pushViewController(viewComponent.viewController, animated: true)
+        }
     }
 }

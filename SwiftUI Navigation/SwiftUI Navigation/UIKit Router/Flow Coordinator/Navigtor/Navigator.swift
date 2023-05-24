@@ -23,6 +23,12 @@ protocol Navigator: AnyObject {
     /// A flag indicating whether the navigation bar is hidden.
     var isNavigationBarHidden: Bool { get }
 
+    /// A currently presented view controller.
+    var presentedViewController: UIViewController? { get }
+
+    /// A modal view presentation controller.
+    var presentationController: UIPresentationController? { get }
+
     func pushViewController(_ viewController: UIViewController, animated: Bool)
     func popViewController(animated: Bool) -> UIViewController?
     func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?

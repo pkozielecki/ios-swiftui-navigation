@@ -16,6 +16,16 @@ enum MainAppRoute {
 
     /// An Edit Asset view:
     case editAsset(assetId: String)
+
+    /// An embedded flow (brand new Main App flow embedded in the existing one):
+    case embeddedMainAppFlow
+
+    /// A main app flow presented as a popup:
+    case popupMainAppFlow
+
+    /// A hypothetical app route representing a drill-down navigation.
+    /// E.g. showing immediately edit asset screen, but with go-back ability to go to asset details screen.
+    case restoreNavigation(assetId: String)
 }
 
 extension MainAppRoute: Route {
@@ -29,16 +39,30 @@ extension MainAppRoute: Route {
             return "Asset Details"
         case .editAsset:
             return "Edit Asset"
+        case .embeddedMainAppFlow:
+            return "Embedded Main App flow"
+        case .popupMainAppFlow:
+            return "Popup Main App flow"
+        case .restoreNavigation:
+            return "Restore navigation"
         }
     }
 
     /// - SeeAlso: Route.isFlow
     var isFlow: Bool {
-        false
+        switch self {
+        case .embeddedMainAppFlow, .popupMainAppFlow:
+            return true
+        default:
+            return false
+        }
     }
 
     /// - SeeAlso: Route.isPopup
     var isPopup: Bool {
-        false
+        if case .popupMainAppFlow = self {
+            return true
+        }
+        return false
     }
 }

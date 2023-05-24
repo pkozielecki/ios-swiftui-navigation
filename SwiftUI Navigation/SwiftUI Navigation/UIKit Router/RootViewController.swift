@@ -5,6 +5,14 @@
 
 import UIKit
 
+/// An abstraction describing a root view controller.
+protocol RootView {
+
+    /// Marks the root view for takedown.
+    /// Call when you want want to remove or replace the root view controller for the app.
+    func markForTakedown()
+}
+
 /// A UIKit navigation root view controller.
 final class RootViewController: UINavigationController {
     private let completion: (() -> Void)?
@@ -26,21 +34,12 @@ final class RootViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarHidden(false, animated: false)
-        arrangeNavigationBar()
     }
 }
 
-// MARK: - Private
+extension RootViewController: RootView {
 
-private extension RootViewController {
-
-    @objc func closeButtonTapped() {
+    func markForTakedown() {
         completion?()
-    }
-
-    func arrangeNavigationBar() {
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonTapped))
-        topViewController?.navigationItem.rightBarButtonItems = [closeButton]
-        navigationBar.prefersLargeTitles = true
     }
 }

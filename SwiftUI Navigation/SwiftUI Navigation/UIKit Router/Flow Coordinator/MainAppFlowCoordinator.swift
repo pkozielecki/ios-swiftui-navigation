@@ -7,10 +7,19 @@ import SwiftUI
 import UIKit
 
 /// A flow coordinator handling main app routes.
-final class MainAppFlowCoordinator: FlowCoordinator {
+final class MainAppFlowCoordinator: NSObject, FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.parent
-    let parent: FlowCoordinator? = nil
+    let parent: FlowCoordinator?
+
+    /// - SeeAlso: FlowCoordinator.completionCallback
+    var completionCallback: (() -> Void)?
+
+    /// - SeeAlso: FlowCoordinator.adaptivePresentationDelegate
+    var adaptivePresentationDelegate: UIAdaptivePresentationControllerDelegate?
+
+    /// - SeeAlso: FlowCoordinator.child
+    private(set) var child: FlowCoordinator? = nil
 
     /// - SeeAlso: FlowCoordinator.navigator
     private(set) var navigator: Navigator
@@ -22,24 +31,31 @@ final class MainAppFlowCoordinator: FlowCoordinator {
     /// - Parameters:
     ///   - navigator: a navigator.
     ///   - dependencyProvider: a dependency provider.
+    ///   - parent: a flow coordinator parent.
     init(
         navigator: Navigator,
-        dependencyProvider: DependencyProvider
+        dependencyProvider: DependencyProvider,
+        parent: FlowCoordinator? = nil
     ) {
         self.navigator = navigator
         self.dependencyProvider = dependencyProvider
+        self.parent = parent
     }
 
     /// - SeeAlso: FlowCoordinator.start(animated:)
     func start(animated: Bool) {
         let initialRoute = MainAppRoute.assetsList
-        let assetsList = makeViewComponent(forRoute: initialRoute, withData: nil)
+        let assetsList = makeViewComponents(forRoute: initialRoute, withData: nil)[0]
         assetsList.route = initialRoute
-        navigator.setViewControllers([assetsList.viewController], animated: animated)
+        navigator.pushViewController(assetsList.viewController, animated: animated)
     }
 
     /// - SeeAlso: FlowCoordinator.stop()
-    func stop() {}
+    func stop() {
+        child?.stop()
+        child = nil
+        completionCallback?()
+    }
 
     /// - SeeAlso: FlowCoordinator.show(route:withData:)
     func canShow(route: any Route) -> Bool {
@@ -48,11 +64,11 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.navigateBack(animated:)
     func navigateBack(animated: Bool) {
-        guard navigator.viewControllers.count > 1 else {
-            return
+        if let presentedViewController = navigator.presentedViewController {
+            presentedViewController.dismiss(animated: animated)
+        } else if navigator.viewControllers.count > 1 {
+            _ = navigator.popViewController(animated: animated)
         }
-
-        _ = navigator.popViewController(animated: animated)
     }
 
     /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:)
@@ -63,8 +79,8 @@ final class MainAppFlowCoordinator: FlowCoordinator {
     /// - SeeAlso: FlowCoordinator.navigateBack(toRoute:animated:)
     func navigateBack(toRoute route: any Route, animated: Bool) {}
 
-    /// - SeeAlso: FlowCoordinator.makeViewComponent(forRoute:withData:)
-    func makeViewComponent(forRoute route: any Route, withData: AnyHashable?) -> ViewComponent {
+    /// - SeeAlso: FlowCoordinator.makeViewComponents(forRoute:withData:)
+    func makeViewComponents(forRoute route: any Route, withData: AnyHashable?) -> [ViewComponent] {
         guard let route = route as? MainAppRoute else {
             fatalError("Route \(route) is not supported by MainAppFlowCoordinator")
         }
@@ -73,34 +89,79 @@ final class MainAppFlowCoordinator: FlowCoordinator {
         case .assetsList:
             let assetListViewController = makeAssetListViewController()
             addNavigationBarButtons(uiViewController: assetListViewController)
-            return assetListViewController
+            return [assetListViewController]
 
         case let .assetDetails(assetId):
-            return makeAssetDetailsViewController(assetId: assetId)
+            return [makeAssetDetailsViewController(assetId: assetId)]
 
         case let .editAsset(assetId):
-            return makeEditAssetViewController(assetId: assetId)
+            return [makeEditAssetViewController(assetId: assetId)]
+
+        case let .restoreNavigation(assetId):
+            return [
+                makeAssetDetailsViewController(assetId: assetId),
+                makeEditAssetViewController(assetId: assetId)
+            ]
+
+        default:
+            fatalError("Route \(route) is not supported by MainAppFlowCoordinator")
         }
     }
 
-    /// - SeeAlso: FlowCoordinator.makeFlowCoordinator(forRoute:withData:)
-    func makeFlowCoordinator(forRoute route: any Route, withData: AnyHashable?) -> FlowCoordinator {
-        fatalError("makeFlowCoordinator(forRoute:withData:) has not been implemented")
+    /// - SeeAlso: FlowCoordinator.makeFlowCoordinator(forRoute:navigator,withData:)
+    func makeFlowCoordinator(forRoute route: any Route, navigator: Navigator, withData: AnyHashable?) -> FlowCoordinator {
+        guard let route = route as? MainAppRoute else {
+            fatalError("Route \(route) is not supported by MainAppFlowCoordinator")
+        }
+
+        switch route {
+        case .embeddedMainAppFlow, .popupMainAppFlow:
+            let flowCoordinator = MainAppFlowCoordinator(
+                navigator: navigator,
+                dependencyProvider: dependencyProvider,
+                parent: self
+            )
+            child = flowCoordinator
+            return flowCoordinator
+
+        default:
+            fatalError("Route \(route) is not supported by MainAppFlowCoordinator")
+        }
+    }
+
+    /// - SeeAlso: UIAdaptivePresentationControllerDelegate.presentationControllerDidDismiss(_:)
+    @objc func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        child = nil
+    }
+
+    /// - SeeAlso: FlowCoordinator.handleChildCoordinatorFinished()
+    func handleChildCoordinatorFinished() {
+        navigateBack()
+        child = nil
     }
 }
 
 private extension MainAppFlowCoordinator {
 
     @objc func embeddedNavigationButtonTapped() {
-        print("embeddedNavigationButtonTapped")
+        show(route: MainAppRoute.embeddedMainAppFlow)
     }
 
     @objc func popupNavigationButtonTapped() {
-        print("popupNavigationButtonTapped")
+        show(route: MainAppRoute.popupMainAppFlow)
     }
 
     @objc func restoreNavigationButtonTapped() {
-        print("restoreNavigationButtonTapped")
+        if let firstAsset = dependencyProvider.favouriteAssetsManager.retrieveFavouriteAssets().first {
+            show(route: MainAppRoute.restoreNavigation(assetId: firstAsset.id))
+        }
+    }
+
+    @objc func closeButtonTapped() {
+        stop()
+        if parent == nil, let rootView = navigator as? RootView {
+            rootView.markForTakedown()
+        }
     }
 
     //  Discussion: This can be moved to a dedicated factory / view builder in the future.
@@ -153,6 +214,16 @@ private extension MainAppFlowCoordinator {
             target: self,
             action: #selector(restoreNavigationButtonTapped)
         )
-        uiViewController.navigationItem.leftBarButtonItems = [embeddedNavigationButton, popupNavigationButton, restoreNavigationButton]
+        let closeButton = UIBarButtonItem(
+            barButtonSystemItem: .close,
+            target: self,
+            action: #selector(closeButtonTapped)
+        )
+        uiViewController.navigationItem.rightBarButtonItems = [
+            embeddedNavigationButton,
+            popupNavigationButton,
+            restoreNavigationButton,
+            closeButton
+        ]
     }
 }
