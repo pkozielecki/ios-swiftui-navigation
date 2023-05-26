@@ -43,6 +43,7 @@
 		1E5F6693486C7D375CA4D46A /* FlowCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F68E48A3A9DDA311A80C8 /* FlowCoordinatorFactory.swift */; };
 		1E5F669EA5F1A077646423EF /* AssetsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6495BD778A68B283DE93 /* AssetsListView.swift */; };
 		1E5F66EA138913FBE2B872CE /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6AFD51A287CB2B0DD32F /* UIApplicationExtensions.swift */; };
+		1E5F670E616A66C3A3A06023 /* PopupDismissHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F615290428A3160AB6EBD /* PopupDismissHandler.swift */; };
 		1E5F670ED38F9A5470831FFA /* SwiftUIRouterHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6D800C8D56BBC0583BF1 /* SwiftUIRouterHomeView.swift */; };
 		1E5F674324488CED3B65E96D /* PopupRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6978DB94ED509A012D9D /* PopupRoute.swift */; };
 		1E5F674483DB660ABA0D5066 /* HistoricalAssetRatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6756B29F085E048BE334 /* HistoricalAssetRatesProvider.swift */; };
@@ -116,6 +117,7 @@
 		1E5F60DCD2C55EB8F65B2C4C /* UIKitRouterAssetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterAssetsListViewModel.swift; sourceTree = "<group>"; };
 		1E5F61313641CC11D7A0D0AB /* MainAppFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppFlowCoordinator.swift; sourceTree = "<group>"; };
 		1E5F61502B84D29CC2CD70EB /* AssetPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPrice.swift; sourceTree = "<group>"; };
+		1E5F615290428A3160AB6EBD /* PopupDismissHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDismissHandler.swift; sourceTree = "<group>"; };
 		1E5F621D2D85C1D85A7AA6EB /* DateFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterExtensions.swift; sourceTree = "<group>"; };
 		1E5F62963DAC2184DB0CBA40 /* FavouriteAssetCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteAssetCellView.swift; sourceTree = "<group>"; };
 		1E5F62A685954D9BA216947D /* MainAppRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppRoute.swift; sourceTree = "<group>"; };
@@ -456,6 +458,14 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		1E5F69C6442C3C340588468F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F615290428A3160AB6EBD /* PopupDismissHandler.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		1E5F69C6E54B07294B7F7660 /* Assets List */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,6 +574,7 @@
 				1E5F68E48A3A9DDA311A80C8 /* FlowCoordinatorFactory.swift */,
 				1E5F65CABFFF9A9B962F8FEA /* Navigtor */,
 				1E5F61313641CC11D7A0D0AB /* MainAppFlowCoordinator.swift */,
+				1E5F69C6442C3C340588468F /* Helpers */,
 			);
 			path = "Flow Coordinator";
 			sourceTree = "<group>";
@@ -899,6 +910,7 @@
 				1E5F611691CBF7E9BF1C3B82 /* UIKitRouterEditAssetViewModel.swift in Sources */,
 				1E5F66058EA934388B12BC4E /* ViewExtensions.swift in Sources */,
 				1E5F6FD0304DD9DE9329AA32 /* FoundationExtensions.swift in Sources */,
+				1E5F670E616A66C3A3A06023 /* PopupDismissHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

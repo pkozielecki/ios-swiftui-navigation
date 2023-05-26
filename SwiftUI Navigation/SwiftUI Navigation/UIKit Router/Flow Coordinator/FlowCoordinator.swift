@@ -9,8 +9,11 @@ import UIKit
 /// An associated object key for a Flow Coordinator route.
 private var FlowCoordinatorRouteKey: UInt8 = 234
 
+/// An associated object key for a Flow Coordinator popup dismiss handler.
+private var PopupDismissHandlerKey: UInt8 = 112
+
 /// An abstraction describing a navigation flow.
-protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFactory, UIAdaptivePresentationControllerDelegate {
+protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFactory {
 
     /// A navigator the flow operates on.
     var navigator: Navigator { get }
@@ -20,9 +23,6 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
 
     /// A child flow coordinator.
     var child: FlowCoordinator? { get }
-
-    /// A presentation delegate.
-    var adaptivePresentationDelegate: UIAdaptivePresentationControllerDelegate? { get set }
 
     /// A coordinator completion callback.
     var completionCallback: (() -> Void)? { get set }
@@ -36,7 +36,7 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
     func stop()
 
     /// Handles situation when child flow has finished.
-    func handleChildCoordinatorFinished()
+    func handleChildCoordinatorFinished(executeBackNavigation: Bool)
 
     /// Shows a route in the flow.
     ///
@@ -76,10 +76,12 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
 
 extension FlowCoordinator {
 
+    /// - SeeAlso: ViewComponent.viewController
     var viewController: UIViewController {
         navigator.navigationStack
     }
 
+    /// - SeeAlso: ViewComponent.route
     var route: any Route {
         get {
             objc_getAssociatedObject(self, &FlowCoordinatorRouteKey) as? any Route ?? EmptyRoute()
@@ -140,7 +142,22 @@ extension FlowCoordinator {
     }
 }
 
+// MARK: - Private
+
 private extension FlowCoordinator {
+
+    // Discussion: If child coordinator is displayed as a popup, we want to capture it's manual dismissal (e.g. by dragging it down).
+    // ... to do so, we need to subscribe to be a UIAdaptivePresentationControllerDelegate...
+    // ... but a protocol cannot have default implementation of @objc methods defined in the delegate...
+    // ... so we need to use this convenient wrapper and store it as an associated object.
+    private var popupDismissHandler: PopupDismissHandler? {
+        get {
+            objc_getAssociatedObject(self, &PopupDismissHandlerKey) as? PopupDismissHandler
+        }
+        set {
+            objc_setAssociatedObject(self, &PopupDismissHandlerKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
 
     func createAndStartInlineFlow(withData: AnyHashable?, route: any Route) {
         let flowCoordinator = makeFlowCoordinator(
@@ -151,7 +168,7 @@ private extension FlowCoordinator {
         flowCoordinator.start(animated: true)
         flowCoordinator.route = route
         flowCoordinator.completionCallback = { [weak self] in
-            self?.handleChildCoordinatorFinished()
+            self?.handleChildCoordinatorFinished(executeBackNavigation: true)
         }
     }
 
@@ -165,10 +182,13 @@ private extension FlowCoordinator {
         )
         flowCoordinator.start(animated: false)
         navigator.present(navigationController, animated: true, completion: nil)
-        navigationController.presentationController?.delegate = self
+        popupDismissHandler = PopupDismissHandler { [weak self] in
+            self?.handleChildCoordinatorFinished(executeBackNavigation: false)
+        }
+        navigationController.presentationController?.delegate = popupDismissHandler
         flowCoordinator.route = route
         flowCoordinator.completionCallback = { [weak self] in
-            self?.handleChildCoordinatorFinished()
+            self?.handleChildCoordinatorFinished(executeBackNavigation: true)
         }
     }
 

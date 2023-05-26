@@ -7,7 +7,7 @@ import SwiftUI
 import UIKit
 
 /// A flow coordinator handling main app routes.
-final class MainAppFlowCoordinator: NSObject, FlowCoordinator {
+final class MainAppFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.parent
     let parent: FlowCoordinator?
@@ -115,6 +115,10 @@ final class MainAppFlowCoordinator: NSObject, FlowCoordinator {
         }
 
         switch route {
+
+        // Discuss: These are showcase routes only ...
+        // ... they're demonstrating that you can launch an instance of Main Flow coordinator from an existing one ...
+            // ... a.k.a. "embedded" / "inception" flow.
         case .embeddedMainAppFlow, .popupMainAppFlow:
             let flowCoordinator = MainAppFlowCoordinator(
                 navigator: navigator,
@@ -129,14 +133,13 @@ final class MainAppFlowCoordinator: NSObject, FlowCoordinator {
         }
     }
 
-    /// - SeeAlso: UIAdaptivePresentationControllerDelegate.presentationControllerDidDismiss(_:)
-    @objc func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        child = nil
-    }
-
-    /// - SeeAlso: FlowCoordinator.handleChildCoordinatorFinished()
-    func handleChildCoordinatorFinished() {
-        navigateBack()
+    /// - SeeAlso: FlowCoordinator.handleChildCoordinatorFinished(executeBackNavigation:)
+    ///
+    /// - Parameter executeBackNavigation: a flag indicating whether to execute back navigation. On manual popup dismissal this should be set to `false`.
+    func handleChildCoordinatorFinished(executeBackNavigation: Bool) {
+        if executeBackNavigation {
+            navigateBack()
+        }
         child = nil
     }
 }
