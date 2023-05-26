@@ -119,7 +119,7 @@ private extension SwiftUIRouterHomeView {
     }
 
     func makeAddAssetView() -> some View {
-        let viewModel = DefaultAddAssetViewModel(
+        let viewModel = SwiftUIRouterAddAssetViewModel(
             assetsProvider: DefaultAssetsProvider(),
             favouriteAssetsManager: viewModel.favouriteAssetsManager,
             router: router

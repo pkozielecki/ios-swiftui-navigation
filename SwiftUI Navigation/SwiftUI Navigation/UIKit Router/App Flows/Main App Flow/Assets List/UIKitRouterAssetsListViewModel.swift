@@ -46,7 +46,7 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
     }
 
     func onAddNewAssetTapped() {
-        print("Add new asset tapped")
+        router.show(route: MainAppRoute.addAsset, withData: nil)
     }
 
     func onAssetSelectedForRemoval(id: String) {
@@ -54,7 +54,8 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
             return
         }
 
-        print(asset)
+        // TODO: Show alert
+        print("Removing asset: \(asset.name)")
     }
 
     func removeAssetFromFavourites(id: String) {

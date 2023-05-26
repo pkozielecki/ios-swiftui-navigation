@@ -1,49 +1,21 @@
 //
-//  AddAssetViewModel.swift
+//  UIKitRouterAddAssetViewModel.swift
 //  KISS Views
 //
 
 import Combine
-import Foundation
+import SwiftUI
+import UIKit
 
-/// An enumeration describing Add Asset View state.
-enum AddAssetViewState {
-    case loading
-    case loaded([AssetCellView.Data])
-    case noAssets
-}
-
-/// An abstraction describing a View Model for Add Asset View.
-protocol AddAssetViewModel: ObservableObject {
-    /// A view state.
-    var viewState: AddAssetViewState { get }
-    var viewStatePublished: Published<AddAssetViewState> { get }
-    var viewStatePublisher: Published<AddAssetViewState>.Publisher { get }
-
-    /// A search phrase.
-    var searchPhrase: String { get set }
-    var searchPhrasePublished: Published<String> { get }
-    var searchPhrasePublisher: Published<String>.Publisher { get }
-
-    /// A list of selected assets ids.
-    var selectedAssetsIds: [String] { get }
-
-    /// Executed on tapping an asset call.
-    func onAssetTapped(id: String)
-
-    /// Executed on confirming assets selection.
-    func onAssetsSelectionConfirmed()
-}
-
-/// A default AddAssetViewModel implementation.
-final class DefaultAddAssetViewModel: AddAssetViewModel {
+/// A default AddAssetViewModel implementation for UIKit navigation.
+final class UIKitRouterAddAssetViewModel: AddAssetViewModel {
     @Published var viewState = AddAssetViewState.loading
     @Published var searchPhrase = ""
     private(set) var selectedAssetsIds = [String]()
 
     private let assetsProvider: AssetsProvider
     private let favouriteAssetsManager: FavouriteAssetsManager
-    private let router: any SwiftUINavigationRouter
+    private let router: UIKitNavigationRouter
 
     private var cancellables = Set<AnyCancellable>()
     private var allAssets = [Asset]()
@@ -57,7 +29,7 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
     init(
         assetsProvider: AssetsProvider,
         favouriteAssetsManager: FavouriteAssetsManager,
-        router: any SwiftUINavigationRouter
+        router: UIKitNavigationRouter
     ) {
         self.assetsProvider = assetsProvider
         self.favouriteAssetsManager = favouriteAssetsManager
@@ -91,11 +63,11 @@ final class DefaultAddAssetViewModel: AddAssetViewModel {
         let assetsToStore = Array(assetsToRetain) + Array(assetsToAdd)
 
         favouriteAssetsManager.store(favouriteAssets: assetsToStore)
-        router.dismiss()
+        router.stop() // TODO: Maybe navigateBack() instead?
     }
 }
 
-private extension DefaultAddAssetViewModel {
+private extension UIKitRouterAddAssetViewModel {
 
     enum Const {
         static let searchLatency = 0.3
@@ -158,7 +130,7 @@ private extension DefaultAddAssetViewModel {
     }
 }
 
-extension DefaultAddAssetViewModel {
+extension UIKitRouterAddAssetViewModel {
     var searchPhrasePublished: Published<String> { _searchPhrase }
     var searchPhrasePublisher: Published<String>.Publisher { $searchPhrase }
     var viewStatePublished: Published<AddAssetViewState> { _viewState }

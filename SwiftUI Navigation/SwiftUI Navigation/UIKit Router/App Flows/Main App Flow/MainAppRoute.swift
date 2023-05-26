@@ -17,6 +17,9 @@ enum MainAppRoute {
     /// An Edit Asset view:
     case editAsset(assetId: String)
 
+    /// A route to add a new asset.
+    case addAsset
+
     /// An embedded flow (brand new Main App flow embedded in the existing one):
     case embeddedMainAppFlow
 
@@ -39,6 +42,8 @@ extension MainAppRoute: Route {
             return "Asset Details"
         case .editAsset:
             return "Edit Asset"
+        case .addAsset:
+            return "Add Asset"
         case .embeddedMainAppFlow:
             return "Embedded Main App flow"
         case .popupMainAppFlow:
@@ -51,7 +56,7 @@ extension MainAppRoute: Route {
     /// - SeeAlso: Route.isFlow
     var isFlow: Bool {
         switch self {
-        case .embeddedMainAppFlow, .popupMainAppFlow:
+        case .embeddedMainAppFlow, .popupMainAppFlow, .addAsset:
             return true
         default:
             return false
@@ -60,10 +65,13 @@ extension MainAppRoute: Route {
 
     /// - SeeAlso: Route.popupPresentationStyle
     var popupPresentationStyle: PopupPresentationStyle {
-        if case .popupMainAppFlow = self {
-            // Discuss: Randomizing popup presentation style for showcase purposes only.
+        switch self {
+        case .addAsset:
+            return .modal
+        case .popupMainAppFlow:
             return Bool.random() ? .fullScreen : .modal
+        default:
+            return .none
         }
-        return .none
     }
 }

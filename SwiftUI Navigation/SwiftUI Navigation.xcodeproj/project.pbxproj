@@ -13,16 +13,13 @@
 		1E5F607D6CFF4E3B2F043FE9 /* AssetsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6ED10B46873CECD4E769 /* AssetsProvider.swift */; };
 		1E5F607E4114DFF0FB78AFF7 /* GetAssetsRatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F678251E7C86105EEF14B /* GetAssetsRatesRequest.swift */; };
 		1E5F60C4FE4AEDFDCCD9D9B9 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F693AA1A3ECC8667C52DA /* DataExtensions.swift */; };
-		1E5F611691CBF7E9BF1C3B82 /* UIKitRouterEditAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6D1EC26F14D90361B2AB /* UIKitRouterEditAssetViewModel.swift */; };
 		1E5F61C91AE57E59A19C2453 /* AssetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6E349CB72B2C6B2258BC /* AssetDetailsView.swift */; };
 		1E5F621225E06818D1EA2C4C /* CellStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66B7C599512A61C0AF02 /* CellStyles.swift */; };
 		1E5F6237FA399CA1FDFC964A /* UIKitNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6FFF1F4FE7CE4513C3CD /* UIKitNavigationRouter.swift */; };
 		1E5F629F4FA4352566D43781 /* GetAllAssetsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F643C13E91E6B9CD3C121 /* GetAllAssetsRequest.swift */; };
-		1E5F62C041CF17D639645C2E /* MainAppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F61313641CC11D7A0D0AB /* MainAppFlowCoordinator.swift */; };
 		1E5F62F61DA12BE05DA65BC3 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62B96BA2BD6CF1B6A96F /* AppConfiguration.swift */; };
 		1E5F630214DA0C2CA32107E3 /* AssetDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A7520CA58C80FF53D7C /* AssetDetailsViewModel.swift */; };
 		1E5F6384731A399F1FE7EC7C /* FakeSwiftUINavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F67597A450FA03D79FBD4 /* FakeSwiftUINavigationRouter.swift */; };
-		1E5F63A56D1D6B7CDEF7CD94 /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F65A75CAF851D2B29C1F2 /* AddAssetView.swift */; };
 		1E5F63B07B24C9B588BDF489 /* SwiftUIRouterAssetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6C4424E9237374C9B43E /* SwiftUIRouterAssetsListViewModel.swift */; };
 		1E5F63FD142A37308336F761 /* AssetPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F61502B84D29CC2CD70EB /* AssetPrice.swift */; };
 		1E5F641395C5BB7E0BBDBC0F /* SnapshottingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6CF6F2A93781697838CF /* SnapshottingExtensions.swift */; };
@@ -33,7 +30,6 @@
 		1E5F65268F5915DA83C6C07B /* DateFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F621D2D85C1D85A7AA6EB /* DateFormatterExtensions.swift */; };
 		1E5F6558A524D1A3E6A530C5 /* AssetHistoricalRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F68A8E8FD64DB4034812A /* AssetHistoricalRate.swift */; };
 		1E5F65AD89483BFA15C4A631 /* XCTestCaseSnapshotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66FB4102C86221E00D50 /* XCTestCaseSnapshotExtensions.swift */; };
-		1E5F65B2BE93CFF60B4A3585 /* MainAppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62A685954D9BA216947D /* MainAppRoute.swift */; };
 		1E5F65C6FA0D8DE93B6D76D0 /* ViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6E7B2A5B22986A6546EE /* ViewComponent.swift */; };
 		1E5F66058EA934388B12BC4E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62C7F7EA51AF3A91A8D1 /* ViewExtensions.swift */; };
 		1E5F660E0EA31ED2D6BF4AC8 /* PreviewFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6DB75761609FE4E69ACF /* PreviewFixtures.swift */; };
@@ -53,11 +49,17 @@
 		1E5F67D56BB2A81B3059B228 /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F65C256BD8DB488CD5C4A /* DependencyProvider.swift */; };
 		1E5F67FA36EBB6557A600BFD /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F647A13070B3EF3FE332C /* Navigator.swift */; };
 		1E5F68000B7C9986CD5511E6 /* NavigationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66A82E08E494DAA212F9 /* NavigationRoute.swift */; };
+		1E5F680F8256D9B892A016AF /* UIKitRouterEditAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6BDB9696133C585F4B94 /* UIKitRouterEditAssetViewModel.swift */; };
+		1E5F68EB3479D9D877AE188D /* UIKitRouterAssetDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F676597786A1B6F634F6C /* UIKitRouterAssetDetailsViewModel.swift */; };
 		1E5F692819ACB45F55BA9731 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62EC10A006551AC82D61 /* EncodableExtensions.swift */; };
+		1E5F6928B5103B50BE32B3B9 /* AddAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F680FD3A9C169EFA9373D /* AddAssetViewModel.swift */; };
 		1E5F6958741A5CEAF1B091B5 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F649113A19B112322E17E /* Route.swift */; };
+		1E5F696B7A59CF7EF9244E75 /* MainAppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6B7A33B36CFB40E19864 /* MainAppFlowCoordinator.swift */; };
+		1E5F696CC6F290B422093D3E /* SwiftUIRouterAddAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A3E0D2CEDEE635E08FF /* SwiftUIRouterAddAssetViewModel.swift */; };
 		1E5F697C7F49C976D0FA2707 /* GetHistoricalAssetRatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6E94E3D62B5565DE45B6 /* GetHistoricalAssetRatesRequest.swift */; };
+		1E5F69BE2FBACF9A1F633F34 /* AddAssetFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F69FB9D02607102804106 /* AddAssetFlowCoordinator.swift */; };
+		1E5F69C8F8CEB1FF5F283AAC /* UIKitRouterAssetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66DA453B2DC5050E8690 /* UIKitRouterAssetsListViewModel.swift */; };
 		1E5F6A7A1599F4FEC3DFC5F5 /* NavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */; };
-		1E5F6A7B2B6DD65BC27D3D31 /* UIKitRouterAssetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F60DCD2C55EB8F65B2C4C /* UIKitRouterAssetsListViewModel.swift */; };
 		1E5F6A82F9662B725628332C /* BindingExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6AF430C47F2B0BACFD9F /* BindingExtenstions.swift */; };
 		1E5F6AB3D5E6A0992833CC62 /* SwiftUIRouterHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64FD9731162973BCC07F /* SwiftUIRouterHomeViewModel.swift */; };
 		1E5F6AF5EAEDC6AA76892073 /* ViewComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64D3D6DC4BC8A829BA84 /* ViewComponentFactory.swift */; };
@@ -65,6 +67,7 @@
 		1E5F6B1A37F169119DF6A8FE /* AssetDetailsViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F11D7D0CAE9D001F4BB /* AssetDetailsViewData.swift */; };
 		1E5F6B1A494ADEE4D5D339A0 /* AssetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F60AC3539DC38DF1B5CBE /* AssetCellView.swift */; };
 		1E5F6B3CCF0DA2812D33E053 /* UIKitRouterHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F63068B9F1DA391B3F0A2 /* UIKitRouterHomeView.swift */; };
+		1E5F6B7C20A31EA17D8B08DB /* AddAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F67DF48A6E47F6AEC3427 /* AddAssetView.swift */; };
 		1E5F6BC9BDEDCDF03234283D /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F63438AF851E166F155A5 /* FlowCoordinator.swift */; };
 		1E5F6BCFDC480A9A3F864042 /* AlertRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A1E0878E6FB97E1BB64 /* AlertRoute.swift */; };
 		1E5F6BE26A2B7DCB536D4E62 /* AssetPerfromance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6D63394BAFC5740E6D04 /* AssetPerfromance.swift */; };
@@ -72,7 +75,6 @@
 		1E5F6C3C00C4EC00033DB672 /* SwiftUIRouterAssetDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F67F1B2C9859E296893B2 /* SwiftUIRouterAssetDetailsViewModel.swift */; };
 		1E5F6C531D0A88DF8258C56E /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A45A82E6F2FF3B52058 /* TextStyles.swift */; };
 		1E5F6C5773CE0FB88CF06F91 /* GetAllAssetsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6B428CB73BAC6F5E7928 /* GetAllAssetsResponse.swift */; };
-		1E5F6C58FC2707D0EDD202BF /* AddAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6CCE9D1F9EE8D732E930 /* AddAssetViewModel.swift */; };
 		1E5F6C7A991D475040AE12F8 /* GetHistoricalAssetRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6B78E8E410DF7653692C /* GetHistoricalAssetRatesResponse.swift */; };
 		1E5F6CA2E396E4FD04AD84CF /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F649A8C7F147629FC911A /* ButtonStyles.swift */; };
 		1E5F6CF5AA423265CA2B1487 /* FavouriteAssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64D3DD883950523741A6 /* FavouriteAssetsManager.swift */; };
@@ -80,14 +82,16 @@
 		1E5F6D811BA324B2FF7D704D /* AddApiKeyAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A9718DF9C65648716B8 /* AddApiKeyAction.swift */; };
 		1E5F6DA01451D2A011DF4BEF /* SwiftUINavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F632AA3F3569832746D24 /* SwiftUINavigationRouter.swift */; };
 		1E5F6DA12439EA913CB79274 /* NetworkingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F67DF69D3D515021129E4 /* NetworkingFactory.swift */; };
+		1E5F6DB2F505347468EC492B /* AddAssetRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F656A2479FC54684F17FE /* AddAssetRoute.swift */; };
+		1E5F6DBB57E772A0B7A57B66 /* MainAppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F69E2EDB3C0A37180E396 /* MainAppRoute.swift */; };
 		1E5F6E4EB4450803E9C918A3 /* GetAssetsRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F69C745B13D00EC884E65 /* GetAssetsRatesResponse.swift */; };
 		1E5F6EA1A8F2E8B2C42BC509 /* AssetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A12D97896299913E133 /* AssetsListViewModel.swift */; };
 		1E5F6EEC19B4D8B29EE3D898 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6805DDEB00513279C1B5 /* ChartView.swift */; };
 		1E5F6EEDE9D460E07419B6B4 /* BaseAssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F65AD420335232E62C3E0 /* BaseAssetManager.swift */; };
 		1E5F6F1766C92764CB33B2CD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66FF8E0ECC21C8423800 /* RootViewController.swift */; };
 		1E5F6F527C264548EF03622D /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66D232288278ED1B8C3A /* Asset.swift */; };
+		1E5F6F86821824C57F6CF6CE /* UIKitRouterAddAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F60E868A50EE09C256C69 /* UIKitRouterAddAssetViewModel.swift */; };
 		1E5F6FA3EF112F30B935634A /* FakeSwiftUIRouterHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64F0B61F8CD1F9DC5D2D /* FakeSwiftUIRouterHomeViewModel.swift */; };
-		1E5F6FB0E7030AEBFD25FDF0 /* UIKitRouterAssetDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F630FBB7884FFE2D84468 /* UIKitRouterAssetDetailsViewModel.swift */; };
 		1E5F6FD0304DD9DE9329AA32 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F697BBE5C440A4A6FE7CD /* FoundationExtensions.swift */; };
 		1E5F6FD0D9DC4E482202BE02 /* FavouriteAssetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62963DAC2184DB0CBA40 /* FavouriteAssetCellView.swift */; };
 		22A240EB29CD884E0062221A /* SwiftUINavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A240EA29CD884E0062221A /* SwiftUINavigationApp.swift */; };
@@ -114,13 +118,11 @@
 		1E5F6054E015178D9AFCEF0C /* DateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
 		1E5F607D5A7DF73D95BAD380 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		1E5F60AC3539DC38DF1B5CBE /* AssetCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCellView.swift; sourceTree = "<group>"; };
-		1E5F60DCD2C55EB8F65B2C4C /* UIKitRouterAssetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterAssetsListViewModel.swift; sourceTree = "<group>"; };
-		1E5F61313641CC11D7A0D0AB /* MainAppFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppFlowCoordinator.swift; sourceTree = "<group>"; };
+		1E5F60E868A50EE09C256C69 /* UIKitRouterAddAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterAddAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F61502B84D29CC2CD70EB /* AssetPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPrice.swift; sourceTree = "<group>"; };
 		1E5F615290428A3160AB6EBD /* PopupDismissHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDismissHandler.swift; sourceTree = "<group>"; };
 		1E5F621D2D85C1D85A7AA6EB /* DateFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterExtensions.swift; sourceTree = "<group>"; };
 		1E5F62963DAC2184DB0CBA40 /* FavouriteAssetCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteAssetCellView.swift; sourceTree = "<group>"; };
-		1E5F62A685954D9BA216947D /* MainAppRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppRoute.swift; sourceTree = "<group>"; };
 		1E5F62B76C71DB987CC38D90 /* EditAssetViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAssetViewData.swift; sourceTree = "<group>"; };
 		1E5F62B96BA2BD6CF1B6A96F /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		1E5F62C7F7EA51AF3A91A8D1 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -129,7 +131,6 @@
 		1E5F62F3481D313C944ACFA8 /* EditAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRouterTests.swift; sourceTree = "<group>"; };
 		1E5F63068B9F1DA391B3F0A2 /* UIKitRouterHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterHomeView.swift; sourceTree = "<group>"; };
-		1E5F630FBB7884FFE2D84468 /* UIKitRouterAssetDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterAssetDetailsViewModel.swift; sourceTree = "<group>"; };
 		1E5F632AA3F3569832746D24 /* SwiftUINavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUINavigationRouter.swift; sourceTree = "<group>"; };
 		1E5F63438AF851E166F155A5 /* FlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		1E5F639D79A4E8968413F3EB /* EditAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAssetView.swift; sourceTree = "<group>"; };
@@ -143,22 +144,26 @@
 		1E5F64D3DD883950523741A6 /* FavouriteAssetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteAssetsManager.swift; sourceTree = "<group>"; };
 		1E5F64F0B61F8CD1F9DC5D2D /* FakeSwiftUIRouterHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSwiftUIRouterHomeViewModel.swift; sourceTree = "<group>"; };
 		1E5F64FD9731162973BCC07F /* SwiftUIRouterHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterHomeViewModel.swift; sourceTree = "<group>"; };
-		1E5F65A75CAF851D2B29C1F2 /* AddAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddAssetView.swift; path = "SwiftUI Navigation/SwiftUI Router/AddAssetView.swift"; sourceTree = SOURCE_ROOT; };
+		1E5F656A2479FC54684F17FE /* AddAssetRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssetRoute.swift; sourceTree = "<group>"; };
 		1E5F65AD420335232E62C3E0 /* BaseAssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAssetManager.swift; sourceTree = "<group>"; };
 		1E5F65C256BD8DB488CD5C4A /* DependencyProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 		1E5F66A82E08E494DAA212F9 /* NavigationRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
 		1E5F66B7C599512A61C0AF02 /* CellStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellStyles.swift; sourceTree = "<group>"; };
 		1E5F66D232288278ED1B8C3A /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		1E5F66D7C71D4118FD020D09 /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		1E5F66DA453B2DC5050E8690 /* UIKitRouterAssetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterAssetsListViewModel.swift; sourceTree = "<group>"; };
 		1E5F66E0810409D23BBDC24B /* SwiftUIRouterEditAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterEditAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F66FB4102C86221E00D50 /* XCTestCaseSnapshotExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseSnapshotExtensions.swift; sourceTree = "<group>"; };
 		1E5F66FF8E0ECC21C8423800 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		1E5F6756B29F085E048BE334 /* HistoricalAssetRatesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalAssetRatesProvider.swift; sourceTree = "<group>"; };
 		1E5F67597A450FA03D79FBD4 /* FakeSwiftUINavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSwiftUINavigationRouter.swift; sourceTree = "<group>"; };
+		1E5F676597786A1B6F634F6C /* UIKitRouterAssetDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterAssetDetailsViewModel.swift; sourceTree = "<group>"; };
 		1E5F678251E7C86105EEF14B /* GetAssetsRatesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAssetsRatesRequest.swift; sourceTree = "<group>"; };
+		1E5F67DF48A6E47F6AEC3427 /* AddAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssetView.swift; sourceTree = "<group>"; };
 		1E5F67DF69D3D515021129E4 /* NetworkingFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingFactory.swift; sourceTree = "<group>"; };
 		1E5F67F1B2C9859E296893B2 /* SwiftUIRouterAssetDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterAssetDetailsViewModel.swift; sourceTree = "<group>"; };
 		1E5F6805DDEB00513279C1B5 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		1E5F680FD3A9C169EFA9373D /* AddAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F68A8E8FD64DB4034812A /* AssetHistoricalRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetHistoricalRate.swift; sourceTree = "<group>"; };
 		1E5F68E48A3A9DDA311A80C8 /* FlowCoordinatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCoordinatorFactory.swift; sourceTree = "<group>"; };
 		1E5F6906889C57FA4B4B18AD /* SwiftUINavigationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUINavigationHelpers.swift; sourceTree = "<group>"; };
@@ -166,9 +171,12 @@
 		1E5F6978DB94ED509A012D9D /* PopupRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupRoute.swift; sourceTree = "<group>"; };
 		1E5F697BBE5C440A4A6FE7CD /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		1E5F69C745B13D00EC884E65 /* GetAssetsRatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAssetsRatesResponse.swift; sourceTree = "<group>"; };
+		1E5F69E2EDB3C0A37180E396 /* MainAppRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppRoute.swift; sourceTree = "<group>"; };
+		1E5F69FB9D02607102804106 /* AddAssetFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssetFlowCoordinator.swift; sourceTree = "<group>"; };
 		1E5F6A12D97896299913E133 /* AssetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsListViewModel.swift; sourceTree = "<group>"; };
 		1E5F6A1E0878E6FB97E1BB64 /* AlertRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertRoute.swift; sourceTree = "<group>"; };
 		1E5F6A2ADAD32E86720C4618 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		1E5F6A3E0D2CEDEE635E08FF /* SwiftUIRouterAddAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterAddAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F6A45A82E6F2FF3B52058 /* TextStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		1E5F6A47658A9C4AF39B488F /* SwiftUIRouterHomeViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterHomeViewTests.swift; sourceTree = "<group>"; };
 		1E5F6A7520CA58C80FF53D7C /* AssetDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -179,11 +187,11 @@
 		1E5F6AFFC7F205830280B067 /* FakeFavouriteAssetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeFavouriteAssetsManager.swift; sourceTree = "<group>"; };
 		1E5F6B428CB73BAC6F5E7928 /* GetAllAssetsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllAssetsResponse.swift; sourceTree = "<group>"; };
 		1E5F6B78E8E410DF7653692C /* GetHistoricalAssetRatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetHistoricalAssetRatesResponse.swift; sourceTree = "<group>"; };
+		1E5F6B7A33B36CFB40E19864 /* MainAppFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppFlowCoordinator.swift; sourceTree = "<group>"; };
 		1E5F6B8D1ABC95641DE76D6C /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		1E5F6BDB9696133C585F4B94 /* UIKitRouterEditAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterEditAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F6C4424E9237374C9B43E /* SwiftUIRouterAssetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterAssetsListViewModel.swift; sourceTree = "<group>"; };
-		1E5F6CCE9D1F9EE8D732E930 /* AddAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddAssetViewModel.swift; path = "SwiftUI Navigation/SwiftUI Router/AddAssetViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		1E5F6CF6F2A93781697838CF /* SnapshottingExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshottingExtensions.swift; sourceTree = "<group>"; };
-		1E5F6D1EC26F14D90361B2AB /* UIKitRouterEditAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterEditAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F6D63394BAFC5740E6D04 /* AssetPerfromance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPerfromance.swift; sourceTree = "<group>"; };
 		1E5F6D800C8D56BBC0583BF1 /* SwiftUIRouterHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterHomeView.swift; sourceTree = "<group>"; };
 		1E5F6DB75761609FE4E69ACF /* PreviewFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewFixtures.swift; sourceTree = "<group>"; };
@@ -238,12 +246,29 @@
 			path = "Edit Asset";
 			sourceTree = "<group>";
 		};
+		1E5F60B93171D3917EED23A9 /* Edit Asset */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F6BDB9696133C585F4B94 /* UIKitRouterEditAssetViewModel.swift */,
+			);
+			path = "Edit Asset";
+			sourceTree = "<group>";
+		};
 		1E5F60DAF4A8922DC48D66F0 /* Assets List */ = {
 			isa = PBXGroup;
 			children = (
 				1E5F6C4424E9237374C9B43E /* SwiftUIRouterAssetsListViewModel.swift */,
 			);
 			path = "Assets List";
+			sourceTree = "<group>";
+		};
+		1E5F6112D5F25D1D081CCD06 /* Add Asset */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F61C05A9ABB8BEDB4CE1D /* View Model */,
+				1E5F67DF48A6E47F6AEC3427 /* AddAssetView.swift */,
+			);
+			path = "Add Asset";
 			sourceTree = "<group>";
 		};
 		1E5F613A804CD9A2123E5AE4 /* Networking */ = {
@@ -279,6 +304,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1E5F61C05A9ABB8BEDB4CE1D /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F680FD3A9C169EFA9373D /* AddAssetViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		1E5F61D52FEFD8E3D2AA2FB4 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,10 +327,8 @@
 		1E5F61D657C05CFD13DB3347 /* App Flows */ = {
 			isa = PBXGroup;
 			children = (
-				1E5F69C6E54B07294B7F7660 /* Assets List */,
-				1E5F62A685954D9BA216947D /* MainAppRoute.swift */,
-				1E5F6C749DDDEFA3EC7E7706 /* Asset Details */,
-				1E5F6D429A0C7CEC17B23E77 /* Edit Asset */,
+				1E5F6F46772AF13688F36095 /* Add Asset Flow */,
+				1E5F6DA539421E8D397040FF /* Main App Flow */,
 			);
 			path = "App Flows";
 			sourceTree = "<group>";
@@ -386,6 +417,14 @@
 			path = Navigtor;
 			sourceTree = "<group>";
 		};
+		1E5F660A48AAB90B2C52F6D6 /* Add Asset */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F60E868A50EE09C256C69 /* UIKitRouterAddAssetViewModel.swift */,
+			);
+			path = "Add Asset";
+			sourceTree = "<group>";
+		};
 		1E5F6704B1489FC7F47D4163 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +449,14 @@
 			children = (
 				1E5F6E349CB72B2C6B2258BC /* AssetDetailsView.swift */,
 				1E5F6AF5E9A970A849A63B56 /* View Model */,
+			);
+			path = "Asset Details";
+			sourceTree = "<group>";
+		};
+		1E5F674035B38C8743A8437F /* Asset Details */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F676597786A1B6F634F6C /* UIKitRouterAssetDetailsViewModel.swift */,
 			);
 			path = "Asset Details";
 			sourceTree = "<group>";
@@ -466,10 +513,10 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		1E5F69C6E54B07294B7F7660 /* Assets List */ = {
+		1E5F6A01B7B1057AFFAFC92D /* Assets List */ = {
 			isa = PBXGroup;
 			children = (
-				1E5F60DCD2C55EB8F65B2C4C /* UIKitRouterAssetsListViewModel.swift */,
+				1E5F66DA453B2DC5050E8690 /* UIKitRouterAssetsListViewModel.swift */,
 			);
 			path = "Assets List";
 			sourceTree = "<group>";
@@ -503,18 +550,9 @@
 		1E5F6B064ACD7EF6168ECEA2 /* Add Asset */ = {
 			isa = PBXGroup;
 			children = (
-				1E5F65A75CAF851D2B29C1F2 /* AddAssetView.swift */,
-				1E5F6E1D704E38295BAE6071 /* View Model */,
+				1E5F6A3E0D2CEDEE635E08FF /* SwiftUIRouterAddAssetViewModel.swift */,
 			);
 			path = "Add Asset";
-			sourceTree = "<group>";
-		};
-		1E5F6C749DDDEFA3EC7E7706 /* Asset Details */ = {
-			isa = PBXGroup;
-			children = (
-				1E5F630FBB7884FFE2D84468 /* UIKitRouterAssetDetailsViewModel.swift */,
-			);
-			path = "Asset Details";
 			sourceTree = "<group>";
 		};
 		1E5F6C9B58A7396DCD738B7E /* Fakes and Mocks */ = {
@@ -550,6 +588,7 @@
 				1E5F6514B6A50F945F727440 /* Assets List */,
 				1E5F673791768D4BF1D562FD /* Asset Details */,
 				1E5F672E91373700FD694B2F /* Edit Asset */,
+				1E5F6112D5F25D1D081CCD06 /* Add Asset */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -573,7 +612,6 @@
 				1E5F6788CD580B83E5AF5666 /* Component */,
 				1E5F68E48A3A9DDA311A80C8 /* FlowCoordinatorFactory.swift */,
 				1E5F65CABFFF9A9B962F8FEA /* Navigtor */,
-				1E5F61313641CC11D7A0D0AB /* MainAppFlowCoordinator.swift */,
 				1E5F69C6442C3C340588468F /* Helpers */,
 			);
 			path = "Flow Coordinator";
@@ -587,12 +625,16 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		1E5F6D429A0C7CEC17B23E77 /* Edit Asset */ = {
+		1E5F6DA539421E8D397040FF /* Main App Flow */ = {
 			isa = PBXGroup;
 			children = (
-				1E5F6D1EC26F14D90361B2AB /* UIKitRouterEditAssetViewModel.swift */,
+				1E5F674035B38C8743A8437F /* Asset Details */,
+				1E5F60B93171D3917EED23A9 /* Edit Asset */,
+				1E5F6A01B7B1057AFFAFC92D /* Assets List */,
+				1E5F69E2EDB3C0A37180E396 /* MainAppRoute.swift */,
+				1E5F6B7A33B36CFB40E19864 /* MainAppFlowCoordinator.swift */,
 			);
-			path = "Edit Asset";
+			path = "Main App Flow";
 			sourceTree = "<group>";
 		};
 		1E5F6DAF5C61A328502BE8B1 /* Home */ = {
@@ -614,15 +656,6 @@
 			);
 			path = "Test Helpers";
 			sourceTree = "<group>";
-		};
-		1E5F6E1D704E38295BAE6071 /* View Model */ = {
-			isa = PBXGroup;
-			children = (
-				1E5F6CCE9D1F9EE8D732E930 /* AddAssetViewModel.swift */,
-			);
-			name = "View Model";
-			path = "SwiftUI Navigation/SwiftUI Router/View Model";
-			sourceTree = SOURCE_ROOT;
 		};
 		1E5F6E1FAB60DC8F3CCB2F7E /* Date Provider */ = {
 			isa = PBXGroup;
@@ -648,6 +681,16 @@
 				1E5F649113A19B112322E17E /* Route.swift */,
 			);
 			path = Route;
+			sourceTree = "<group>";
+		};
+		1E5F6F46772AF13688F36095 /* Add Asset Flow */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F69FB9D02607102804106 /* AddAssetFlowCoordinator.swift */,
+				1E5F660A48AAB90B2C52F6D6 /* Add Asset */,
+				1E5F656A2479FC54684F17FE /* AddAssetRoute.swift */,
+			);
+			path = "Add Asset Flow";
 			sourceTree = "<group>";
 		};
 		22A240DE29CD884E0062221A = {
@@ -863,8 +906,6 @@
 				1E5F692819ACB45F55BA9731 /* EncodableExtensions.swift in Sources */,
 				1E5F6B1A494ADEE4D5D339A0 /* AssetCellView.swift in Sources */,
 				1E5F6FD0D9DC4E482202BE02 /* FavouriteAssetCellView.swift in Sources */,
-				1E5F63A56D1D6B7CDEF7CD94 /* AddAssetView.swift in Sources */,
-				1E5F6C58FC2707D0EDD202BF /* AddAssetViewModel.swift in Sources */,
 				1E5F6AB3D5E6A0992833CC62 /* SwiftUIRouterHomeViewModel.swift in Sources */,
 				1E5F6EEDE9D460E07419B6B4 /* BaseAssetManager.swift in Sources */,
 				1E5F67524A9EC8BA04B29AAC /* AssetsRatesProvider.swift in Sources */,
@@ -893,24 +934,30 @@
 				1E5F6EA1A8F2E8B2C42BC509 /* AssetsListViewModel.swift in Sources */,
 				1E5F669EA5F1A077646423EF /* AssetsListView.swift in Sources */,
 				1E5F670ED38F9A5470831FFA /* SwiftUIRouterHomeView.swift in Sources */,
-				1E5F62C041CF17D639645C2E /* MainAppFlowCoordinator.swift in Sources */,
 				1E5F67D56BB2A81B3059B228 /* DependencyProvider.swift in Sources */,
 				1E5F6237FA399CA1FDFC964A /* UIKitNavigationRouter.swift in Sources */,
-				1E5F65B2BE93CFF60B4A3585 /* MainAppRoute.swift in Sources */,
-				1E5F6A7B2B6DD65BC27D3D31 /* UIKitRouterAssetsListViewModel.swift in Sources */,
 				1E5F61C91AE57E59A19C2453 /* AssetDetailsView.swift in Sources */,
 				1E5F630214DA0C2CA32107E3 /* AssetDetailsViewModel.swift in Sources */,
 				1E5F6B1A37F169119DF6A8FE /* AssetDetailsViewData.swift in Sources */,
-				1E5F6FB0E7030AEBFD25FDF0 /* UIKitRouterAssetDetailsViewModel.swift in Sources */,
 				1E5F6C3C00C4EC00033DB672 /* SwiftUIRouterAssetDetailsViewModel.swift in Sources */,
 				1E5F662295189AA73CAFBCD4 /* EditAssetViewModel.swift in Sources */,
 				1E5F64A9523213A865E850B4 /* EditAssetViewData.swift in Sources */,
 				1E5F67B06416348FB75F0BE7 /* EditAssetView.swift in Sources */,
 				1E5F67A937F4910533C00E5A /* SwiftUIRouterEditAssetViewModel.swift in Sources */,
-				1E5F611691CBF7E9BF1C3B82 /* UIKitRouterEditAssetViewModel.swift in Sources */,
 				1E5F66058EA934388B12BC4E /* ViewExtensions.swift in Sources */,
 				1E5F6FD0304DD9DE9329AA32 /* FoundationExtensions.swift in Sources */,
 				1E5F670E616A66C3A3A06023 /* PopupDismissHandler.swift in Sources */,
+				1E5F68EB3479D9D877AE188D /* UIKitRouterAssetDetailsViewModel.swift in Sources */,
+				1E5F680F8256D9B892A016AF /* UIKitRouterEditAssetViewModel.swift in Sources */,
+				1E5F69C8F8CEB1FF5F283AAC /* UIKitRouterAssetsListViewModel.swift in Sources */,
+				1E5F6DBB57E772A0B7A57B66 /* MainAppRoute.swift in Sources */,
+				1E5F696B7A59CF7EF9244E75 /* MainAppFlowCoordinator.swift in Sources */,
+				1E5F69BE2FBACF9A1F633F34 /* AddAssetFlowCoordinator.swift in Sources */,
+				1E5F6DB2F505347468EC492B /* AddAssetRoute.swift in Sources */,
+				1E5F6928B5103B50BE32B3B9 /* AddAssetViewModel.swift in Sources */,
+				1E5F6B7C20A31EA17D8B08DB /* AddAssetView.swift in Sources */,
+				1E5F6F86821824C57F6CF6CE /* UIKitRouterAddAssetViewModel.swift in Sources */,
+				1E5F696CC6F290B422093D3E /* SwiftUIRouterAddAssetViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

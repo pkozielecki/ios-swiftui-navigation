@@ -22,7 +22,7 @@ final class MainAppFlowCoordinator: FlowCoordinator {
     private(set) var child: FlowCoordinator? = nil
 
     /// - SeeAlso: FlowCoordinator.navigator
-    private(set) var navigator: Navigator
+    let navigator: Navigator
 
     private let dependencyProvider: DependencyProvider
 
@@ -62,23 +62,6 @@ final class MainAppFlowCoordinator: FlowCoordinator {
         route as? MainAppRoute != nil
     }
 
-    /// - SeeAlso: FlowCoordinator.navigateBack(animated:)
-    func navigateBack(animated: Bool) {
-        if let presentedViewController = navigator.presentedViewController {
-            presentedViewController.dismiss(animated: animated)
-        } else if navigator.viewControllers.count > 1 {
-            _ = navigator.popViewController(animated: animated)
-        }
-    }
-
-    /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:)
-    func navigateBackToRoot(animated: Bool) {
-        _ = navigator.popToRootViewController(animated: animated)
-    }
-
-    /// - SeeAlso: FlowCoordinator.navigateBack(toRoute:animated:)
-    func navigateBack(toRoute route: any Route, animated: Bool) {}
-
     /// - SeeAlso: FlowCoordinator.makeViewComponents(forRoute:withData:)
     func makeViewComponents(forRoute route: any Route, withData: AnyHashable?) -> [ViewComponent] {
         guard let route = route as? MainAppRoute else {
@@ -116,6 +99,15 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 
         switch route {
 
+        case .addAsset:
+            let flowCoordinator = AddAssetFlowCoordinator(
+                navigator: navigator,
+                dependencyProvider: dependencyProvider,
+                parent: self
+            )
+            child = flowCoordinator
+            return flowCoordinator
+
         // Discuss: These are showcase routes only ...
         // ... they're demonstrating that you can launch an instance of Main Flow coordinator from an existing one ...
         // ... a.k.a. "embedded" / "inception" flow.
@@ -134,8 +126,6 @@ final class MainAppFlowCoordinator: FlowCoordinator {
     }
 
     /// - SeeAlso: FlowCoordinator.handleChildCoordinatorFinished(executeBackNavigation:)
-    ///
-    /// - Parameter executeBackNavigation: a flag indicating whether to execute back navigation. On manual popup dismissal this should be set to `false`.
     func handleChildCoordinatorFinished(executeBackNavigation: Bool) {
         if executeBackNavigation {
             navigateBack()

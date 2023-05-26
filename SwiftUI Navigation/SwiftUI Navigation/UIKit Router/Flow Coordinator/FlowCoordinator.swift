@@ -133,13 +133,32 @@ extension FlowCoordinator {
         navigateBack(animated: true)
     }
 
+    func navigateBack(animated: Bool) {
+        if let presentedViewController = navigator.presentedViewController {
+            presentedViewController.dismiss(animated: animated)
+        } else if navigator.viewControllers.count > 1 {
+            _ = navigator.popViewController(animated: animated)
+        }
+    }
+
     func navigateBackToRoot() {
         navigateBackToRoot(animated: true)
+    }
+
+    func navigateBackToRoot(animated: Bool) {
+        _ = navigator.popToRootViewController(animated: animated)
     }
 
     func navigateBack(toRoute route: any Route) {
         navigateBack(toRoute: route, animated: true)
     }
+
+    func navigateBack(toRoute route: any Route, animated: Bool) {
+        // TODO: Implement navigating back to a route.
+        // TODO: Traverse through the flow coordinator hierarchy to find the route to return to.
+    }
+
+    func handleChildCoordinatorFinished(executeBackNavigation: Bool) {}
 }
 
 // MARK: - Private
@@ -150,7 +169,7 @@ private extension FlowCoordinator {
     // ... to do so, we need to subscribe to be a UIAdaptivePresentationControllerDelegate...
     // ... but a protocol cannot have default implementation of @objc methods defined in the delegate...
     // ... so we need to use this convenient wrapper and store it as an associated object.
-    private var popupDismissHandler: PopupDismissHandler? {
+    var popupDismissHandler: PopupDismissHandler? {
         get {
             objc_getAssociatedObject(self, &PopupDismissHandlerKey) as? PopupDismissHandler
         }

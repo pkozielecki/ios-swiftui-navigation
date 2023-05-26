@@ -7,9 +7,8 @@ import UIKit
 
 /// An abstraction describing a dependency provider.
 protocol DependencyProvider {
-
-    ///
     var favouriteAssetsManager: FavouriteAssetsManager { get }
+    var assetsProvider: AssetsProvider { get }
     var assetsRatesProvider: AssetsRatesProvider { get }
     var historicalAssetRatesProvider: HistoricalAssetRatesProvider { get }
     var router: UIKitNavigationRouter { get }
@@ -19,6 +18,7 @@ protocol DependencyProvider {
 struct DefaultDependencyProvider: DependencyProvider {
     let favouriteAssetsManager: FavouriteAssetsManager
     let assetsRatesProvider: AssetsRatesProvider
+    let assetsProvider: AssetsProvider
     let historicalAssetRatesProvider: HistoricalAssetRatesProvider
     let router: UIKitNavigationRouter
 
@@ -38,6 +38,7 @@ struct DefaultDependencyProvider: DependencyProvider {
             networkModule: networkModule,
             baseAssetProvider: baseAssetManager
         )
+        assetsProvider = DefaultAssetsProvider(networkModule: networkModule)
 
         self.favouriteAssetsManager = favouriteAssetsManager
     }
