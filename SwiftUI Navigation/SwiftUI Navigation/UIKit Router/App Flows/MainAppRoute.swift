@@ -58,11 +58,12 @@ extension MainAppRoute: Route {
         }
     }
 
-    /// - SeeAlso: Route.isPopup
-    var isPopup: Bool {
+    /// - SeeAlso: Route.popupPresentationStyle
+    var popupPresentationStyle: PopupPresentationStyle {
         if case .popupMainAppFlow = self {
-            return true
+            // Discuss: Randomizing popup presentation style for showcase purposes only.
+            return Bool.random() ? .fullScreen : .modal
         }
-        return false
+        return .none
     }
 }

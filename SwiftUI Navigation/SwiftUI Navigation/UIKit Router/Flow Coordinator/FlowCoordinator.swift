@@ -174,7 +174,7 @@ private extension FlowCoordinator {
 
     func createAndStartFlowOnPopup(withData: AnyHashable?, route: any Route) {
         let navigationController = UINavigationController()
-        //  TODO: Handle fullscreen and popover presentation styles: navigationController.modalPresentationStyle = .fullScreen
+        navigationController.modalPresentationStyle = route.popupPresentationStyle.modalPresentationStyle
         let flowCoordinator = makeFlowCoordinator(
             forRoute: route,
             navigator: navigationController,

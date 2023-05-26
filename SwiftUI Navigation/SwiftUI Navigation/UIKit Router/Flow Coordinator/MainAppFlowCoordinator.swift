@@ -118,7 +118,7 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 
         // Discuss: These are showcase routes only ...
         // ... they're demonstrating that you can launch an instance of Main Flow coordinator from an existing one ...
-            // ... a.k.a. "embedded" / "inception" flow.
+        // ... a.k.a. "embedded" / "inception" flow.
         case .embeddedMainAppFlow, .popupMainAppFlow:
             let flowCoordinator = MainAppFlowCoordinator(
                 navigator: navigator,
