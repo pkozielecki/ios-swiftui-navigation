@@ -37,18 +37,22 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
         getAssetRates()
     }
 
+    /// - SeeAlso: AssetsListViewModel.getAssetRates()
     func onAssetSelected(id: String) {
         router.show(route: MainAppRoute.assetDetails(assetId: id), withData: nil)
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAssetSelectedToBeEdited(id:)
     func onAssetSelectedToBeEdited(id: String) {
         router.show(route: MainAppRoute.editAsset(assetId: id), withData: nil)
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAddNewAssetTapped()
     func onAddNewAssetTapped() {
         router.show(route: MainAppRoute.addAsset, withData: nil)
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAssetSelectedForRemoval(id:)
     func onAssetSelectedForRemoval(id: String) {
         guard let asset = favouriteAssets.filter({ $0.id == id }).first else {
             return
@@ -58,14 +62,21 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
         print("Removing asset: \(asset.name)")
     }
 
+    /// - SeeAlso: AssetsListViewModel.addAssetToFavourites(id:)
     func removeAssetFromFavourites(id: String) {
         favouriteAssets.removeAll { $0.id == id }
         favouriteAssetsManager.store(favouriteAssets: favouriteAssets)
         getAssetRates()
     }
 
+    /// - SeeAlso: AssetsListViewModel.onRefreshRequested()
     func onRefreshRequested() {
         getAssetRates()
+    }
+
+    /// - SeeAlso: AssetsListViewModel.onAppInfoTapped()
+    func onAppInfoTapped() {
+        router.show(route: MainAppRoute.appInfo, withData: nil)
     }
 }
 

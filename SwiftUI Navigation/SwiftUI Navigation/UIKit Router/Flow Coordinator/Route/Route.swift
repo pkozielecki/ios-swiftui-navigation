@@ -56,6 +56,11 @@ extension Route {
             return true
         }
     }
+
+    /// A convenience method that returns whether the route matches the given route.
+    func matches(_ route: any Route) -> Bool {
+        name == route.name && isFlow == route.isFlow && popupPresentationStyle == route.popupPresentationStyle
+    }
 }
 
 /// An empty implementation of the `Route` protocol.

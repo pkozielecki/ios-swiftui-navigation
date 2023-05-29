@@ -37,7 +37,8 @@ final class UIKitRouterAssetDetailsViewModel: AssetDetailsViewModel {
 
     /// - SeeAlso: AssetDetailsViewModel.edit(assetID:)
     func edit(asset assetID: String) {
-        router.show(route: MainAppRoute.editAsset(assetId: assetID), withData: nil)
+        // Discuss: Using switch(toRoute:withData:) instead of show(route:withData:) just to showcase this option.
+        router.switch(toRoute: MainAppRoute.editAsset(assetId: assetID), withData: nil)
     }
 
     /// - SeeAlso: AssetDetailsViewModel.reloadChart(scope:)

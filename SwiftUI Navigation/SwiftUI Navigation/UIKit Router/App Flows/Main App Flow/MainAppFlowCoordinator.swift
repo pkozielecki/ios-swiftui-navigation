@@ -19,7 +19,7 @@ final class MainAppFlowCoordinator: FlowCoordinator {
     var adaptivePresentationDelegate: UIAdaptivePresentationControllerDelegate?
 
     /// - SeeAlso: FlowCoordinator.child
-    private(set) var child: FlowCoordinator? = nil
+    var child: FlowCoordinator? = nil
 
     /// - SeeAlso: FlowCoordinator.navigator
     let navigator: Navigator
@@ -108,6 +108,15 @@ final class MainAppFlowCoordinator: FlowCoordinator {
             child = flowCoordinator
             return flowCoordinator
 
+        case .appInfo:
+            let flowCoordinator = AppInfoFlowCoordinator(
+                navigator: navigator,
+                dependencyProvider: dependencyProvider,
+                parent: self
+            )
+            child = flowCoordinator
+            return flowCoordinator
+
         // Discuss: These are showcase routes only ...
         // ... they're demonstrating that you can launch an instance of Main Flow coordinator from an existing one ...
         // ... a.k.a. "embedded" / "inception" flow.
@@ -123,14 +132,6 @@ final class MainAppFlowCoordinator: FlowCoordinator {
         default:
             fatalError("Route \(route) is not supported by MainAppFlowCoordinator")
         }
-    }
-
-    /// - SeeAlso: FlowCoordinator.handleChildCoordinatorFinished(executeBackNavigation:)
-    func handleChildCoordinatorFinished(executeBackNavigation: Bool) {
-        if executeBackNavigation {
-            navigateBack()
-        }
-        child = nil
     }
 }
 

@@ -26,6 +26,9 @@ protocol AssetsListViewModel: ObservableObject {
     /// Triggerred on tapping Add Asset button.
     func onAddNewAssetTapped()
 
+    /// Triggered on tapping App Info button.
+    func onAppInfoTapped()
+
     /// Triggered on selecting an asset cell.
     ///
     /// - Parameter id: a selected asset id.

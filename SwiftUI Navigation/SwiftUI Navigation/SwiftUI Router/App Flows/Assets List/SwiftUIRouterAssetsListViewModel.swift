@@ -35,18 +35,27 @@ final class SwiftUIRouterAssetsListViewModel: AssetsListViewModel {
         getAssetRates()
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAssetSelected(id:)
     func onAssetSelected(id: String) {
         router.push(screen: .assetDetails(id))
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAssetSelectedToBeEdited(id:)
     func onAssetSelectedToBeEdited(id: String) {
         router.push(screen: .editAsset(id))
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAddNewAssetTapped()
     func onAddNewAssetTapped() {
         router.present(popup: .addAsset)
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAppInfoTapped()
+    func onAppInfoTapped() {
+        router.present(popup: .appInfo)
+    }
+
+    /// - SeeAlso: AssetsListViewModel.onAssetSelectedForRemoval(id:)
     func onAssetSelectedForRemoval(id: String) {
         guard let asset = favouriteAssets.filter({ $0.id == id }).first else {
             return
@@ -55,12 +64,14 @@ final class SwiftUIRouterAssetsListViewModel: AssetsListViewModel {
         router.show(alert: .deleteAsset(assetId: asset.id, assetName: asset.name))
     }
 
+    /// - SeeAlso: AssetsListViewModel.onAssetSelectedForFavouriteToggle(id:)
     func removeAssetFromFavourites(id: String) {
         favouriteAssets.removeAll { $0.id == id }
         favouriteAssetsManager.store(favouriteAssets: favouriteAssets)
         getAssetRates()
     }
 
+    /// - SeeAlso: AssetsListViewModel.onRefreshRequested()
     func onRefreshRequested() {
         getAssetRates()
     }

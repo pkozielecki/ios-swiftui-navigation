@@ -39,6 +39,7 @@ final class UIKitRouterAddAssetViewModel: AddAssetViewModel {
         setupAssetFiltering()
     }
 
+    /// - SeeAlso: AddAssetViewModel.onAssetTapped(id:)
     func onAssetTapped(id: String) {
         if selectedAssetsIds.contains(id) {
             selectedAssetsIds.removeAll { $0 == id }
@@ -48,6 +49,7 @@ final class UIKitRouterAddAssetViewModel: AddAssetViewModel {
         composeViewState()
     }
 
+    /// - SeeAlso: AddAssetViewModel.onAssetsSelectionConfirmed()
     func onAssetsSelectionConfirmed() {
         //  Discussion: We want to retain all the modifications users made to favourite assets...
         //  ... so we can't just replace the assets stored in the manager with the selected ones.
@@ -64,6 +66,11 @@ final class UIKitRouterAddAssetViewModel: AddAssetViewModel {
 
         favouriteAssetsManager.store(favouriteAssets: assetsToStore)
         router.stop() // TODO: Maybe navigateBack() instead?
+    }
+
+    /// - SeeAlso: AddAssetViewModel.onPopToRootTapped()
+    func onPopToRootTapped() {
+        router.switch(toRoute: MainAppRoute.assetsList, withData: nil)
     }
 }
 

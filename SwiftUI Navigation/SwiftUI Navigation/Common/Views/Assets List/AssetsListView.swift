@@ -35,7 +35,12 @@ struct AssetsListView<ViewModel: AssetsListViewModel>: View {
                             Text("Your asssets")
                             Spacer()
                             Button {
-                                addNewTapped()
+                                viewModel.onAppInfoTapped()
+                            } label: {
+                                Image(systemName: "info.circle.fill")
+                            }
+                            Button {
+                                viewModel.onAddNewAssetTapped()
                             } label: {
                                 Image(systemName: "plus.circle.fill")
                             }
@@ -89,10 +94,6 @@ private extension AssetsListView {
         default:
             return ""
         }
-    }
-
-    func addNewTapped() {
-        viewModel.onAddNewAssetTapped()
     }
 
     func onAssetSelected(id: String) {

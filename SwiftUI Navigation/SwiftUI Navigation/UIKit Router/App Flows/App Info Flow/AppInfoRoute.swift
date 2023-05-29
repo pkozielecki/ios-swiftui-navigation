@@ -1,24 +1,24 @@
 //
-//  AddAssetRoute.swift
+//  AppInfoRoute.swift
 //  KISS Views
 //
 
 import Foundation
 
-/// An enumeration describing a routes in Add Asset flow.
-enum AddAssetRoute {
+/// An enumeration describing a routes in App Info route.
+enum AppInfoRoute {
 
-    /// A route to add an asset.
-    case addAsset
+    /// A route presenting app info.
+    case appInfo
 }
 
-extension AddAssetRoute: Route {
+extension AppInfoRoute: Route {
 
     /// - SeeAlso: Route.path
     var name: String {
         switch self {
-        case .addAsset:
-            return "AddAssetRoute.AddAsset"
+        case .appInfo:
+            return "AppInfoRoute.AppInfo"
         }
     }
 

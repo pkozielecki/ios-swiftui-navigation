@@ -20,6 +20,9 @@ enum MainAppRoute {
     /// A route to add a new asset.
     case addAsset
 
+    /// A route to show app info.
+    case appInfo
+
     /// An embedded flow (brand new Main App flow embedded in the existing one):
     case embeddedMainAppFlow
 
@@ -37,26 +40,28 @@ extension MainAppRoute: Route {
     var name: String {
         switch self {
         case .assetsList:
-            return "Assets List"
+            return "MainAppRoute.AssetsList"
         case .assetDetails:
-            return "Asset Details"
+            return "MainAppRoute.AssetDetails"
         case .editAsset:
-            return "Edit Asset"
+            return "MainAppRoute.EditAsset"
         case .addAsset:
-            return "Add Asset"
+            return "MainAppRoute.AddAsset"
+        case .appInfo:
+            return "MainAppRoute.AppInfo"
         case .embeddedMainAppFlow:
-            return "Embedded Main App flow"
+            return "MainAppRoute.EmbeddedMainAppFlow"
         case .popupMainAppFlow:
-            return "Popup Main App flow"
+            return "MainAppRoute.PopupMainAppFlow"
         case .restoreNavigation:
-            return "Restore navigation"
+            return "MainAppRoute.RestoreNavigation"
         }
     }
 
     /// - SeeAlso: Route.isFlow
     var isFlow: Bool {
         switch self {
-        case .embeddedMainAppFlow, .popupMainAppFlow, .addAsset:
+        case .embeddedMainAppFlow, .popupMainAppFlow, .addAsset, .appInfo:
             return true
         default:
             return false
@@ -66,7 +71,7 @@ extension MainAppRoute: Route {
     /// - SeeAlso: Route.popupPresentationStyle
     var popupPresentationStyle: PopupPresentationStyle {
         switch self {
-        case .addAsset:
+        case .addAsset, .appInfo:
             return .modal
         case .popupMainAppFlow:
             return Bool.random() ? .fullScreen : .modal

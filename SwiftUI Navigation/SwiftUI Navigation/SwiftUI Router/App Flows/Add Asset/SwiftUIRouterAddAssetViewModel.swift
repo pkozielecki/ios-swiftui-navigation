@@ -38,6 +38,7 @@ final class SwiftUIRouterAddAssetViewModel: AddAssetViewModel {
         setupAssetFiltering()
     }
 
+    /// - SeeAlso: AddAssetViewModel.onAssetSelected(id:)
     func onAssetTapped(id: String) {
         if selectedAssetsIds.contains(id) {
             selectedAssetsIds.removeAll { $0 == id }
@@ -47,6 +48,13 @@ final class SwiftUIRouterAddAssetViewModel: AddAssetViewModel {
         composeViewState()
     }
 
+    /// - SeeAlso: AddAssetViewModel.onPopToRootTapped()
+    func onPopToRootTapped() {
+        router.popAll()
+        router.dismiss()
+    }
+
+    /// - SeeAlso: AddAssetViewModel.onAssetsSelectionConfirmed()
     func onAssetsSelectionConfirmed() {
         //  Discussion: We want to retain all the modifications users made to favourite assets...
         //  ... so we can't just replace the assets stored in the manager with the selected ones.

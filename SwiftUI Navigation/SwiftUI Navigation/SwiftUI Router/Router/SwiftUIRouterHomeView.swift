@@ -75,7 +75,7 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Swif
                     //  Handling app popups, presented as sheets:
                     switch $popup.wrappedValue.popup {
                     case .appInfo:
-                        Text("SwiftUI Navigation v 0.1")
+                        makeAppInfoView()
                     case .addAsset:
                         makeAddAssetView()
                     case .homeView:
@@ -165,6 +165,11 @@ private extension SwiftUIRouterHomeView {
             ),
             router: router
         )
+    }
+
+    func makeAppInfoView() -> some View {
+        let viewModel = SwiftUIRouterAppInfoViewModel(router: router)
+        return AppInfoView(viewModel: viewModel)
     }
 }
 

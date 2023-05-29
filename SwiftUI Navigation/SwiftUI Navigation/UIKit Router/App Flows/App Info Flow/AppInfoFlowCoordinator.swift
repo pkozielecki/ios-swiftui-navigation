@@ -1,13 +1,15 @@
 //
-//  AddAssetFlowCoordinator.swift
+//  AppInfoFlowCoordinator.swift
 //  KISS Views
 //
+
+import Foundation
 
 import SwiftUI
 import UIKit
 
 /// A coordinator handling add asset flow.
-final class AddAssetFlowCoordinator: FlowCoordinator {
+final class AppInfoFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.parent
     let parent: FlowCoordinator?
@@ -44,10 +46,10 @@ final class AddAssetFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.start(animated:)
     func start(animated: Bool) {
-        let initialRoute = AddAssetRoute.addAsset
-        let addAsset = makeViewComponents(forRoute: initialRoute, withData: nil)[0]
-        addAsset.route = initialRoute
-        navigator.pushViewController(addAsset.viewController, animated: animated)
+        let initialRoute = AppInfoRoute.appInfo
+        let appInfo = makeViewComponents(forRoute: initialRoute, withData: nil)[0]
+        appInfo.route = initialRoute
+        navigator.pushViewController(appInfo.viewController, animated: animated)
     }
 
     /// - SeeAlso: FlowCoordinator.stop()
@@ -57,18 +59,18 @@ final class AddAssetFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.show(route:withData:)
     func canShow(route: any Route) -> Bool {
-        route as? AddAssetRoute != nil
+        route as? AppInfoRoute != nil
     }
 
     /// - SeeAlso: FlowCoordinator.makeViewComponents(forRoute:withData:)
     func makeViewComponents(forRoute route: any Route, withData: AnyHashable?) -> [ViewComponent] {
-        guard let route = route as? AddAssetRoute else {
-            fatalError("Route \(route) is not supported by AddAssetFlowCoordinator")
+        guard let route = route as? AppInfoRoute else {
+            fatalError("Route \(route) is not supported by AppInfoFlowCoordinator")
         }
 
         switch route {
-        case .addAsset:
-            return [makeAddAssetViewController()]
+        case .appInfo:
+            return [makeAppInfoViewController()]
         }
     }
 
@@ -78,14 +80,12 @@ final class AddAssetFlowCoordinator: FlowCoordinator {
     }
 }
 
-private extension AddAssetFlowCoordinator {
+private extension AppInfoFlowCoordinator {
 
-    func makeAddAssetViewController() -> ViewComponent {
-        let viewModel = UIKitRouterAddAssetViewModel(
-            assetsProvider: dependencyProvider.assetsProvider,
-            favouriteAssetsManager: dependencyProvider.favouriteAssetsManager,
+    func makeAppInfoViewController() -> ViewComponent {
+        let viewModel = UIKitRouterAppInfoViewModel(
             router: dependencyProvider.router
         )
-        return AddAssetView(viewModel: viewModel).viewController
+        return AppInfoView(viewModel: viewModel).viewController
     }
 }

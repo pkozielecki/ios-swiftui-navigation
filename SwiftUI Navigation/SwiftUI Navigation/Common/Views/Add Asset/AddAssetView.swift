@@ -28,7 +28,15 @@ struct AddAssetView<ViewModel>: View where ViewModel: AddAssetViewModel {
                                 .noInsetsCell()
                             }
                             if !hasFilteredAssets {
-                                Text("Couldn't find any assets matching the search criteria")
+                                VStack {
+                                    Spacer()
+                                    Text("Couldn't find any assets matching the search criteria")
+                                    Spacer()
+                                    PrimaryButton(label: "Back to my assets") {
+                                        viewModel.onPopToRootTapped()
+                                    }
+                                }
+                                .padding(20)
                             }
                         }
 
@@ -41,9 +49,15 @@ struct AddAssetView<ViewModel>: View where ViewModel: AddAssetViewModel {
                     .listStyle(.grouped)
                 }
             } else {
-                Spacer()
-                Text("No assets to show")
-                Spacer()
+                VStack {
+                    Spacer()
+                    Text("No assets to show")
+                    Spacer()
+                    PrimaryButton(label: "Back to my assets") {
+                        viewModel.onPopToRootTapped()
+                    }
+                }
+                .padding(20)
             }
         }
     }

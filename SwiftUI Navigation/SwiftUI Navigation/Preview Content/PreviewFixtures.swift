@@ -49,6 +49,7 @@ final class PreviewAddAssetViewModel: AddAssetViewModel {
 
     func onAssetTapped(id: String) {}
     func onAssetsSelectionConfirmed() {}
+    func onPopToRootTapped() {}
 }
 
 final class PreviewAssetsListViewModel: AssetsListViewModel {
@@ -66,6 +67,7 @@ final class PreviewAssetsListViewModel: AssetsListViewModel {
     func onAssetSelectedToBeEdited(id: String) {}
     func onAssetSelectedForRemoval(id: String) {}
     func onRefreshRequested() {}
+    func onAppInfoTapped() {}
 }
 
 final class PreviewSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
@@ -104,4 +106,17 @@ final class PreviewEditAssetViewModel: EditAssetViewModel {
 
     func popToRoot() {}
     func saveChanges(assetData: EditAssetViewData) {}
+}
+
+final class PreviewAppInfoViewModel: AppInfoViewModel {
+    @Published var viewState: AppInfoViewState
+    var viewStatePublished: Published<AppInfoViewState> { _viewState }
+    var viewStatePublisher: Published<AppInfoViewState>.Publisher { $viewState }
+
+    init(state: AppInfoViewState) {
+        viewState = state
+    }
+
+    func addAssetTapped() {}
+    func appUpdateTapped() {}
 }

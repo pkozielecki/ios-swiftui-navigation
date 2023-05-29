@@ -75,14 +75,12 @@ final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
     func show(route: any Route, withData: AnyHashable?) {
         if currentFlow?.canShow(route: route) == true {
             currentFlow?.show(route: route, withData: withData)
-        } else {
-            currentFlow?.parent?.show(route: route, withData: withData)
         }
     }
 
     /// - SeeAlso: UIKitNavigationRouter.switch(toRoute:withData:)
     func `switch`(toRoute route: any Route, withData: AnyHashable?) {
-        currentFlow?.parent?.switch(toRoute: route, withData: withData)
+        currentFlow?.switch(toRoute: route, withData: withData)
     }
 
     /// - SeeAlso: UIKitNavigationRouter.navigateBack(animated:)

@@ -33,4 +33,7 @@ protocol AddAssetViewModel: ObservableObject {
 
     /// Executed on confirming assets selection.
     func onAssetsSelectionConfirmed()
+
+    /// Executed on tapping a pop to root button.
+    func onPopToRootTapped()
 }

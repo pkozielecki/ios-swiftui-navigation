@@ -22,7 +22,9 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
     var parent: FlowCoordinator? { get }
 
     /// A child flow coordinator.
-    var child: FlowCoordinator? { get }
+    /// Important: It's NOT recommended to set child manually OUTSIDE of a given FlowCoordinator!
+    /// The setter is exposed only to set Flow's child to nil after it's finished. 
+    var child: FlowCoordinator? { get set }
 
     /// A coordinator completion callback.
     var completionCallback: (() -> Void)? { get set }
@@ -34,9 +36,6 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
 
     /// Stops the flow.
     func stop()
-
-    /// Handles situation when child flow has finished.
-    func handleChildCoordinatorFinished(executeBackNavigation: Bool)
 
     /// Shows a route in the flow.
     ///
@@ -113,8 +112,18 @@ extension FlowCoordinator {
     }
 
     func `switch`(toRoute route: any Route, withData: AnyHashable?) {
-        // TODO: Implement switching between routes.
-        // TODO: pass the request down the parent flow if needed.
+        if canShow(route: route) {
+            if isShowing(route: route) {
+                child?.stop()
+                navigateBack(toRoute: route)
+            } else {
+                show(route: route, withData: withData)
+            }
+        } else if let parent = parent {
+            parent.switch(toRoute: route, withData: withData)
+        } else {
+            fatalError("`Switch` to route is not implemented not handled properly.")
+        }
     }
 
     func start() {
@@ -154,11 +163,19 @@ extension FlowCoordinator {
     }
 
     func navigateBack(toRoute route: any Route, animated: Bool) {
-        // TODO: Implement navigating back to a route.
-        // TODO: Traverse through the flow coordinator hierarchy to find the route to return to.
+        // Discussion: Affects only this coordinator - does not recurse to parent.
+        // Use switch(toRoute:) to check also parent coordinators
+        if let popup = navigator.presentedViewController, popup.route.matches(route) {
+            navigateBack()
+        } else {
+            for viewController in navigator.viewControllers.reversed() {
+                if viewController.route.matches(route) {
+                    _ = navigator.popToViewController(viewController, animated: animated)
+                    break
+                }
+            }
+        }
     }
-
-    func handleChildCoordinatorFinished(executeBackNavigation: Bool) {}
 }
 
 // MARK: - Private
@@ -187,7 +204,8 @@ private extension FlowCoordinator {
         flowCoordinator.start(animated: true)
         flowCoordinator.route = route
         flowCoordinator.completionCallback = { [weak self] in
-            self?.handleChildCoordinatorFinished(executeBackNavigation: true)
+            self?.navigateBack()
+            self?.child = nil
         }
     }
 
@@ -200,14 +218,22 @@ private extension FlowCoordinator {
             withData: withData
         )
         flowCoordinator.start(animated: false)
-        navigator.present(navigationController, animated: true, completion: nil)
+        // Discussion: If there is a popup already presented, we need to dismiss it first:
+        if navigator.presentedViewController != nil {
+            navigator.dismiss(animated: true) { [weak self] in
+                self?.navigator.present(navigationController, animated: true, completion: nil)
+            }
+        } else {
+            navigator.present(navigationController, animated: true, completion: nil)
+        }
         popupDismissHandler = PopupDismissHandler { [weak self] in
-            self?.handleChildCoordinatorFinished(executeBackNavigation: false)
+            self?.child = nil
         }
         navigationController.presentationController?.delegate = popupDismissHandler
         flowCoordinator.route = route
         flowCoordinator.completionCallback = { [weak self] in
-            self?.handleChildCoordinatorFinished(executeBackNavigation: true)
+            self?.navigateBack()
+            self?.child = nil
         }
     }
 
@@ -220,11 +246,11 @@ private extension FlowCoordinator {
             last.route = route
             navigator.present(last.viewController, animated: true, completion: nil)
         } else {
-            var vcs = navigator.viewControllers
+            var currentViewControllers = navigator.viewControllers
             let viewControllers = viewComponents.map { $0.viewController }
             viewControllers.forEach { $0.route = route }
-            vcs.append(contentsOf: viewControllers)
-            navigator.setViewControllers(vcs, animated: true)
+            currentViewControllers.append(contentsOf: viewControllers)
+            navigator.setViewControllers(currentViewControllers, animated: true)
         }
     }
 
@@ -234,6 +260,16 @@ private extension FlowCoordinator {
             navigator.present(viewComponent.viewController, animated: true, completion: nil)
         } else {
             navigator.pushViewController(viewComponent.viewController, animated: true)
+        }
+    }
+
+    func isShowing(route: any Route) -> Bool {
+        if let popup = navigator.presentedViewController, popup.route.matches(route) {
+            return true
+        }
+
+        return navigator.viewControllers.contains { controller in
+            controller.route.matches(route)
         }
     }
 }
