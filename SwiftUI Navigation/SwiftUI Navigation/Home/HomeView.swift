@@ -45,7 +45,7 @@ struct HomeView: View {
                     let rootViewController = RootViewController {
                         isUIKitNaviPresented = false
                     }
-                    let dependencyProvider = DefaultDependencyProvider(rootViewController: rootViewController)
+                    let dependencyProvider = DefaultDependencyProvider(rootAppNavigator: rootViewController)
                     UIKitRouterHomeView(dependencyProvider: dependencyProvider, rootViewController: rootViewController)
                 }
 

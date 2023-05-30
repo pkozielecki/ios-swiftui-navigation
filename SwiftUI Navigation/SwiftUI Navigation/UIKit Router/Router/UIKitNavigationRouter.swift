@@ -42,33 +42,22 @@ protocol UIKitNavigationRouter: AnyObject {
 
     /// Starts the initial flow.
     ///
-    /// - Parameter dependencyProvider: a dependency provider.
-    /// - Parameter animated: a flag indicating whether the navigation should be animated.
-    func startInitialFlow(dependencyProvider: DependencyProvider, animated: Bool)
+    /// - Parameters:
+    ///  - initialFlow: an initial flow to start.
+    /// - animated: a flag indicating whether the navigation should be animated.
+    func start(initialFlow: FlowCoordinator, animated: Bool)
 }
 
 // MARK: - DefaultUIKitNavigationRouter
 
 /// A default implementation of UIKitNavigationRouter.
 final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
-    private let navigator: Navigator
-    private var dependencyProvider: DependencyProvider?
     private var initialFlow: FlowCoordinator?
 
-    /// A default initializer for DefaultUIKitNavigationRouter.
-    ///
-    /// - Parameter navigator: a navigator.
-    init(
-        navigator: Navigator
-    ) {
-        self.navigator = navigator
-    }
-
-    /// - SeeAlso: UIKitNavigationRouter.startInitialFlow(dependencyProvider:animated:)
-    func startInitialFlow(dependencyProvider: DependencyProvider, animated: Bool) {
-        self.dependencyProvider = dependencyProvider
-        initialFlow = MainAppFlowCoordinator(navigator: navigator, dependencyProvider: dependencyProvider)
-        initialFlow?.start(animated: animated)
+    /// - SeeAlso: UIKitNavigationRouter.startInitialFlow(initialFlow:animated:)
+    func start(initialFlow: FlowCoordinator, animated: Bool) {
+        self.initialFlow = initialFlow
+        initialFlow.start(animated: animated)
     }
 
     /// - SeeAlso: UIKitNavigationRouter.show(route:withData:)
@@ -104,13 +93,19 @@ final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
     }
 }
 
-// MARK: - Private
+// MARK: - Helpers
 
-private extension DefaultUIKitNavigationRouter {
+extension DefaultUIKitNavigationRouter {
 
+    /// Returns the current flow.
     var currentFlow: FlowCoordinator? {
         getCurrentFlow(base: initialFlow)
     }
+}
+
+// MARK: - Private
+
+private extension DefaultUIKitNavigationRouter {
 
     func getCurrentFlow(base: FlowCoordinator?) -> FlowCoordinator? {
         if let child = base?.child {

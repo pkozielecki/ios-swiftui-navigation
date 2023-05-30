@@ -23,7 +23,7 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
 
     /// A child flow coordinator.
     /// Important: It's NOT recommended to set child manually OUTSIDE of a given FlowCoordinator!
-    /// The setter is exposed only to set Flow's child to nil after it's finished. 
+    /// The setter is exposed only to set Flow's child to nil after it's finished.
     var child: FlowCoordinator? { get set }
 
     /// A coordinator completion callback.

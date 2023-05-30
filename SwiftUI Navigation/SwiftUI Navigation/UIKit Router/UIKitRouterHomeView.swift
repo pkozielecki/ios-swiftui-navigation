@@ -28,7 +28,11 @@ struct UIKitRouterHomeView: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(context: Context) -> UIViewControllerType {
-        router.startInitialFlow(dependencyProvider: dependencyProvider, animated: false)
+        let initialFlow = MainAppFlowCoordinator(
+            navigator: dependencyProvider.rootAppNavigator,
+            dependencyProvider: dependencyProvider
+        )
+        router.start(initialFlow: initialFlow, animated: false)
         return rootViewController
     }
 

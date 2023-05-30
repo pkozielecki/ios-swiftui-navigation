@@ -12,6 +12,7 @@ protocol DependencyProvider {
     var assetsRatesProvider: AssetsRatesProvider { get }
     var historicalAssetRatesProvider: HistoricalAssetRatesProvider { get }
     var router: UIKitNavigationRouter { get }
+    var rootAppNavigator: Navigator { get }
 }
 
 /// A default implementation of DependencyProvider.
@@ -21,14 +22,15 @@ struct DefaultDependencyProvider: DependencyProvider {
     let assetsProvider: AssetsProvider
     let historicalAssetRatesProvider: HistoricalAssetRatesProvider
     let router: UIKitNavigationRouter
+    let rootAppNavigator: Navigator
 
     /// A default initializer for DefaultDependencyProvider.
-    init(rootViewController: UINavigationController) {
+    init(rootAppNavigator: Navigator) {
         let favouriteAssetsManager = DefaultFavouriteAssetsManager()
         let networkModule = NetworkingFactory.makeNetworkingModule()
         let baseAssetManager = DefaultBaseAssetManager()
 
-        router = DefaultUIKitNavigationRouter(navigator: rootViewController)
+        router = DefaultUIKitNavigationRouter()
         assetsRatesProvider = DefaultAssetsRatesProvider(
             favouriteAssetsProvider: favouriteAssetsManager,
             networkModule: networkModule,
@@ -41,5 +43,6 @@ struct DefaultDependencyProvider: DependencyProvider {
         assetsProvider = DefaultAssetsProvider(networkModule: networkModule)
 
         self.favouriteAssetsManager = favouriteAssetsManager
+        self.rootAppNavigator = rootAppNavigator
     }
 }

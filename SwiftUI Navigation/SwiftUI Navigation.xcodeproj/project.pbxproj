@@ -13,8 +13,10 @@
 		1E5F607D6CFF4E3B2F043FE9 /* AssetsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6ED10B46873CECD4E769 /* AssetsProvider.swift */; };
 		1E5F607E4114DFF0FB78AFF7 /* GetAssetsRatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F678251E7C86105EEF14B /* GetAssetsRatesRequest.swift */; };
 		1E5F60C4FE4AEDFDCCD9D9B9 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F693AA1A3ECC8667C52DA /* DataExtensions.swift */; };
+		1E5F614E095516995D424833 /* FakeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6CD9ED55CE38F4BB3EAD /* FakeNavigator.swift */; };
 		1E5F6189EA46DC63152DEAEB /* AppInfoFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64D05FD121699541E96B /* AppInfoFlowCoordinator.swift */; };
 		1E5F61C91AE57E59A19C2453 /* AssetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6E349CB72B2C6B2258BC /* AssetDetailsView.swift */; };
+		1E5F61CF6AC48C22B1D2396C /* FakeAssetsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6D641B30D05D26E6FE03 /* FakeAssetsProvider.swift */; };
 		1E5F621225E06818D1EA2C4C /* CellStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66B7C599512A61C0AF02 /* CellStyles.swift */; };
 		1E5F6237FA399CA1FDFC964A /* UIKitNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6FFF1F4FE7CE4513C3CD /* UIKitNavigationRouter.swift */; };
 		1E5F629F4FA4352566D43781 /* GetAllAssetsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F643C13E91E6B9CD3C121 /* GetAllAssetsRequest.swift */; };
@@ -24,12 +26,16 @@
 		1E5F63B07B24C9B588BDF489 /* SwiftUIRouterAssetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6C4424E9237374C9B43E /* SwiftUIRouterAssetsListViewModel.swift */; };
 		1E5F63FD142A37308336F761 /* AssetPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F61502B84D29CC2CD70EB /* AssetPrice.swift */; };
 		1E5F641395C5BB7E0BBDBC0F /* SnapshottingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6CF6F2A93781697838CF /* SnapshottingExtensions.swift */; };
+		1E5F6413EC0D9B72E2241835 /* FakeAssetsRatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6C738A4881C798C93A14 /* FakeAssetsRatesProvider.swift */; };
 		1E5F64A9523213A865E850B4 /* EditAssetViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62B76C71DB987CC38D90 /* EditAssetViewData.swift */; };
 		1E5F64D812A28AE9C61F5654 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F63C5B93C64ECFD7B250D /* UIViewExtension.swift */; };
 		1E5F64E11B13700DEBD34FCD /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A2ADAD32E86720C4618 /* LoaderView.swift */; };
 		1E5F64EEE83605707C061341 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6054E015178D9AFCEF0C /* DateProvider.swift */; };
+		1E5F64F58F81A683EABF9241 /* FakeFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64715F68F6BBB5DAF527 /* FakeFlowCoordinator.swift */; };
 		1E5F65268F5915DA83C6C07B /* DateFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F621D2D85C1D85A7AA6EB /* DateFormatterExtensions.swift */; };
 		1E5F6558A524D1A3E6A530C5 /* AssetHistoricalRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F68A8E8FD64DB4034812A /* AssetHistoricalRate.swift */; };
+		1E5F6579522804EB7E27BB30 /* MainAppFlowCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F69C1F6E2D701EDAA30BB /* MainAppFlowCoordinatorTests.swift */; };
+		1E5F658963BE56E11B8DDA27 /* FakeDependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F693FEBBD51213CB5A878 /* FakeDependencyProvider.swift */; };
 		1E5F65A7159F26AE5184160F /* AppInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F3610C2E447CFCA4D56 /* AppInfoViewModel.swift */; };
 		1E5F65AD89483BFA15C4A631 /* XCTestCaseSnapshotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66FB4102C86221E00D50 /* XCTestCaseSnapshotExtensions.swift */; };
 		1E5F65C6FA0D8DE93B6D76D0 /* ViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6E7B2A5B22986A6546EE /* ViewComponent.swift */; };
@@ -43,6 +49,7 @@
 		1E5F66EA138913FBE2B872CE /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6AFD51A287CB2B0DD32F /* UIApplicationExtensions.swift */; };
 		1E5F670E616A66C3A3A06023 /* PopupDismissHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F615290428A3160AB6EBD /* PopupDismissHandler.swift */; };
 		1E5F670ED38F9A5470831FFA /* SwiftUIRouterHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6D800C8D56BBC0583BF1 /* SwiftUIRouterHomeView.swift */; };
+		1E5F673C725480D1C460E8F5 /* UIKitNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F628C0DED74EDCD784FBE /* UIKitNavigationRouterTests.swift */; };
 		1E5F674324488CED3B65E96D /* PopupRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6978DB94ED509A012D9D /* PopupRoute.swift */; };
 		1E5F674483DB660ABA0D5066 /* HistoricalAssetRatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6756B29F085E048BE334 /* HistoricalAssetRatesProvider.swift */; };
 		1E5F67524A9EC8BA04B29AAC /* AssetsRatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62CB7AFAC634BC18399F /* AssetsRatesProvider.swift */; };
@@ -61,6 +68,7 @@
 		1E5F696B7A59CF7EF9244E75 /* MainAppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6B7A33B36CFB40E19864 /* MainAppFlowCoordinator.swift */; };
 		1E5F696CC6F290B422093D3E /* SwiftUIRouterAddAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6A3E0D2CEDEE635E08FF /* SwiftUIRouterAddAssetViewModel.swift */; };
 		1E5F697C7F49C976D0FA2707 /* GetHistoricalAssetRatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6E94E3D62B5565DE45B6 /* GetHistoricalAssetRatesRequest.swift */; };
+		1E5F69A03DD9F970E906217E /* FakeUIKitNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F65A2C2EC4C6E16BC1EC5 /* FakeUIKitNavigationRouter.swift */; };
 		1E5F69BE2FBACF9A1F633F34 /* AddAssetFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F69FB9D02607102804106 /* AddAssetFlowCoordinator.swift */; };
 		1E5F69C8F8CEB1FF5F283AAC /* UIKitRouterAssetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66DA453B2DC5050E8690 /* UIKitRouterAssetsListViewModel.swift */; };
 		1E5F6A7A1599F4FEC3DFC5F5 /* NavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */; };
@@ -95,6 +103,7 @@
 		1E5F6EEC19B4D8B29EE3D898 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6805DDEB00513279C1B5 /* ChartView.swift */; };
 		1E5F6EEDE9D460E07419B6B4 /* BaseAssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F65AD420335232E62C3E0 /* BaseAssetManager.swift */; };
 		1E5F6F1766C92764CB33B2CD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66FF8E0ECC21C8423800 /* RootViewController.swift */; };
+		1E5F6F1806DEA170E671F724 /* FakeHistoricalAssetRatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64CD4974E37910C9EEC5 /* FakeHistoricalAssetRatesProvider.swift */; };
 		1E5F6F527C264548EF03622D /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66D232288278ED1B8C3A /* Asset.swift */; };
 		1E5F6F86821824C57F6CF6CE /* UIKitRouterAddAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F60E868A50EE09C256C69 /* UIKitRouterAddAssetViewModel.swift */; };
 		1E5F6FA3EF112F30B935634A /* FakeSwiftUIRouterHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64F0B61F8CD1F9DC5D2D /* FakeSwiftUIRouterHomeViewModel.swift */; };
@@ -128,6 +137,7 @@
 		1E5F61502B84D29CC2CD70EB /* AssetPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPrice.swift; sourceTree = "<group>"; };
 		1E5F615290428A3160AB6EBD /* PopupDismissHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupDismissHandler.swift; sourceTree = "<group>"; };
 		1E5F621D2D85C1D85A7AA6EB /* DateFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterExtensions.swift; sourceTree = "<group>"; };
+		1E5F628C0DED74EDCD784FBE /* UIKitNavigationRouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitNavigationRouterTests.swift; sourceTree = "<group>"; };
 		1E5F62963DAC2184DB0CBA40 /* FavouriteAssetCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteAssetCellView.swift; sourceTree = "<group>"; };
 		1E5F62B76C71DB987CC38D90 /* EditAssetViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAssetViewData.swift; sourceTree = "<group>"; };
 		1E5F62B96BA2BD6CF1B6A96F /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
@@ -142,16 +152,19 @@
 		1E5F639D79A4E8968413F3EB /* EditAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAssetView.swift; sourceTree = "<group>"; };
 		1E5F63C5B93C64ECFD7B250D /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		1E5F643C13E91E6B9CD3C121 /* GetAllAssetsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllAssetsRequest.swift; sourceTree = "<group>"; };
+		1E5F64715F68F6BBB5DAF527 /* FakeFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeFlowCoordinator.swift; sourceTree = "<group>"; };
 		1E5F647A13070B3EF3FE332C /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		1E5F649113A19B112322E17E /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		1E5F6495BD778A68B283DE93 /* AssetsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsListView.swift; sourceTree = "<group>"; };
 		1E5F649A8C7F147629FC911A /* ButtonStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		1E5F64CD4974E37910C9EEC5 /* FakeHistoricalAssetRatesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeHistoricalAssetRatesProvider.swift; sourceTree = "<group>"; };
 		1E5F64D05FD121699541E96B /* AppInfoFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoFlowCoordinator.swift; sourceTree = "<group>"; };
 		1E5F64D3D6DC4BC8A829BA84 /* ViewComponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewComponentFactory.swift; sourceTree = "<group>"; };
 		1E5F64D3DD883950523741A6 /* FavouriteAssetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteAssetsManager.swift; sourceTree = "<group>"; };
 		1E5F64F0B61F8CD1F9DC5D2D /* FakeSwiftUIRouterHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSwiftUIRouterHomeViewModel.swift; sourceTree = "<group>"; };
 		1E5F64FD9731162973BCC07F /* SwiftUIRouterHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterHomeViewModel.swift; sourceTree = "<group>"; };
 		1E5F656A2479FC54684F17FE /* AddAssetRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssetRoute.swift; sourceTree = "<group>"; };
+		1E5F65A2C2EC4C6E16BC1EC5 /* FakeUIKitNavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeUIKitNavigationRouter.swift; sourceTree = "<group>"; };
 		1E5F65AD420335232E62C3E0 /* BaseAssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAssetManager.swift; sourceTree = "<group>"; };
 		1E5F65C256BD8DB488CD5C4A /* DependencyProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 		1E5F66A82E08E494DAA212F9 /* NavigationRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
@@ -175,8 +188,10 @@
 		1E5F68E48A3A9DDA311A80C8 /* FlowCoordinatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCoordinatorFactory.swift; sourceTree = "<group>"; };
 		1E5F6906889C57FA4B4B18AD /* SwiftUINavigationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUINavigationHelpers.swift; sourceTree = "<group>"; };
 		1E5F693AA1A3ECC8667C52DA /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		1E5F693FEBBD51213CB5A878 /* FakeDependencyProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeDependencyProvider.swift; sourceTree = "<group>"; };
 		1E5F6978DB94ED509A012D9D /* PopupRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupRoute.swift; sourceTree = "<group>"; };
 		1E5F697BBE5C440A4A6FE7CD /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
+		1E5F69C1F6E2D701EDAA30BB /* MainAppFlowCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppFlowCoordinatorTests.swift; sourceTree = "<group>"; };
 		1E5F69C745B13D00EC884E65 /* GetAssetsRatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAssetsRatesResponse.swift; sourceTree = "<group>"; };
 		1E5F69E2EDB3C0A37180E396 /* MainAppRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppRoute.swift; sourceTree = "<group>"; };
 		1E5F69FB9D02607102804106 /* AddAssetFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssetFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -200,8 +215,11 @@
 		1E5F6BDB9696133C585F4B94 /* UIKitRouterEditAssetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterEditAssetViewModel.swift; sourceTree = "<group>"; };
 		1E5F6C2BC688391D87A080AF /* AppInfoRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoRoute.swift; sourceTree = "<group>"; };
 		1E5F6C4424E9237374C9B43E /* SwiftUIRouterAssetsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterAssetsListViewModel.swift; sourceTree = "<group>"; };
+		1E5F6C738A4881C798C93A14 /* FakeAssetsRatesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAssetsRatesProvider.swift; sourceTree = "<group>"; };
+		1E5F6CD9ED55CE38F4BB3EAD /* FakeNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigator.swift; sourceTree = "<group>"; };
 		1E5F6CF6F2A93781697838CF /* SnapshottingExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshottingExtensions.swift; sourceTree = "<group>"; };
 		1E5F6D63394BAFC5740E6D04 /* AssetPerfromance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPerfromance.swift; sourceTree = "<group>"; };
+		1E5F6D641B30D05D26E6FE03 /* FakeAssetsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAssetsProvider.swift; sourceTree = "<group>"; };
 		1E5F6D800C8D56BBC0583BF1 /* SwiftUIRouterHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIRouterHomeView.swift; sourceTree = "<group>"; };
 		1E5F6D9A86EF37996C14E689 /* UIKitRouterAppInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitRouterAppInfoViewModel.swift; sourceTree = "<group>"; };
 		1E5F6DB75761609FE4E69ACF /* PreviewFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewFixtures.swift; sourceTree = "<group>"; };
@@ -595,6 +613,15 @@
 			path = "Add Asset";
 			sourceTree = "<group>";
 		};
+		1E5F6BD2C82B043ADE4F7CA9 /* UIKit Router */ = {
+			isa = PBXGroup;
+			children = (
+				1E5F69C1F6E2D701EDAA30BB /* MainAppFlowCoordinatorTests.swift */,
+				1E5F628C0DED74EDCD784FBE /* UIKitNavigationRouterTests.swift */,
+			);
+			path = "UIKit Router";
+			sourceTree = "<group>";
+		};
 		1E5F6BD9C7C78DB560AA5F85 /* App Info */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,6 +636,13 @@
 				1E5F64F0B61F8CD1F9DC5D2D /* FakeSwiftUIRouterHomeViewModel.swift */,
 				1E5F6AFFC7F205830280B067 /* FakeFavouriteAssetsManager.swift */,
 				1E5F67597A450FA03D79FBD4 /* FakeSwiftUINavigationRouter.swift */,
+				1E5F6CD9ED55CE38F4BB3EAD /* FakeNavigator.swift */,
+				1E5F693FEBBD51213CB5A878 /* FakeDependencyProvider.swift */,
+				1E5F6D641B30D05D26E6FE03 /* FakeAssetsProvider.swift */,
+				1E5F65A2C2EC4C6E16BC1EC5 /* FakeUIKitNavigationRouter.swift */,
+				1E5F6C738A4881C798C93A14 /* FakeAssetsRatesProvider.swift */,
+				1E5F64CD4974E37910C9EEC5 /* FakeHistoricalAssetRatesProvider.swift */,
+				1E5F64715F68F6BBB5DAF527 /* FakeFlowCoordinator.swift */,
 			);
 			path = "Fakes and Mocks";
 			sourceTree = "<group>";
@@ -799,6 +833,7 @@
 				1E5F684ACBAD512CBA88AFD0 /* SwiftUI Router */,
 				1E5F6DE3C4432923A3DE8FC0 /* Test Helpers */,
 				1E5F6C9B58A7396DCD738B7E /* Fakes and Mocks */,
+				1E5F6BD2C82B043ADE4F7CA9 /* UIKit Router */,
 			);
 			path = "SwiftUI NavigationTests";
 			sourceTree = "<group>";
@@ -1039,6 +1074,15 @@
 				1E5F66EA138913FBE2B872CE /* UIApplicationExtensions.swift in Sources */,
 				1E5F64D812A28AE9C61F5654 /* UIViewExtension.swift in Sources */,
 				1E5F6AF94AD3F6192B5A550B /* UIViewControllerExtensions.swift in Sources */,
+				1E5F6579522804EB7E27BB30 /* MainAppFlowCoordinatorTests.swift in Sources */,
+				1E5F673C725480D1C460E8F5 /* UIKitNavigationRouterTests.swift in Sources */,
+				1E5F614E095516995D424833 /* FakeNavigator.swift in Sources */,
+				1E5F658963BE56E11B8DDA27 /* FakeDependencyProvider.swift in Sources */,
+				1E5F61CF6AC48C22B1D2396C /* FakeAssetsProvider.swift in Sources */,
+				1E5F69A03DD9F970E906217E /* FakeUIKitNavigationRouter.swift in Sources */,
+				1E5F6413EC0D9B72E2241835 /* FakeAssetsRatesProvider.swift in Sources */,
+				1E5F6F1806DEA170E671F724 /* FakeHistoricalAssetRatesProvider.swift in Sources */,
+				1E5F64F58F81A683EABF9241 /* FakeFlowCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
