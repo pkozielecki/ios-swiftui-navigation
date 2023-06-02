@@ -54,10 +54,12 @@ final class FakeNavigator: Navigator {
     }
 
     func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        simulatedViewControllers.append(viewController)
         lastPushedViewController = viewController
     }
 
     func popViewController(animated: Bool) -> UIViewController? {
+        simulatedViewControllers.removeLast()
         lastPoppedViewControllerAnimation = animated
         return nil
     }
@@ -65,6 +67,8 @@ final class FakeNavigator: Navigator {
     func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         lastPoppedToViewController = viewController
         lastPoppedViewControllerAnimation = animated
+        let index = simulatedViewControllers.firstIndex(of: viewController) ?? 0
+        simulatedViewControllers.removeSubrange(index..<simulatedViewControllers.count)
         return nil
     }
 

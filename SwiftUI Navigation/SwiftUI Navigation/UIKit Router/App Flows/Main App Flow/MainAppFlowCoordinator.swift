@@ -81,9 +81,14 @@ final class MainAppFlowCoordinator: FlowCoordinator {
             return [makeEditAssetViewController(assetId: assetId)]
 
         case let .restoreNavigation(assetId):
+            // Discussion: You need to manually assign the route to the view controller if restoring a navi stack.
+            let detailsViewController = makeAssetDetailsViewController(assetId: assetId)
+            detailsViewController.route = MainAppRoute.assetDetails(assetId: assetId)
+            let editAssetViewController = makeEditAssetViewController(assetId: assetId)
+            editAssetViewController.route = MainAppRoute.editAsset(assetId: assetId)
             return [
-                makeAssetDetailsViewController(assetId: assetId),
-                makeEditAssetViewController(assetId: assetId)
+                detailsViewController,
+                editAssetViewController
             ]
 
         default:

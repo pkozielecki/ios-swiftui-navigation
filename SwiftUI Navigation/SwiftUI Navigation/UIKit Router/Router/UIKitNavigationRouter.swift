@@ -25,8 +25,8 @@ protocol UIKitNavigationRouter: AnyObject {
     /// - Parameter animated: a flag indicating whether the navigation should be animated.
     func navigateBack(animated: Bool)
 
-    /// Stops the router.
-    func stop()
+    /// Stops the current flow.
+    func stopCurrentFlow()
 
     /// Navigates back to the root view of the flow.
     ///
@@ -87,8 +87,8 @@ final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
         currentFlow?.navigateBack(toRoute: route, animated: animated)
     }
 
-    /// - SeeAlso: UIKitNavigationRouter.stop()
-    func stop() {
+    /// - SeeAlso: UIKitNavigationRouter.stopCurrentFlow()
+    func stopCurrentFlow() {
         currentFlow?.stop()
     }
 }

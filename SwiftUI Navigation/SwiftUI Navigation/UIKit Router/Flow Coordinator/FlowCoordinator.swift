@@ -145,7 +145,7 @@ extension FlowCoordinator {
     func navigateBack(animated: Bool) {
         if let presentedViewController = navigator.presentedViewController {
             presentedViewController.dismiss(animated: animated)
-        } else if navigator.viewControllers.count > 1 {
+        } else {
             _ = navigator.popViewController(animated: animated)
         }
     }
@@ -246,9 +246,10 @@ private extension FlowCoordinator {
             last.route = route
             navigator.present(last.viewController, animated: true, completion: nil)
         } else {
+            // Discussion: Not setting a route on view components to be shown...
+            // ... as it should already be done by the coordinator factory implementation.
             var currentViewControllers = navigator.viewControllers
             let viewControllers = viewComponents.map { $0.viewController }
-            viewControllers.forEach { $0.route = route }
             currentViewControllers.append(contentsOf: viewControllers)
             navigator.setViewControllers(currentViewControllers, animated: true)
         }

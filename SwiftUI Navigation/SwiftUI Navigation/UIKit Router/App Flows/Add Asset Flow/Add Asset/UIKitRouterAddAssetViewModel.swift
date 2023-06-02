@@ -65,7 +65,7 @@ final class UIKitRouterAddAssetViewModel: AddAssetViewModel {
         let assetsToStore = Array(assetsToRetain) + Array(assetsToAdd)
 
         favouriteAssetsManager.store(favouriteAssets: assetsToStore)
-        router.stop() // TODO: Maybe navigateBack() instead?
+        router.stopCurrentFlow() // TODO: Maybe navigateBack() instead?
     }
 
     /// - SeeAlso: AddAssetViewModel.onPopToRootTapped()

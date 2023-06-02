@@ -24,7 +24,7 @@ struct UIKitRouterHomeView: UIViewControllerRepresentable {
     ) {
         self.dependencyProvider = dependencyProvider
         self.rootViewController = rootViewController
-        // TODO: Stop current flow coordinator when the completion is called.
+        // TODO: Stop current flow coordinator when the completion is called. It's not leaking memory, but...
     }
 
     func makeUIViewController(context: Context) -> UIViewControllerType {

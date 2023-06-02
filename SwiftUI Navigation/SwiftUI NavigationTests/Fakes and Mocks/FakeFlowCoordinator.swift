@@ -16,6 +16,12 @@ final class FakeFlowCoordinator: FlowCoordinator {
     private(set) var lastSwitchedToRouteData: AnyHashable?
     private(set) var lastShownRoute: (any Route)?
     private(set) var lastShownRouteData: AnyHashable?
+    private(set) var lastNavigatedBackAnimated: Bool?
+    private(set) var lastNavigatedBackToRootAnimated: Bool?
+    private(set) var lastNavigatedBackToRoute: (any Route)?
+    private(set) var lastNavigatedBackToRouteAnimated: Bool?
+    private(set) var lastDidStartAnimated: Bool?
+    private(set) var lastDidStop: Bool?
 
     var navigator: Navigator {
         simulatedNavigator ?? UINavigationController()
@@ -28,9 +34,13 @@ final class FakeFlowCoordinator: FlowCoordinator {
     var child: FlowCoordinator?
     var completionCallback: (() -> Void)?
 
-    func start(animated: Bool) {}
+    func start(animated: Bool) {
+        lastDidStartAnimated = animated
+    }
 
-    func stop() {}
+    func stop() {
+        lastDidStop = true
+    }
 
     func canShow(route: any Route) -> Bool {
         simulatedCanShow ?? false
@@ -46,11 +56,18 @@ final class FakeFlowCoordinator: FlowCoordinator {
         lastSwitchedToRouteData = withData
     }
 
-    func navigateBack(animated: Bool) {}
+    func navigateBack(animated: Bool) {
+        lastNavigatedBackAnimated = animated
+    }
 
-    func navigateBackToRoot(animated: Bool) {}
+    func navigateBackToRoot(animated: Bool) {
+        lastNavigatedBackToRootAnimated = animated
+    }
 
-    func navigateBack(toRoute route: any Route, animated: Bool) {}
+    func navigateBack(toRoute route: any Route, animated: Bool) {
+        lastNavigatedBackToRoute = route
+        lastNavigatedBackToRouteAnimated = animated
+    }
 
     func makeViewComponents(forRoute route: any Route, withData: AnyHashable?) -> [ViewComponent] {
         []

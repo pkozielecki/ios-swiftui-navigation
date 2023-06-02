@@ -15,7 +15,7 @@ final class FakeUIKitNavigationRouter: UIKitNavigationRouter {
 
     func navigateBack(animated: Bool) {}
 
-    func stop() {}
+    func stopCurrentFlow() {}
 
     func navigateBackToRoot(animated: Bool) {}
 
