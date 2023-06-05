@@ -39,8 +39,20 @@ protocol Navigator: AnyObject {
     func setNavigationBarHidden(_ hidden: Bool, animated: Bool)
 }
 
+extension Navigator {
+
+    /// A helper method checking if a navigation stack contains a given route.
+    ///
+    /// - Parameter route: a route to check.
+    /// - Returns: a flag indicating whether a navigation stack contains a given route.
+    func contains(route: any Route) -> Bool {
+        viewControllers.filter { $0.route.matches(route) }.isEmpty == false
+    }
+}
+
 extension UINavigationController: Navigator {
 
+    /// - SeeAlso: `Navigator.navigationStack`
     var navigationStack: UINavigationController {
         self
     }

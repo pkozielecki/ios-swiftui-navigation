@@ -18,7 +18,7 @@ final class FakeNavigator: Navigator {
 
     private(set) var lastPushedViewController: UIViewController?
     private(set) var lastPushedViewControllerAnimation: Bool?
-    private(set) var lastPoppedViewControllerAnimation: Bool?
+    private(set) var lastPoppedToViewControllerAnimation: Bool?
     private(set) var lastPoppedToViewController: UIViewController?
     private(set) var didPopToRootViewController: Bool?
     private(set) var lastPresentedViewController: UIViewController?
@@ -59,32 +59,36 @@ final class FakeNavigator: Navigator {
     }
 
     func popViewController(animated: Bool) -> UIViewController? {
-        simulatedViewControllers.removeLast()
-        lastPoppedViewControllerAnimation = animated
+        if !simulatedViewControllers.isEmpty {
+            simulatedViewControllers.removeLast()
+        }
+        lastPoppedToViewControllerAnimation = animated
         return nil
     }
 
     func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         lastPoppedToViewController = viewController
-        lastPoppedViewControllerAnimation = animated
+        lastPoppedToViewControllerAnimation = animated
         let index = simulatedViewControllers.firstIndex(of: viewController) ?? 0
-        simulatedViewControllers.removeSubrange(index..<simulatedViewControllers.count)
+        simulatedViewControllers = Array(simulatedViewControllers[0...index])
         return nil
     }
 
     func popToRootViewController(animated: Bool) -> [UIViewController]? {
-        lastPoppedViewControllerAnimation = animated
+        lastPoppedToViewControllerAnimation = animated
         didPopToRootViewController = true
         return nil
     }
 
     func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        simulatedPresentedViewController = viewControllerToPresent
         lastPresentedViewController = viewControllerToPresent
         lastPresentedViewControllerAnimation = flag
         completion?()
     }
 
     func dismiss(animated flag: Bool, completion: (() -> Void)?) {
+        simulatedPresentedViewController = nil
         lastDismissedViewControllerAnimation = flag
         completion?()
     }

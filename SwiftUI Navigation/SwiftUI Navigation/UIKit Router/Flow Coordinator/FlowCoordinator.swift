@@ -12,6 +12,9 @@ private var FlowCoordinatorRouteKey: UInt8 = 234
 /// An associated object key for a Flow Coordinator popup dismiss handler.
 private var PopupDismissHandlerKey: UInt8 = 112
 
+/// An associated object key for a Flow Coordinator popup dismiss in progress flag.
+private var PopupDismissInProgressKey: UInt8 = 113
+
 /// An abstraction describing a navigation flow.
 protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFactory {
 
@@ -90,6 +93,7 @@ extension FlowCoordinator {
         }
     }
 
+    /// - SeeAlso: ViewComponentFactory.show(route:withData:)
     func show(route: any Route, withData: AnyHashable?) {
         guard canShow(route: route) else {
             return
@@ -111,12 +115,17 @@ extension FlowCoordinator {
         }
     }
 
+    /// - SeeAlso: ViewComponentFactory.switch(route:withData:)
     func `switch`(toRoute route: any Route, withData: AnyHashable?) {
         if canShow(route: route) {
             if isShowing(route: route) {
                 child?.stop()
                 navigateBack(toRoute: route)
             } else {
+                //  Discussion: If the desired route is NOT a popup, we need to stop the child flow (if it exists).
+                if !route.isPopup {
+                    child?.stop()
+                }
                 show(route: route, withData: withData)
             }
         } else if let parent = parent {
@@ -126,53 +135,69 @@ extension FlowCoordinator {
         }
     }
 
+    /// - SeeAlso: FlowCoordinator.start()
     func start() {
         start(animated: true)
     }
 
+    /// - SeeAlso: FlowCoordinator.show(route:)
     func show(route: any Route) {
         show(route: route, withData: nil)
     }
 
+    /// - SeeAlso: FlowCoordinator.switch(route:)
     func `switch`(toRoute route: any Route) {
         `switch`(toRoute: route, withData: nil)
     }
 
+    /// - SeeAlso: FlowCoordinator.navigateBack()
     func navigateBack() {
         navigateBack(animated: true)
     }
 
+    /// - SeeAlso: FlowCoordinator.navigateBack(animated:)
     func navigateBack(animated: Bool) {
-        if let presentedViewController = navigator.presentedViewController {
-            presentedViewController.dismiss(animated: animated)
+        if navigator.presentedViewController != nil {
+            dismissPopupIfNeeded(animated: animated)
         } else {
             _ = navigator.popViewController(animated: animated)
         }
     }
 
+    /// - SeeAlso: FlowCoordinator.navigateBackToRoot()
     func navigateBackToRoot() {
         navigateBackToRoot(animated: true)
     }
 
+    /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:)
     func navigateBackToRoot(animated: Bool) {
         _ = navigator.popToRootViewController(animated: animated)
     }
 
+    /// - SeeAlso: FlowCoordinator.navigateBack(route:)
     func navigateBack(toRoute route: any Route) {
         navigateBack(toRoute: route, animated: true)
     }
 
+    /// - SeeAlso: FlowCoordinator.navigateBack(route:animated:)
     func navigateBack(toRoute route: any Route, animated: Bool) {
         // Discussion: Affects only this coordinator - does not recurse to parent.
         // Use switch(toRoute:) to check also parent coordinators
-        if let popup = navigator.presentedViewController, popup.route.matches(route) {
-            navigateBack()
-        } else {
-            for viewController in navigator.viewControllers.reversed() {
-                if viewController.route.matches(route) {
-                    _ = navigator.popToViewController(viewController, animated: animated)
-                    break
-                }
+        if navigator.presentedViewController?.route.matches(route) == true {
+            return
+        }
+        if !navigator.contains(route: route) {
+            return
+        }
+
+        // Discussion: Dismiss popup if there is one...
+        dismissPopupIfNeeded(animated: animated)
+
+        // ... then traverse navigation stack to find a view controller matching the route.
+        for viewController in navigator.viewControllers.reversed() {
+            if viewController.route.matches(route) {
+                _ = navigator.popToViewController(viewController, animated: animated)
+                break
             }
         }
     }
@@ -192,6 +217,15 @@ private extension FlowCoordinator {
         }
         set {
             objc_setAssociatedObject(self, &PopupDismissHandlerKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
+    var isDismissingPopup: Bool {
+        get {
+            objc_getAssociatedObject(self, &PopupDismissInProgressKey) as? Bool ?? false
+        }
+        set {
+            objc_setAssociatedObject(self, &PopupDismissInProgressKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 
@@ -243,8 +277,13 @@ private extension FlowCoordinator {
             guard let last = viewComponents.last else {
                 return
             }
-            last.route = route
-            navigator.present(last.viewController, animated: true, completion: nil)
+            if navigator.presentedViewController != nil {
+                navigator.dismiss(animated: true) { [weak self] in
+                    self?.navigator.present(last.viewController, animated: true, completion: nil)
+                }
+            } else {
+                navigator.present(last.viewController, animated: true, completion: nil)
+            }
         } else {
             // Discussion: Not setting a route on view components to be shown...
             // ... as it should already be done by the coordinator factory implementation.
@@ -264,13 +303,20 @@ private extension FlowCoordinator {
         }
     }
 
+    func dismissPopupIfNeeded(animated: Bool) {
+        if !isDismissingPopup {
+            isDismissingPopup = true
+            navigator.dismiss(animated: animated) { [weak self] in
+                self?.isDismissingPopup = false
+            }
+        }
+    }
+
     func isShowing(route: any Route) -> Bool {
         if let popup = navigator.presentedViewController, popup.route.matches(route) {
             return true
         }
 
-        return navigator.viewControllers.contains { controller in
-            controller.route.matches(route)
-        }
+        return navigator.contains(route: route)
     }
 }

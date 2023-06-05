@@ -23,6 +23,9 @@ enum MainAppRoute {
     /// A route to show app info.
     case appInfo
 
+    /// A route to show app info as a standalone view.
+    case appInfoStandalone
+
     /// An embedded flow (brand new Main App flow embedded in the existing one):
     case embeddedMainAppFlow
 
@@ -32,6 +35,10 @@ enum MainAppRoute {
     /// A hypothetical app route representing a drill-down navigation.
     /// E.g. showing immediately edit asset screen, but with go-back ability to go to asset details screen.
     case restoreNavigation(assetId: String)
+
+    /// A hypothetical app route representing a single popup to be restored.
+    /// As only one popup can be displayed at once, only the last view controller is restored.
+    case restorePopupNavigation
 }
 
 extension MainAppRoute: Route {
@@ -49,12 +56,16 @@ extension MainAppRoute: Route {
             return "MainAppRoute.AddAsset"
         case .appInfo:
             return "MainAppRoute.AppInfo"
+        case .appInfoStandalone:
+            return "MainAppRoute.AppInfoStandalone"
         case .embeddedMainAppFlow:
             return "MainAppRoute.EmbeddedMainAppFlow"
         case .popupMainAppFlow:
             return "MainAppRoute.PopupMainAppFlow"
         case .restoreNavigation:
             return "MainAppRoute.RestoreNavigation"
+        case .restorePopupNavigation:
+            return "MainAppRoute.RestorePopupNavigation"
         }
     }
 
@@ -71,7 +82,7 @@ extension MainAppRoute: Route {
     /// - SeeAlso: Route.popupPresentationStyle
     var popupPresentationStyle: PopupPresentationStyle {
         switch self {
-        case .addAsset, .appInfo:
+        case .addAsset, .appInfo, .appInfoStandalone, .restorePopupNavigation:
             return .modal
         case .popupMainAppFlow:
             return Bool.random() ? .fullScreen : .modal

@@ -80,6 +80,9 @@ final class MainAppFlowCoordinator: FlowCoordinator {
         case let .editAsset(assetId):
             return [makeEditAssetViewController(assetId: assetId)]
 
+        case .appInfoStandalone:
+            return [makeAppInfoViewController()]
+
         case let .restoreNavigation(assetId):
             // Discussion: You need to manually assign the route to the view controller if restoring a navi stack.
             let detailsViewController = makeAssetDetailsViewController(assetId: assetId)
@@ -89,6 +92,17 @@ final class MainAppFlowCoordinator: FlowCoordinator {
             return [
                 detailsViewController,
                 editAssetViewController
+            ]
+
+        case .restorePopupNavigation:
+            // Discussion: You need to manually assign the route to the view controller if restoring a navi stack.
+            let appInfoViewController = makeAppInfoViewController()
+            appInfoViewController.route = MainAppRoute.addAsset // Done on purpose - to distinguish the two instances.
+            let appInfoViewController2 = makeAppInfoViewController()
+            appInfoViewController2.route = MainAppRoute.appInfoStandalone
+            return [
+                appInfoViewController,
+                appInfoViewController2
             ]
 
         default:
@@ -192,6 +206,13 @@ private extension MainAppFlowCoordinator {
             router: dependencyProvider.router
         )
         return EditAssetView(viewModel: viewModel).viewController
+    }
+
+    func makeAppInfoViewController() -> ViewComponent {
+        let viewModel = UIKitRouterAppInfoViewModel(
+            router: dependencyProvider.router
+        )
+        return AppInfoView(viewModel: viewModel).viewController
     }
 
     func addNavigationBarButtons(uiViewController: UIViewController) {
