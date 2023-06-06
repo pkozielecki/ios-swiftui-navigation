@@ -9,6 +9,8 @@ import Foundation
 
 final class FakeUIKitNavigationRouter: UIKitNavigationRouter {
 
+    var currentFlow: FlowCoordinator?
+
     func show(route: any Route, withData: AnyHashable?) {}
 
     func `switch`(toRoute route: any Route, withData: AnyHashable?) {}

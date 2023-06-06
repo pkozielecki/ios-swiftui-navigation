@@ -14,6 +14,7 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
     private let favouriteAssetsManager: FavouriteAssetsManager
     private let assetsRatesProvider: AssetsRatesProvider
     private let router: UIKitNavigationRouter
+    private let alertPresenter: AlertPresenter
     private var favouriteAssets: [Asset]
     private var cancellables = Set<AnyCancellable>()
 
@@ -22,14 +23,17 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
     /// - Parameter favouriteAssetsManager: a favourite assets manager.
     /// - Parameter assetsRatesProvider: an assets rates provider.
     /// - Parameter router: a navigation router.
+    /// - Parameter alertPresenter: an alert presenter.
     init(
         favouriteAssetsManager: FavouriteAssetsManager,
         assetsRatesProvider: AssetsRatesProvider,
-        router: UIKitNavigationRouter
+        router: UIKitNavigationRouter,
+        alertPresenter: AlertPresenter
     ) {
         self.favouriteAssetsManager = favouriteAssetsManager
         self.assetsRatesProvider = assetsRatesProvider
         self.router = router
+        self.alertPresenter = alertPresenter
         let favouriteAssets = favouriteAssetsManager.retrieveFavouriteAssets()
         viewState = UIKitRouterAssetsListViewModel.composeViewState(favouriteAssets: favouriteAssets)
         self.favouriteAssets = favouriteAssets
@@ -54,12 +58,16 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
 
     /// - SeeAlso: AssetsListViewModel.onAssetSelectedForRemoval(id:)
     func onAssetSelectedForRemoval(id: String) {
-        guard let asset = favouriteAssets.filter({ $0.id == id }).first else {
+        guard let asset = favouriteAssets.filter({
+            $0.id == id
+        })
+        .first,
+        let viewController = router.currentFlow?.navigator.navigationStack
+        else {
             return
         }
 
-        // TODO: Show alert
-        print("Removing asset: \(asset.name)")
+        showAssetDeletionAlert(viewController: viewController, asset: asset, id: id)
     }
 
     /// - SeeAlso: AssetsListViewModel.addAssetToFavourites(id:)
@@ -67,6 +75,7 @@ final class UIKitRouterAssetsListViewModel: AssetsListViewModel {
         favouriteAssets.removeAll { $0.id == id }
         favouriteAssetsManager.store(favouriteAssets: favouriteAssets)
         getAssetRates()
+        showAssetRemovedAlert(id: id)
     }
 
     /// - SeeAlso: AssetsListViewModel.onRefreshRequested()
@@ -118,6 +127,31 @@ private extension UIKitRouterAssetsListViewModel {
             }
             self.viewState = .loaded(data, lastUpdatedString)
         }
+    }
+
+    func showAssetDeletionAlert(viewController: UINavigationController, asset: Asset, id: String) {
+        alertPresenter.showAcceptanceAlert(
+            on: viewController,
+            title: "Confirmation required?",
+            message: "Would you like to remove \(asset.name) from favourites?"
+        ) { [weak self] answer in
+            if answer == .yes {
+                self?.removeAssetFromFavourites(id: id)
+            }
+        }
+    }
+
+    func showAssetRemovedAlert(id: String) {
+        guard let viewController = router.currentFlow?.navigator.navigationStack else {
+            return
+        }
+
+        alertPresenter.showInfoAlert(
+            on: viewController,
+            title: "Asset \(id) has been removed from favourites.",
+            message: nil,
+            completion: nil
+        )
     }
 }
 

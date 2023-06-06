@@ -10,6 +10,9 @@ import Foundation
 /// An abstraction describing a UIKit navigation router.
 protocol UIKitNavigationRouter: AnyObject {
 
+    /// Provides a currently shown application flow.
+    var currentFlow: FlowCoordinator? { get }
+
     /// Shows a route in the flow.
     ///
     /// - Parameters:

@@ -14,6 +14,7 @@ final class FakeDependencyProvider: DependencyProvider {
     let fakeUIKitNavigationRouter = FakeUIKitNavigationRouter()
     let fakeAssetsRatesProvider = FakeAssetsRatesProvider()
     let fakeHistoricalAssetRatesProvider = FakeHistoricalAssetRatesProvider()
+    let fakeAlertPresenter = FakeAlertPresenter()
 
     var rootAppNavigator: Navigator {
         fakeRootAppNavigator
@@ -37,5 +38,9 @@ final class FakeDependencyProvider: DependencyProvider {
 
     var router: UIKitNavigationRouter {
         fakeUIKitNavigationRouter
+    }
+
+    var alertPresenter: AlertPresenter {
+        fakeAlertPresenter
     }
 }

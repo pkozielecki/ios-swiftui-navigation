@@ -184,7 +184,8 @@ private extension MainAppFlowCoordinator {
         let viewModel = UIKitRouterAssetsListViewModel(
             favouriteAssetsManager: dependencyProvider.favouriteAssetsManager,
             assetsRatesProvider: dependencyProvider.assetsRatesProvider,
-            router: dependencyProvider.router
+            router: dependencyProvider.router,
+            alertPresenter: dependencyProvider.alertPresenter
         )
         return AssetsListView(viewModel: viewModel).viewController
     }
