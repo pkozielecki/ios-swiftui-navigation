@@ -3,8 +3,6 @@
 //  KISS Views
 //
 
-import Foundation
-
 import SwiftUI
 import UIKit
 

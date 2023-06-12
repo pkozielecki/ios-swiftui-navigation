@@ -47,6 +47,22 @@ final class DefaultAlertPresenterTest: XCTestCase {
 
         // then:
         XCTAssertEqual(didComplete, true, "Should execute completion block")
+
+        // given:
+        didComplete = nil
+
+        // when:
+        sut.showInfoAlert(on: fakeNavigationController, title: fixtureTitle, message: fixtureMessage) {
+            didComplete = true
+        }
+
+        // then:
+        XCTAssertEqual(fakeNavigationController.lastPresentedViewController, sut.alertController, "Should present alert controller")
+        XCTAssertEqual(sut.alertController?.title, fixtureTitle, "Should assign appropriate title to alert controller")
+        XCTAssertEqual(sut.alertController?.message, fixtureMessage, "Should assign appropriate message to alert controller")
+        XCTAssertEqual(sut.alertController?.actions.first?.title, "OK", "Should assign default message to action button")
+        XCTAssertEqual(sut.alertController?.preferredStyle, .alert, "Should assign appropriate style to alert controller")
+        XCTAssertEqual(sut.alertController?.actions.count, 1, "Should add two actions")
     }
 
     func test_whenAcceptanceAlertIsRequested_shouldPresentAppropriateAlertController() {
@@ -88,5 +104,30 @@ final class DefaultAlertPresenterTest: XCTestCase {
 
         // then:
         XCTAssertEqual(lastSelectedAction, .yes, "Should execute completion block with proper answer")
+
+        // given:
+        lastSelectedAction = nil
+
+        // when:
+        sut.showAcceptanceAlert(on: fakeNavigationController, title: fixtureTitle, message: fixtureMessage) { action in
+            lastSelectedAction = action
+        }
+
+        // then:
+        XCTAssertEqual(fakeNavigationController.lastPresentedViewController, sut.alertController, "Should present alert controller")
+        XCTAssertEqual(sut.alertController?.title, fixtureTitle, "Should assign appropriate title to alert controller")
+        XCTAssertEqual(sut.alertController?.message, fixtureMessage, "Should assign appropriate message to alert controller")
+        XCTAssertEqual(sut.alertController?.actions.first?.title, "Yes", "Should assign appropriate message to action button")
+        XCTAssertEqual(sut.alertController?.actions.first?.style, UIAlertAction.Style.default, "Should assign appropriate styl to action button")
+        XCTAssertEqual(sut.alertController?.actions.last?.title, "No", "Should assign appropriate message to action button")
+        XCTAssertEqual(sut.alertController?.actions.last?.style, UIAlertAction.Style.default, "Should assign appropriate styl to action button")
+        XCTAssertEqual(sut.alertController?.preferredStyle, .alert, "Should assign appropriate style to alert controller")
+        XCTAssertEqual(sut.alertController?.actions.count, 2, "Should add two actions")
+
+        // when:
+        sut.alertController?.tapButton(atIndex: 1)
+
+        // then:
+        XCTAssertEqual(lastSelectedAction, .no, "Should execute completion block with proper answer")
     }
 }

@@ -208,6 +208,50 @@ final class MainAppFlowCoordinatorTest: XCTestCase {
         //  then:
         XCTAssertNil(sut.child, "Should remove child flow")
     }
+
+    func test_whenRequestingNavigationBackToRoute_shouldCheckIfRouteIsShown() {
+        //  given:
+        sut.show(route: MainAppRoute.assetDetails(assetId: fixtureAsset.id))
+        sut.show(route: MainAppRoute.appInfoStandalone)
+
+        //  when - trying to go back to Route displayed as a popup:
+        sut.navigateBack(toRoute: MainAppRoute.appInfoStandalone)
+
+        //  then:
+        XCTAssertNil(fakeNavigator.lastDismissedViewControllerAnimation, "Should not dismiss any view controller")
+        XCTAssertNil(fakeNavigator.lastPoppedToViewController, "Should not pop to any view controller")
+
+        //  when - trying to go back to Route not displayed at the moment:
+        sut.navigateBack(toRoute: MainAppRoute.appInfo)
+
+        //  then:
+        XCTAssertNil(fakeNavigator.lastDismissedViewControllerAnimation, "Should not dismiss any view controller")
+        XCTAssertNil(fakeNavigator.lastPoppedToViewController, "Should not pop to any view controller")
+
+        //  when - truing to go back to Route displayed on the navigation stack:
+        sut.navigateBack(toRoute: MainAppRoute.assetsList)
+
+        //  then:
+        XCTAssertEqual(fakeNavigator.lastDismissedViewControllerAnimation, true, "Should dismiss current popup")
+        XCTAssertEqual(
+            fakeNavigator.lastPoppedToViewController?.route.matches(MainAppRoute.assetsList),
+            true,
+            "Should pop to a view controller representing a desired route"
+        )
+    }
+
+    func test_whenShowingPopupRoute_whenOtherPopupIsDisplayed_shouldHideThatPopupFirst() {
+        //  given:
+        sut.show(route: MainAppRoute.assetDetails(assetId: fixtureAsset.id))
+        sut.show(route: MainAppRoute.appInfo)
+
+        //  when:
+        sut.show(route: MainAppRoute.appInfoStandalone)
+
+        //  then:
+        XCTAssertEqual(fakeNavigator.lastDismissedViewControllerAnimation, true, "Should dismiss current popup")
+        XCTAssertEqual(fakeNavigator.lastPresentedViewController?.route.matches(MainAppRoute.appInfoStandalone), true, "Should show proper route")
+    }
 }
 
 private extension MainAppFlowCoordinatorTest {

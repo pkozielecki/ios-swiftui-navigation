@@ -108,9 +108,16 @@ extension FlowCoordinator {
         } else {
             let viewComponents = makeViewComponents(forRoute: route, withData: withData)
             if viewComponents.count == 1, let viewComponent = viewComponents.first {
-                show(viewComponent: viewComponent, route: route)
-            } else {
-                show(viewComponents: viewComponents, route: route)
+                // There is only a single view to show (99% of cases):
+                viewComponent.route = route
+                show(viewComponent: viewComponent, asPopup: route.isPopup)
+            } else if !route.isPopup {
+                // There are more views to show, but inline (not on a popup):
+                showInline(viewComponents: viewComponents)
+            } else if let last = viewComponents.last {
+                // Discussion: There are more views to show on a popup, but not defined as a flow.
+                // It's a hypothetical case, but we handle it anyway:
+                show(viewComponent: last, asPopup: true)
             }
         }
     }
@@ -271,35 +278,28 @@ private extension FlowCoordinator {
         }
     }
 
-    func show(viewComponents: [ViewComponent], route: any Route) {
-        if route.isPopup {
-            //  Discussion: showing only the last view as popup.
-            guard let last = viewComponents.last else {
-                return
-            }
-            if navigator.presentedViewController != nil {
-                navigator.dismiss(animated: true) { [weak self] in
-                    self?.navigator.present(last.viewController, animated: true, completion: nil)
-                }
-            } else {
-                navigator.present(last.viewController, animated: true, completion: nil)
-            }
+    func show(viewComponent: ViewComponent, asPopup: Bool) {
+        if asPopup {
+            showAsPopup(viewComponent: viewComponent)
         } else {
-            // Discussion: Not setting a route on view components to be shown...
-            // ... as it should already be done by the coordinator factory implementation.
-            var currentViewControllers = navigator.viewControllers
-            let viewControllers = viewComponents.map { $0.viewController }
-            currentViewControllers.append(contentsOf: viewControllers)
-            navigator.setViewControllers(currentViewControllers, animated: true)
+            navigator.pushViewController(viewComponent.viewController, animated: true)
         }
     }
 
-    func show(viewComponent: ViewComponent, route: any Route) {
-        viewComponent.route = route
-        if route.isPopup {
-            navigator.present(viewComponent.viewController, animated: true, completion: nil)
+    func showInline(viewComponents: [ViewComponent]) {
+        var currentViewControllers = navigator.viewControllers
+        let viewControllers = viewComponents.map { $0.viewController }
+        currentViewControllers.append(contentsOf: viewControllers)
+        navigator.setViewControllers(currentViewControllers, animated: true)
+    }
+
+    func showAsPopup(viewComponent: ViewComponent) {
+        if navigator.presentedViewController != nil {
+            navigator.dismiss(animated: true) { [weak self] in
+                self?.navigator.present(viewComponent.viewController, animated: true, completion: nil)
+            }
         } else {
-            navigator.pushViewController(viewComponent.viewController, animated: true)
+            navigator.present(viewComponent.viewController, animated: true, completion: nil)
         }
     }
 
