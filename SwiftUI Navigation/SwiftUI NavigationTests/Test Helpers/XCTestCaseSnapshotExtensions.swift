@@ -74,7 +74,7 @@ extension XCTestCase {
     }
 
     // Discussion: Introducing slight delay to allow display list to redraw before making a snapshot"
-    func waitForDisplayListRedraw(delay: Double = 0.1) {
+    func waitForDisplayListRedraw(delay: Double = 1) {
         let expectation = expectation(description: "waitForDisplayListRedraw")
 
         //  when:
@@ -87,7 +87,7 @@ extension XCTestCase {
     }
 
     // Discussion: Introducing longer delay to allow view hierarchy on the main app window to redraw:
-    func waitForViewHierarchyRedraw(window: UIWindow, delay: Double = 0.5) {
+    func waitForViewHierarchyRedraw(window: UIWindow, delay: Double = 3) {
         let expectation = expectation(description: "waitForViewHierarchyRedraw")
         UIView.setAnimationsEnabled(false)
 
