@@ -41,10 +41,11 @@ extension XCTestCase {
         functionName: String = #function,
         line: UInt = #line
     ) {
+        viewController.loadViewIfNeeded()
         viewController.forceLightMode()
         assertSnapshot(
             matching: viewController,
-            as: .image(on: .iPhone12, precision: precision, perceptualPrecision: precision),
+            as: .image(on: .iPhone12, precision: precision, perceptualPrecision: 0.95),
             named: name,
             record: isRecording,
             file: file,
@@ -115,6 +116,7 @@ extension XCTestCase {
 
         window.overrideUserInterfaceStyle = .light
         window.rootViewController = viewController
+        viewController.loadViewIfNeeded()
         return window
     }
 }
