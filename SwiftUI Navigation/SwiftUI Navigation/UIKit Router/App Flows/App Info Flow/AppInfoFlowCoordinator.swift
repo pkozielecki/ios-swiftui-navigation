@@ -48,10 +48,12 @@ final class AppInfoFlowCoordinator: FlowCoordinator {
         let appInfo = makeViewComponents(forRoute: initialRoute, withData: nil)[0]
         appInfo.route = initialRoute
         navigator.pushViewController(appInfo.viewController, animated: animated)
+        initialInternalRoute = initialRoute
     }
 
     /// - SeeAlso: FlowCoordinator.stop()
     func stop() {
+        navigateBackToRoot()
         completionCallback?()
     }
 

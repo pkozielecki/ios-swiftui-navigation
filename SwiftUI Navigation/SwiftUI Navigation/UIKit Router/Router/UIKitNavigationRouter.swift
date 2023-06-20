@@ -82,12 +82,12 @@ final class DefaultUIKitNavigationRouter: UIKitNavigationRouter {
 
     /// - SeeAlso: UIKitNavigationRouter.navigateBackToRoot(animated:)
     func navigateBackToRoot(animated: Bool) {
-        currentFlow?.navigateBackToRoot(animated: animated)
+        currentFlow?.navigateBackToRoot(animated: animated, dismissPopup: true)
     }
 
     /// - SeeAlso: UIKitNavigationRouter.navigateBack(toRoute:animated:)
     func navigateBack(toRoute route: any Route, animated: Bool) {
-        currentFlow?.navigateBack(toRoute: route, animated: animated)
+        currentFlow?.navigateBack(toRoute: route, animated: animated, dismissPopup: true)
     }
 
     /// - SeeAlso: UIKitNavigationRouter.stopCurrentFlow()

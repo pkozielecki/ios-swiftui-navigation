@@ -29,6 +29,9 @@ enum MainAppRoute {
     /// An embedded flow (brand new Main App flow embedded in the existing one):
     case embeddedMainAppFlow
 
+    /// An embedded flow showing app info.
+    case appInfoEmbedded
+
     /// A main app flow presented as a popup:
     case popupMainAppFlow
 
@@ -58,6 +61,8 @@ extension MainAppRoute: Route {
             return "MainAppRoute.AppInfo"
         case .appInfoStandalone:
             return "MainAppRoute.AppInfoStandalone"
+        case .appInfoEmbedded:
+            return "MainAppRoute.AppInfoEmbedded"
         case .embeddedMainAppFlow:
             return "MainAppRoute.EmbeddedMainAppFlow"
         case .popupMainAppFlow:
@@ -72,7 +77,7 @@ extension MainAppRoute: Route {
     /// - SeeAlso: Route.isFlow
     var isFlow: Bool {
         switch self {
-        case .embeddedMainAppFlow, .popupMainAppFlow, .addAsset, .appInfo:
+        case .embeddedMainAppFlow, .popupMainAppFlow, .addAsset, .appInfo, .appInfoEmbedded:
             return true
         default:
             return false

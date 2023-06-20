@@ -77,6 +77,7 @@
 		1E5F69C8F8CEB1FF5F283AAC /* UIKitRouterAssetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F66DA453B2DC5050E8690 /* UIKitRouterAssetsListViewModel.swift */; };
 		1E5F6A7A1599F4FEC3DFC5F5 /* NavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F62F4DD3962CCD0CDD4AE /* NavigationRouterTests.swift */; };
 		1E5F6A82F9662B725628332C /* BindingExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6AF430C47F2B0BACFD9F /* BindingExtenstions.swift */; };
+		1E5F6AAE76E22DA2CB9184CA /* NavigationStackChangesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F6F7B620D3AB736F3122F /* NavigationStackChangesHandler.swift */; };
 		1E5F6AB3D5E6A0992833CC62 /* SwiftUIRouterHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64FD9731162973BCC07F /* SwiftUIRouterHomeViewModel.swift */; };
 		1E5F6AF5EAEDC6AA76892073 /* ViewComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F64D3D6DC4BC8A829BA84 /* ViewComponentFactory.swift */; };
 		1E5F6AF94AD3F6192B5A550B /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5F607D5A7DF73D95BAD380 /* UIViewControllerExtensions.swift */; };
@@ -244,6 +245,7 @@
 		1E5F6F11D7D0CAE9D001F4BB /* AssetDetailsViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailsViewData.swift; sourceTree = "<group>"; };
 		1E5F6F30B8CB540FB14E7F3C /* AppInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
 		1E5F6F3610C2E447CFCA4D56 /* AppInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoViewModel.swift; sourceTree = "<group>"; };
+		1E5F6F7B620D3AB736F3122F /* NavigationStackChangesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStackChangesHandler.swift; sourceTree = "<group>"; };
 		1E5F6FFF1F4FE7CE4513C3CD /* UIKitNavigationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitNavigationRouter.swift; sourceTree = "<group>"; };
 		22A240E729CD884E0062221A /* SwiftUI Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI Navigation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A240EA29CD884E0062221A /* SwiftUINavigationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUINavigationApp.swift; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 			isa = PBXGroup;
 			children = (
 				1E5F615290428A3160AB6EBD /* PopupDismissHandler.swift */,
+				1E5F6F7B620D3AB736F3122F /* NavigationStackChangesHandler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1088,6 +1091,7 @@
 				1E5F68AB95C7433F4AD0D530 /* AppInfoRoute.swift in Sources */,
 				1E5F6E1C87AF67A0BECD6CF3 /* AlertPresenter.swift in Sources */,
 				1E5F6D51E50037C9CC940DD9 /* DefaultAlertPresenter.swift in Sources */,
+				1E5F6AAE76E22DA2CB9184CA /* NavigationStackChangesHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

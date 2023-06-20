@@ -36,6 +36,7 @@ final class FakeFlowCoordinator: FlowCoordinator {
 
     func start(animated: Bool) {
         lastDidStartAnimated = animated
+        initialInternalRoute = MainAppRoute.assetsList
     }
 
     func stop() {
@@ -60,11 +61,11 @@ final class FakeFlowCoordinator: FlowCoordinator {
         lastNavigatedBackAnimated = animated
     }
 
-    func navigateBackToRoot(animated: Bool) {
+    func navigateBackToRoot(animated: Bool, dismissPopup: Bool) {
         lastNavigatedBackToRootAnimated = animated
     }
 
-    func navigateBack(toRoute route: any Route, animated: Bool) {
+    func navigateBack(toRoute route: any Route, animated: Bool, dismissPopup: Bool) {
         lastNavigatedBackToRoute = route
         lastNavigatedBackToRouteAnimated = animated
     }

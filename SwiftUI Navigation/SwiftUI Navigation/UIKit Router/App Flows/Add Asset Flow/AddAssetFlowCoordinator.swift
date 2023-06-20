@@ -48,6 +48,7 @@ final class AddAssetFlowCoordinator: FlowCoordinator {
         let addAsset = makeViewComponents(forRoute: initialRoute, withData: nil)[0]
         addAsset.route = initialRoute
         navigator.pushViewController(addAsset.viewController, animated: animated)
+        initialInternalRoute = initialRoute
     }
 
     /// - SeeAlso: FlowCoordinator.stop()

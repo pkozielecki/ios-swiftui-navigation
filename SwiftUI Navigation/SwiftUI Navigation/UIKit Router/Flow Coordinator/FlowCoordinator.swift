@@ -12,8 +12,14 @@ private var FlowCoordinatorRouteKey: UInt8 = 234
 /// An associated object key for a Flow Coordinator popup dismiss handler.
 private var PopupDismissHandlerKey: UInt8 = 112
 
+private var NavigationStackChangesHandlerKey: UInt8 = 212
+// private var NavigationStackChangesPreviousHandlerKey: UInt8 = 214
+
 /// An associated object key for a Flow Coordinator popup dismiss in progress flag.
 private var PopupDismissInProgressKey: UInt8 = 113
+
+/// An associated object key for a Flow Coordinator initial internal route.
+private var FlowCoordinatorInitialInternalRoute: UInt8 = 119
 
 /// An abstraction describing a navigation flow.
 protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFactory {
@@ -64,14 +70,16 @@ protocol FlowCoordinator: ViewComponent, ViewComponentFactory, FlowCoordinatorFa
     /// Navigates back to the root view of the flow.
     ///
     /// - Parameter animated: a flag indicating whether the navigation should be animated.
-    func navigateBackToRoot(animated: Bool)
+    /// - Parameter dismissPopup: a flag indicating whether the popup should be dismissed.
+    func navigateBackToRoot(animated: Bool, dismissPopup: Bool)
 
     /// Navigates back to an already shown route.
     ///
     /// - Parameters:
     ///   - route: a route to navigate back to.
     ///   - animated: a flag indicating whether the navigation should be animated.
-    func navigateBack(toRoute route: any Route, animated: Bool)
+    ///   - dismissPopup: a flag indicating whether the popup should be dismissed.
+    func navigateBack(toRoute route: any Route, animated: Bool, dismissPopup: Bool)
 }
 
 // MARK: - Default implementation
@@ -93,10 +101,23 @@ extension FlowCoordinator {
         }
     }
 
+    /// A route that is internally displayed by the flow coordinator (at root).
+    var initialInternalRoute: (any Route)? {
+        get {
+            objc_getAssociatedObject(self, &FlowCoordinatorInitialInternalRoute) as? any Route
+        }
+        set {
+            objc_setAssociatedObject(self, &FlowCoordinatorInitialInternalRoute, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
     /// - SeeAlso: ViewComponentFactory.show(route:withData:)
     func show(route: any Route, withData: AnyHashable?) {
         guard canShow(route: route) else {
             return
+        }
+        if initialInternalRoute == nil {
+            initialInternalRoute = route
         }
 
         if route.isFlow {
@@ -129,10 +150,12 @@ extension FlowCoordinator {
                 child?.stop()
                 navigateBack(toRoute: route)
             } else {
-                //  Discussion: If the desired route is NOT a popup, we need to stop the child flow (if it exists).
-                if !route.isPopup {
+                // Discussion: If the desired route is NOT a popup and current child flow is displayed on a popup:
+                if !route.isPopup, child?.route.isPopup == true {
                     child?.stop()
                 }
+
+                navigateBackToRoot(animated: true, dismissPopup: false)
                 show(route: route, withData: withData)
             }
         } else if let parent = parent {
@@ -167,27 +190,34 @@ extension FlowCoordinator {
         if navigator.presentedViewController != nil {
             dismissPopupIfNeeded(animated: animated)
         } else {
+            // Discussion: We are currently at the initial view of the flow and going back == stopping the flow:
+            if let route = initialInternalRoute, navigator.topViewController?.route.matches(route) == true {
+                stop()
+            }
             _ = navigator.popViewController(animated: animated)
         }
     }
 
     /// - SeeAlso: FlowCoordinator.navigateBackToRoot()
     func navigateBackToRoot() {
-        navigateBackToRoot(animated: true)
+        navigateBackToRoot(animated: true, dismissPopup: true)
     }
 
-    /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:)
-    func navigateBackToRoot(animated: Bool) {
-        _ = navigator.popToRootViewController(animated: animated)
+    /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:dissmissPopup:)
+    func navigateBackToRoot(animated: Bool, dismissPopup: Bool) {
+        guard let initialRoute = initialInternalRoute else {
+            fatalError("No initial route defined.")
+        }
+        navigateBack(toRoute: initialRoute, animated: animated, dismissPopup: dismissPopup)
     }
 
     /// - SeeAlso: FlowCoordinator.navigateBack(route:)
     func navigateBack(toRoute route: any Route) {
-        navigateBack(toRoute: route, animated: true)
+        navigateBack(toRoute: route, animated: true, dismissPopup: true)
     }
 
     /// - SeeAlso: FlowCoordinator.navigateBack(route:animated:)
-    func navigateBack(toRoute route: any Route, animated: Bool) {
+    func navigateBack(toRoute route: any Route, animated: Bool, dismissPopup: Bool) {
         // Discussion: Affects only this coordinator - does not recurse to parent.
         // Use switch(toRoute:) to check also parent coordinators
         if navigator.presentedViewController?.route.matches(route) == true {
@@ -197,10 +227,11 @@ extension FlowCoordinator {
             return
         }
 
-        // Discussion: Dismiss popup if there is one...
-        dismissPopupIfNeeded(animated: animated)
+        if dismissPopup {
+            dismissPopupIfNeeded(animated: animated)
+        }
 
-        // ... then traverse navigation stack to find a view controller matching the route.
+        // Traverse navigation stack to find a view controller matching the route.
         for viewController in navigator.viewControllers.reversed() {
             if viewController.route.matches(route) {
                 _ = navigator.popToViewController(viewController, animated: animated)
@@ -227,6 +258,15 @@ private extension FlowCoordinator {
         }
     }
 
+    var navigationStackChangesHandler: NavigationStackChangesHandler? {
+        get {
+            objc_getAssociatedObject(self, &NavigationStackChangesHandlerKey) as? NavigationStackChangesHandler
+        }
+        set {
+            objc_setAssociatedObject(self, &NavigationStackChangesHandlerKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
     var isDismissingPopup: Bool {
         get {
             objc_getAssociatedObject(self, &PopupDismissInProgressKey) as? Bool ?? false
@@ -245,9 +285,21 @@ private extension FlowCoordinator {
         flowCoordinator.start(animated: true)
         flowCoordinator.route = route
         flowCoordinator.completionCallback = { [weak self] in
-            self?.navigateBack()
+            // Discussion: Executed when the child flow is stopped.
+            self?.navigator.delegate = self?.navigationStackChangesHandler
             self?.child = nil
         }
+        let stackChangesHandler = NavigationStackChangesHandler { [weak self, weak flowCoordinator] route in
+            // Discussion: We show route NOT supported by the flow, but supported by its parent
+            // ... == we went beyond the child flow's scope.
+            let parentFlowCanShow = self?.canShow(route: route) ?? false
+            let childFlowCanShow = flowCoordinator?.canShow(route: route) ?? true
+            if !childFlowCanShow, parentFlowCanShow {
+                flowCoordinator?.stop()
+            }
+        }
+        flowCoordinator.navigationStackChangesHandler = stackChangesHandler
+        navigator.delegate = stackChangesHandler
     }
 
     func createAndStartFlowOnPopup(withData: AnyHashable?, route: any Route) {
@@ -304,6 +356,9 @@ private extension FlowCoordinator {
     }
 
     func dismissPopupIfNeeded(animated: Bool) {
+        if navigator.presentedViewController == nil {
+            return
+        }
         if !isDismissingPopup {
             isDismissingPopup = true
             navigator.dismiss(animated: animated) { [weak self] in

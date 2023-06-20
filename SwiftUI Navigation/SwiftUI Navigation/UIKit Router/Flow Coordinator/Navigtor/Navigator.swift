@@ -29,10 +29,12 @@ protocol Navigator: AnyObject {
     /// A modal view presentation controller.
     var presentationController: UIPresentationController? { get }
 
+    /// A delegate object for the navigation controller.
+    var delegate: UINavigationControllerDelegate? { get set }
+
     func pushViewController(_ viewController: UIViewController, animated: Bool)
     func popViewController(animated: Bool) -> UIViewController?
     func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
-    func popToRootViewController(animated: Bool) -> [UIViewController]?
     func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
     func dismiss(animated flag: Bool, completion: (() -> Void)?)
     func setViewControllers(_ viewControllers: [UIViewController], animated: Bool)

@@ -95,7 +95,7 @@ final class MainAppFlowCoordinatorTest: XCTestCase {
         sut.navigateBackToRoot()
 
         //  then - should pop to root view controller on the flow's navigation stack:
-        XCTAssertEqual(fakeNavigator.didPopToRootViewController, true, "Should pop to root view controller")
+        XCTAssertEqual(fakeNavigator.lastPoppedToViewController?.route.matches(MainAppRoute.assetsList), true, "Should pop to root view controller")
         XCTAssertEqual(fakeNavigator.lastPoppedToViewControllerAnimation, true, "Should pop to root view controller with animation")
     }
 
@@ -191,9 +191,9 @@ final class MainAppFlowCoordinatorTest: XCTestCase {
         //  then:
         XCTAssertNil(sut.child, "Should remove child flow")
         XCTAssertEqual(fakeNavigator.lastDismissedViewControllerAnimation, true, "Should dismiss a child flow on popup")
-        XCTAssertEqual(fakeNavigator.viewControllers.count, 3, "Should have 3 view controllers")
+        XCTAssertEqual(fakeNavigator.viewControllers.count, 2, "Should have 2 view controllers: Assets List and Edit Asset")
         XCTAssertEqual(fakeNavigator.viewControllers.last?.route.matches(desiredRoute), true, "Should navigate back to Main flow and display desired route")
-        XCTAssertNil(fakeNavigator.lastPoppedToViewController, "Should not navigate back on Main flow")
+        XCTAssertEqual(fakeNavigator.lastPoppedToViewController?.route.matches(MainAppRoute.assetsList), true, "Should pop to Main flow root (Assets List)")
     }
 
     func test_whenDismissingManuallyFlowDisplayedOnPopup_shouldNotifyParentFlow() throws {

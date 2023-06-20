@@ -48,12 +48,14 @@ final class MainAppFlowCoordinator: FlowCoordinator {
         let assetsList = makeViewComponents(forRoute: initialRoute, withData: nil)[0]
         assetsList.route = initialRoute
         navigator.pushViewController(assetsList.viewController, animated: animated)
+        initialInternalRoute = initialRoute
     }
 
     /// - SeeAlso: FlowCoordinator.stop()
     func stop() {
         child?.stop()
         child = nil
+        navigateBackToRoot()
         completionCallback?()
     }
 
@@ -127,7 +129,7 @@ final class MainAppFlowCoordinator: FlowCoordinator {
             child = flowCoordinator
             return flowCoordinator
 
-        case .appInfo:
+        case .appInfo, .appInfoEmbedded:
             let flowCoordinator = AppInfoFlowCoordinator(
                 navigator: navigator,
                 dependencyProvider: dependencyProvider,
@@ -157,7 +159,7 @@ final class MainAppFlowCoordinator: FlowCoordinator {
 private extension MainAppFlowCoordinator {
 
     @objc func embeddedNavigationButtonTapped() {
-        show(route: MainAppRoute.embeddedMainAppFlow)
+        Bool.random() ? show(route: MainAppRoute.embeddedMainAppFlow) : show(route: MainAppRoute.appInfoEmbedded)
     }
 
     @objc func popupNavigationButtonTapped() {

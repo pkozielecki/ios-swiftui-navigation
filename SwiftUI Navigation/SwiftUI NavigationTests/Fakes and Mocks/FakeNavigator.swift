@@ -15,12 +15,12 @@ final class FakeNavigator: Navigator {
     var simulatedIsNavigationBarHidden: Bool?
     var simulatedPresentedViewController: UIViewController?
     var simulatedPresentationController: UIPresentationController?
+    var delegate: UINavigationControllerDelegate?
 
     private(set) var lastPushedViewController: UIViewController?
     private(set) var lastPushedViewControllerAnimation: Bool?
     private(set) var lastPoppedToViewControllerAnimation: Bool?
     private(set) var lastPoppedToViewController: UIViewController?
-    private(set) var didPopToRootViewController: Bool?
     private(set) var lastPresentedViewController: UIViewController?
     private(set) var lastPresentedViewControllerAnimation: Bool?
     private(set) var lastDismissedViewControllerAnimation: Bool?
@@ -71,12 +71,6 @@ final class FakeNavigator: Navigator {
         lastPoppedToViewControllerAnimation = animated
         let index = simulatedViewControllers.firstIndex(of: viewController) ?? 0
         simulatedViewControllers = Array(simulatedViewControllers[0...index])
-        return nil
-    }
-
-    func popToRootViewController(animated: Bool) -> [UIViewController]? {
-        lastPoppedToViewControllerAnimation = animated
-        didPopToRootViewController = true
         return nil
     }
 
