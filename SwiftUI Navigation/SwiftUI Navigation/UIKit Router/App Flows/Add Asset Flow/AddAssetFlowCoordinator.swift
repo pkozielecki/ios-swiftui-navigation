@@ -53,6 +53,7 @@ final class AddAssetFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.stop()
     func stop() {
+        cleanUpNavigationStack()
         completionCallback?()
     }
 

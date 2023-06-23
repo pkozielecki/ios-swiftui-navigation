@@ -193,8 +193,9 @@ extension FlowCoordinator {
             // Discussion: We are currently at the initial view of the flow and going back == stopping the flow:
             if let route = initialInternalRoute, navigator.topViewController?.route.matches(route) == true {
                 stop()
+            } else {
+                _ = navigator.popViewController(animated: animated)
             }
-            _ = navigator.popViewController(animated: animated)
         }
     }
 
@@ -203,7 +204,7 @@ extension FlowCoordinator {
         navigateBackToRoot(animated: true, dismissPopup: true)
     }
 
-    /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:dissmissPopup:)
+    /// - SeeAlso: FlowCoordinator.navigateBackToRoot(animated:dismissPopup:)
     func navigateBackToRoot(animated: Bool, dismissPopup: Bool) {
         guard let initialRoute = initialInternalRoute else {
             fatalError("No initial route defined.")
@@ -237,6 +238,20 @@ extension FlowCoordinator {
                 _ = navigator.popToViewController(viewController, animated: animated)
                 break
             }
+        }
+    }
+
+    /// A helper method to remove all flow views from the navigation stack.
+    /// If a flow initial view is a root view of a given `Navigator`, it won't be removed.
+    ///
+    /// - Parameter animated: A flag indicating if the transition should be animated.
+    func cleanUpNavigationStack(animated: Bool = true) {
+        if let initialInternalRoute,
+           let rootViewIndex = navigator.index(for: initialInternalRoute),
+           rootViewIndex > 0 {
+            _ = navigator.popToViewController(navigator.viewControllers[rootViewIndex - 1], animated: animated)
+        } else {
+            navigateBackToRoot(animated: animated, dismissPopup: true)
         }
     }
 }
@@ -285,7 +300,6 @@ private extension FlowCoordinator {
         flowCoordinator.start(animated: true)
         flowCoordinator.route = route
         flowCoordinator.completionCallback = { [weak self] in
-            // Discussion: Executed when the child flow is stopped.
             self?.navigator.delegate = self?.navigationStackChangesHandler
             self?.child = nil
         }

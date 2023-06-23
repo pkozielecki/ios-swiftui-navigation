@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import XCTest
 
 @testable import SwiftUI_Navigation
 
@@ -93,5 +94,13 @@ final class FakeNavigator: Navigator {
 
     func setNavigationBarHidden(_ hidden: Bool, animated: Bool) {
         simulatedIsNavigationBarHidden = hidden
+    }
+}
+
+extension FakeNavigator {
+
+    func simulateBackButtonTapped(viewToPopTo view: UIViewController, animated: Bool = false) {
+        _ = simulatedViewControllers.popLast()
+        delegate?.navigationController?(navigationStack, didShow: view, animated: animated)
     }
 }

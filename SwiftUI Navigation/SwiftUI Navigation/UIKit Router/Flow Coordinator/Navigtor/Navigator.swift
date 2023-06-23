@@ -50,6 +50,14 @@ extension Navigator {
     func contains(route: any Route) -> Bool {
         viewControllers.filter { $0.route.matches(route) }.isEmpty == false
     }
+
+    /// A helper method returning an index of a view controller showing a given route.
+    ///
+    /// - Parameter route: a route to check.
+    /// - Returns: an index of a view controller showing a given route.
+    func index(for route: any Route) -> Int? {
+        viewControllers.firstIndex { $0.route.matches(route) }
+    }
 }
 
 extension UINavigationController: Navigator {

@@ -55,7 +55,7 @@ final class MainAppFlowCoordinator: FlowCoordinator {
     func stop() {
         child?.stop()
         child = nil
-        navigateBackToRoot()
+        cleanUpNavigationStack()
         completionCallback?()
     }
 

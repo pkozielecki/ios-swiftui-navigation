@@ -252,6 +252,43 @@ final class MainAppFlowCoordinatorTest: XCTestCase {
         XCTAssertEqual(fakeNavigator.lastDismissedViewControllerAnimation, true, "Should dismiss current popup")
         XCTAssertEqual(fakeNavigator.lastPresentedViewController?.route.matches(MainAppRoute.appInfoStandalone), true, "Should show proper route")
     }
+
+    func test_whenShowingInlineFlow_andPressingBackButtonOnNavigationBar_shouldNotifyParentFlow() throws {
+        //  given:
+        let initialView = try XCTUnwrap(fakeNavigator.lastPushedViewController)
+        sut.show(route: MainAppRoute.appInfoEmbedded)
+
+        //  when:
+        fakeNavigator.simulateBackButtonTapped(viewToPopTo: initialView)
+
+        //  then:
+        // Discussion: This is what happens (in order):
+        //  1. User taps on `Back` button on the navigation bar
+        //  2. Navigation controller pops the view and notifies the delegate that the previously shown view is now visible again.
+        //  3. As the view shown now does not belong to the child flow, that flow must be stopped and removed.
+        XCTAssertNil(sut.child, "Should remove child flow")
+        //  4. However, we DO NOT need to do anything with the navigation stack, as the root view of the child flow was already popped in step 2.
+        //  5. It is vital then to make sure no further views are popped from the navigation stack.
+        XCTAssertNil(fakeNavigator.lastPoppedToViewController, "Should not pop another view")
+        XCTAssertNil(fakeNavigator.lastPoppedToViewControllerAnimation, "Should not pop another view")
+    }
+
+    func test_whenShowingInlineFlow_andItIsStopped_shouldNotifyParentFlow_andRemoveAllChildFlowViewsFromNavStack() throws {
+        //  when:
+        let initialView = try XCTUnwrap(fakeNavigator.lastPushedViewController)
+        sut.show(route: MainAppRoute.appInfoEmbedded)
+
+        //  then:
+        XCTAssertNotNil(sut.child, "Should create a child flow")
+
+        //  when:
+        sut.child?.stop()
+
+        //  then:
+        XCTAssertNil(sut.child, "Should remove child flow")
+        XCTAssertEqual(fakeNavigator.viewControllers.last?.route.matches(initialView.route), true, "Should pop to initial view")
+        XCTAssertEqual(fakeNavigator.lastPoppedToViewControllerAnimation, true, "Should pop to initial view with animation")
+    }
 }
 
 private extension MainAppFlowCoordinatorTest {

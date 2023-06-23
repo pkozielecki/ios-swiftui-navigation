@@ -53,7 +53,7 @@ final class AppInfoFlowCoordinator: FlowCoordinator {
 
     /// - SeeAlso: FlowCoordinator.stop()
     func stop() {
-        navigateBackToRoot()
+        cleanUpNavigationStack()
         completionCallback?()
     }
 
