@@ -73,6 +73,7 @@ final class SwiftUIRouterHomeViewTest: XCTestCase {
         waitForViewHierarchyRedraw(window: window)
 
         //  then:
+        waitForDisplayListRedraw(delay: 2)
         executeSnapshotTests(appWindow: window, named: "SwiftUIRouterNavi_Home_PresentedAlert")
     }
 }
