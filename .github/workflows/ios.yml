@@ -18,8 +18,14 @@ jobs:
         uses: actions/checkout@v3
       - name: Test
         run: |
-          xcodebuild test -scheme Tests -project 'SwiftUI Navigation/SwiftUI Navigation.xcodeproj' -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4' -resultBundlePath TestResults build test
+          xcodebuild test -scheme Tests -project 'SwiftUI Navigation/SwiftUI Navigation.xcodeproj' -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4' -resultBundlePath TestsResult.xcresult build test
       - uses: kishikawakatsumi/xcresulttool@v1
         with:
-          path: TestResult.xcresult
+          path: TestsResult.xcresult
+        if: success() || failure()
+      - name: Archive test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: TestsResult.xcresult
         if: success() || failure()
