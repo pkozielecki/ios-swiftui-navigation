@@ -23,9 +23,9 @@ jobs:
         with:
           path: TestsResult.xcresult
         if: success() || failure()
-      - name: Archive test results
+      - name: Archive failed snapshots
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: TestsResult.xcresult
+          path: 'SwiftUI Navigation/failed-snapshots'
         if: success() || failure()
