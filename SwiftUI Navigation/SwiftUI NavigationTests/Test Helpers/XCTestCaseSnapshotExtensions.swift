@@ -20,7 +20,6 @@ extension XCTestCase {
         functionName: String = #function,
         line: UInt = #line
     ) {
-        SnapshotTesting.diffTool = "ksdiff"
         executeSnapshotTests(
             forViewController: view.viewController,
             named: name,
@@ -42,7 +41,6 @@ extension XCTestCase {
         functionName: String = #function,
         line: UInt = #line
     ) {
-        SnapshotTesting.diffTool = "ksdiff"
         viewController.loadViewIfNeeded()
         viewController.forceLightMode()
         assertSnapshot(
@@ -65,7 +63,6 @@ extension XCTestCase {
         functionName: String = #function,
         line: UInt = #line
     ) {
-        SnapshotTesting.diffTool = "ksdiff"
         assertSnapshot(
             matching: window,
             as: .appWindow,
