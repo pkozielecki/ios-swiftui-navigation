@@ -2,6 +2,8 @@
 
 Welcome to the demonstration of **different ways** to implement **scalable navigation** in **SwiftUI** projects.
 
+[![Build & Test](https://github.com/pkozielecki/ios-swiftui-navigation/actions/workflows/ios.yml/badge.svg)](https://github.com/pkozielecki/ios-swiftui-navigation/actions/workflows/ios.yml)
+
 ## Main Features
 Showcase of 2 most reliable, currently available ways to implement SwiftUI navigation:
 * using **SwiftUIRouter** component
