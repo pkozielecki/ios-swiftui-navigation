@@ -45,7 +45,7 @@ extension XCTestCase {
         viewController.forceLightMode()
         assertSnapshot(
             matching: viewController,
-            as: .image(on: .iPhone12, precision: precision, perceptualPrecision: 0.95),
+            as: .image(on: .iPhone12, precision: precision, perceptualPrecision: 0.98),
             named: name,
             record: isRecording,
             file: file,
@@ -58,6 +58,7 @@ extension XCTestCase {
     func executeSnapshotTests(
         appWindow window: UIWindow,
         named name: String,
+        precision: Float = 0.995,
         isRecording: Bool = false,
         file: StaticString = #file,
         functionName: String = #function,
@@ -65,7 +66,7 @@ extension XCTestCase {
     ) {
         assertSnapshot(
             matching: window,
-            as: .appWindow,
+            as: .makeAppWindow(precision: precision),
             named: name,
             record: isRecording,
             file: file,
