@@ -30,8 +30,8 @@ protocol SwiftUINavigationRouter: AnyObject, ObservableObject {
 
     /// Pushes screen to navigation stack.
     ///
-    /// - Parameter screen: a screen to be pushed.
-    func push(screen: NavigationRoute.Screen)
+    /// - Parameter route: a screen to be pushed.
+    func push(route: NavigationRoute)
 
     /// Removes last view from the navigation stack.
     func pop()
@@ -47,7 +47,7 @@ protocol SwiftUINavigationRouter: AnyObject, ObservableObject {
     /// Presents provided popup as sheet.
     ///
     /// - Parameter popup: a popup to present.
-    func present(popup: PopupRoute.Popup)
+    func present(popup: PopupRoute)
 
     /// Dismisses current popup.
     func dismiss()
@@ -55,7 +55,7 @@ protocol SwiftUINavigationRouter: AnyObject, ObservableObject {
     /// Shows an alert.
     ///
     /// - Parameter alert: an alert to show.
-    func show(alert: AlertRoute.Alert)
+    func show(alert: AlertRoute)
 
     /// Removes currently displayed alert from the navigation stack.
     func hideCurrentAlert()
@@ -79,8 +79,8 @@ final class DefaultSwiftUINavigationRouter: SwiftUINavigationRouter {
 
     // MARK: - Popups:
 
-    func present(popup: PopupRoute.Popup) {
-        presentedPopup = .makePopup(named: popup)
+    func present(popup: PopupRoute) {
+        presentedPopup = popup
     }
 
     func dismiss() {
@@ -89,8 +89,7 @@ final class DefaultSwiftUINavigationRouter: SwiftUINavigationRouter {
 
     // MARK: - Inline navigation:
 
-    func push(screen: NavigationRoute.Screen) {
-        let route = NavigationRoute.makeScreen(named: screen)
+    func push(route: NavigationRoute) {
         navigationStack.append(route)
         objectWillChange.send()
     }
@@ -113,8 +112,8 @@ final class DefaultSwiftUINavigationRouter: SwiftUINavigationRouter {
 
     // MARK: - Alerts:
 
-    func show(alert: AlertRoute.Alert) {
-        presentedAlert = .makeAlert(named: alert)
+    func show(alert: AlertRoute) {
+        presentedAlert = alert
     }
 
     func hideCurrentAlert() {

@@ -37,12 +37,12 @@ final class SwiftUIRouterAssetsListViewModel: AssetsListViewModel {
 
     /// - SeeAlso: AssetsListViewModel.onAssetSelected(id:)
     func onAssetSelected(id: String) {
-        router.push(screen: .assetDetails(id))
+        router.push(route: .assetDetails(id))
     }
 
     /// - SeeAlso: AssetsListViewModel.onAssetSelectedToBeEdited(id:)
     func onAssetSelectedToBeEdited(id: String) {
-        router.push(screen: .editAsset(id))
+        router.push(route: .editAsset(id))
     }
 
     /// - SeeAlso: AssetsListViewModel.onAddNewAssetTapped()

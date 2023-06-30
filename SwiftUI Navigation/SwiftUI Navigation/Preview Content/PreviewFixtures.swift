@@ -23,14 +23,14 @@ final class PreviewSwiftUINavigationRouter: SwiftUINavigationRouter {
 
     func set(navigationStack: [NavigationRoute]) {}
 
-    func present(popup: PopupRoute.Popup) {}
+    func present(popup: PopupRoute) {}
     func dismiss() {}
 
-    func push(screen: NavigationRoute.Screen) {}
+    func push(route: NavigationRoute) {}
     func pop() {}
     func popAll() {}
 
-    func show(alert: AlertRoute.Alert) {}
+    func show(alert: AlertRoute) {}
     func hideCurrentAlert() {}
 }
 

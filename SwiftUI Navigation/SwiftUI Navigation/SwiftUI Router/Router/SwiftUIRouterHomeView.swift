@@ -61,7 +61,7 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Swif
             }
             .navigationDestination(for: NavigationRoute.self) { route in
                 //  Handling app screens, pushed to the navigation stack:
-                switch route.screen {
+                switch route {
                 case let .editAsset(id):
                     makeEditAssetView(id: id)
                 case let .assetDetails(id):
@@ -73,7 +73,7 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Swif
             .sheet(item: $router.presentedPopup) { _ in
                 if let $popup = Binding($router.presentedPopup) {
                     //  Handling app popups, presented as sheets:
-                    switch $popup.wrappedValue.popup {
+                    switch $popup.wrappedValue {
                     case .appInfo:
                         makeAppInfoView()
                     case .addAsset:
@@ -87,7 +87,7 @@ struct SwiftUIRouterHomeView<ViewModel: SwiftUIRouterHomeViewModel, Router: Swif
                 presenting: $router.presentedAlert,
                 confirmationActionCallback: { alertRoute in
                     //  Handling app alert confirmation action:
-                    switch alertRoute.alert {
+                    switch alertRoute {
                     case let .deleteAsset(assetId, _):
                         viewModel.removeAssetFromFavourites(id: assetId)
                     }
@@ -105,13 +105,13 @@ private extension SwiftUIRouterHomeView {
         }
 
         router.set(navigationStack: [
-            .makeScreen(named: .assetDetails(asset.id)),
-            .makeScreen(named: .editAsset(asset.id))
+            .assetDetails(asset.id),
+            .editAsset(asset.id)
         ])
     }
 
     func showEmbeddedHomeView() {
-        router.push(screen: .embeddedHomeView)
+        router.push(route: .embeddedHomeView)
     }
 
     func showPopupHomeView() {

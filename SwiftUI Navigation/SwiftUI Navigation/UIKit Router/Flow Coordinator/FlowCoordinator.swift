@@ -111,7 +111,7 @@ extension FlowCoordinator {
         }
     }
 
-    /// - SeeAlso: ViewComponentFactory.show(route:withData:)
+    /// - SeeAlso: FlowCoordinator.show(route:withData:)
     func show(route: any Route, withData: AnyHashable?) {
         guard canShow(route: route) else {
             return
@@ -143,7 +143,7 @@ extension FlowCoordinator {
         }
     }
 
-    /// - SeeAlso: ViewComponentFactory.switch(route:withData:)
+    /// - SeeAlso: FlowCoordinator.switch(route:withData:)
     func `switch`(toRoute route: any Route, withData: AnyHashable?) {
         if canShow(route: route) {
             if isShowing(route: route) {

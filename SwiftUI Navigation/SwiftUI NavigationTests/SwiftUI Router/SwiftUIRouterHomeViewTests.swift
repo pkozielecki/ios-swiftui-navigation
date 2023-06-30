@@ -33,16 +33,13 @@ final class SwiftUIRouterHomeViewTest: XCTestCase {
         fakeSwiftUIRouterHomeViewModel.fakeFavouriteAssetsManager.simulatedFavouriteAssets = [fixtureAsset, fixtureAsset2]
 
         //  when:
-        fakeNavigationRouter.set(navigationStack: [
-            .makeScreen(named: .assetDetails(fixtureId)),
-            .makeScreen(named: .editAsset(fixtureId))
-        ])
+        fakeNavigationRouter.set(navigationStack: [.assetDetails(fixtureId), .editAsset(fixtureId)])
 
         //  then:
         executeSnapshotTests(forView: sut, named: "SwiftUIRouterNavi_Home_PushedView")
 
         //  when:
-        fakeNavigationRouter.set(navigationStack: [.makeScreen(named: .assetDetails(fixtureId))])
+        fakeNavigationRouter.set(navigationStack: [.assetDetails(fixtureId)])
 
         //  then:
         executeSnapshotTests(forView: sut, named: "SwiftUIRouterNavi_Home_PushedView_Popped")
@@ -51,7 +48,7 @@ final class SwiftUIRouterHomeViewTest: XCTestCase {
     func test_whenSettingPopup_shouldPresentProperView() throws {
         //  given:
         let vc = UIHostingController(rootView: sut)
-        fakeNavigationRouter.presentedPopup = .makePopup(named: .appInfo)
+        fakeNavigationRouter.presentedPopup = .appInfo
 
         //  when:
         waitForDisplayListRedraw()
@@ -65,7 +62,7 @@ final class SwiftUIRouterHomeViewTest: XCTestCase {
     func test_whenSettingAlert_shouldPresentProperAlert() throws {
         //  given:
         let vc = UIHostingController(rootView: sut)
-        fakeNavigationRouter.presentedAlert = .makeAlert(named: .deleteAsset(assetId: "AU", assetName: "Gold"))
+        fakeNavigationRouter.presentedAlert = .deleteAsset(assetId: "AU", assetName: "Gold")
 
         //  when:
         waitForDisplayListRedraw()

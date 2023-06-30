@@ -37,7 +37,7 @@ final class SwiftUIRouterAssetDetailsViewModel: AssetDetailsViewModel {
 
     /// - SeeAlso: AssetDetailsViewModel.edit(assetID:)
     func edit(asset assetID: String) {
-        router.push(screen: .editAsset(assetID))
+        router.push(route: .editAsset(assetID))
     }
 
     /// - SeeAlso: AssetDetailsViewModel.reloadChart(scope:)

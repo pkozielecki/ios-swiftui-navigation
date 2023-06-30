@@ -43,7 +43,7 @@ final class DefaultSwiftUIRouterHomeViewModel: SwiftUIRouterHomeViewModel {
     }
 
     func editAssets(id: String) {
-        router.push(screen: .editAsset(id))
+        router.push(route: .editAsset(id))
     }
 
     func getRandomFavouriteAsset() -> Asset? {

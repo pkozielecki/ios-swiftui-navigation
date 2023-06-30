@@ -27,42 +27,42 @@ final class DefaultNavigationRouterTest: XCTestCase {
 
     func test_whenPushingAndPoppingViews_shouldUpdateNavigationStack() {
         //  given:
-        let fixtureFirstScreen = NavigationRoute.Screen.editAsset("abc")
-        let fixtureSecondScreen = NavigationRoute.Screen.editAsset("efg")
+        let fixtureFirstScreen = NavigationRoute.editAsset("abc")
+        let fixtureSecondScreen = NavigationRoute.editAsset("efg")
 
         //  when:
-        sut.push(screen: fixtureFirstScreen)
-        sut.push(screen: fixtureSecondScreen)
+        sut.push(route: fixtureFirstScreen)
+        sut.push(route: fixtureSecondScreen)
 
         //  then:
-        XCTAssertEqual(sut.navigationRoute?.screen, fixtureSecondScreen, "Should be showing proper screen")
+        XCTAssertEqual(sut.navigationRoute, fixtureSecondScreen, "Should be showing proper screen")
         XCTAssertEqual(sut.navigationStack.count, 2, "Should update navigation stack")
 
         //  when:
         sut.pop()
 
         //  then:
-        XCTAssertEqual(sut.navigationRoute?.screen, fixtureFirstScreen, "Should pop the screen from navigation stack")
+        XCTAssertEqual(sut.navigationRoute, fixtureFirstScreen, "Should pop the screen from navigation stack")
     }
 
     func test_whenPresentingAndDismissingPopup_shouldNotifySubscribers() {
         //  given:
-        let fixtureFirstPopup = PopupRoute.Popup.addAsset
+        let fixtureFirstPopup = PopupRoute.addAsset
 
         //  when:
         sut.present(popup: fixtureFirstPopup)
 
         //  then:
-        XCTAssertEqual(sut.presentedPopup?.popup, fixtureFirstPopup, "Should be showing second popup")
+        XCTAssertEqual(sut.presentedPopup, fixtureFirstPopup, "Should be showing second popup")
 
         //  given:
-        let fixtureSecondPopup = PopupRoute.Popup.homeView
+        let fixtureSecondPopup = PopupRoute.homeView
 
         //  when:
         sut.present(popup: fixtureSecondPopup)
 
         //  then:
-        XCTAssertEqual(sut.presentedPopup?.popup, fixtureSecondPopup, "Should be showing second popup")
+        XCTAssertEqual(sut.presentedPopup, fixtureSecondPopup, "Should be showing second popup")
 
         //  when:
         sut.dismiss()
@@ -73,13 +73,13 @@ final class DefaultNavigationRouterTest: XCTestCase {
 
     func test_whenShowingAndHiding_shouldNotifySubscribers() {
         //  given:
-        let fixtureAlert = AlertRoute.Alert.deleteAsset(assetId: "abc", assetName: "ABC")
+        let fixtureAlert = AlertRoute.deleteAsset(assetId: "abc", assetName: "ABC")
 
         //  when:
         sut.show(alert: fixtureAlert)
 
         //  then:
-        XCTAssertEqual(sut.presentedAlert?.alert, fixtureAlert, "Should be showing an alert")
+        XCTAssertEqual(sut.presentedAlert, fixtureAlert, "Should be showing an alert")
 
         //  when:
         sut.hideCurrentAlert()
@@ -90,27 +90,27 @@ final class DefaultNavigationRouterTest: XCTestCase {
 
     func test_whenSettingNavigationStack_shouldReplaceCurrentlyDisplayedScreens() {
         //  given:
-        let fixtureFirstScreen = NavigationRoute.Screen.assetDetails("abc")
-        let fixtureSecondScreen = NavigationRoute.Screen.editAsset("xyz")
-        sut.push(screen: fixtureFirstScreen)
+        let fixtureFirstScreen = NavigationRoute.assetDetails("abc")
+        let fixtureSecondScreen = NavigationRoute.editAsset("xyz")
+        sut.push(route: fixtureFirstScreen)
 
         //  when:
-        sut.set(navigationStack: [NavigationRoute.makeScreen(named: fixtureSecondScreen)])
+        sut.set(navigationStack: [fixtureSecondScreen])
 
         //  then:
-        XCTAssertEqual(sut.navigationRoute?.screen, fixtureSecondScreen, "Should set navigation stack accordingly")
+        XCTAssertEqual(sut.navigationRoute, fixtureSecondScreen, "Should set navigation stack accordingly")
         XCTAssertEqual(sut.navigationStack.count, 1, "Should replace all previous screens in navigation stack")
     }
 
     func test_whenPoppingAllScreens_shouldClearNavigationStack() {
         //  given:
-        let fixtureFirstScreen = NavigationRoute.Screen.assetDetails("abc")
-        let fixtureSecondScreen = NavigationRoute.Screen.editAsset("xyz")
-        sut.push(screen: fixtureFirstScreen)
-        sut.push(screen: fixtureFirstScreen)
-        sut.push(screen: fixtureSecondScreen)
-        sut.push(screen: fixtureSecondScreen)
-        sut.push(screen: fixtureSecondScreen) // Testing if we can add multiple instances of the same view.
+        let fixtureFirstScreen = NavigationRoute.assetDetails("abc")
+        let fixtureSecondScreen = NavigationRoute.editAsset("xyz")
+        sut.push(route: fixtureFirstScreen)
+        sut.push(route: fixtureFirstScreen)
+        sut.push(route: fixtureSecondScreen)
+        sut.push(route: fixtureSecondScreen)
+        sut.push(route: fixtureSecondScreen) // Testing if we can add multiple instances of the same view.
 
         //  then:
         XCTAssertEqual(sut.navigationStack.count, 5, "Should show all the added views")
@@ -125,18 +125,15 @@ final class DefaultNavigationRouterTest: XCTestCase {
 
     func test_whenSettingNavigationStack_shouldShowWholeCollectionOfViews() {
         //  given:
-        let fixtureFirstScreen = NavigationRoute.Screen.assetDetails("abc")
-        let fixtureSecondScreen = NavigationRoute.Screen.editAsset("xyz")
-        sut.set(navigationStack: [
-            NavigationRoute.makeScreen(named: fixtureFirstScreen),
-            NavigationRoute.makeScreen(named: fixtureSecondScreen)
-        ])
+        let fixtureFirstScreen = NavigationRoute.assetDetails("abc")
+        let fixtureSecondScreen = NavigationRoute.editAsset("xyz")
+        sut.set(navigationStack: [fixtureFirstScreen, fixtureSecondScreen])
 
         //  when:
         sut.pop()
 
         //  then:
-        XCTAssertEqual(sut.navigationRoute?.screen, fixtureFirstScreen, "Should show first app screen")
+        XCTAssertEqual(sut.navigationRoute, fixtureFirstScreen, "Should show first app screen")
         XCTAssertEqual(sut.navigationStack.count, 1, "Should have only one screen on the stack")
     }
 }

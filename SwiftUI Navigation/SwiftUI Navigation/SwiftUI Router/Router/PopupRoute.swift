@@ -6,27 +6,12 @@
 import Foundation
 
 /// A structure describing app popup route.
-struct PopupRoute: Hashable, Codable, Identifiable {
-    let popup: Popup
+enum PopupRoute: Hashable, Codable, Identifiable {
+    case addAsset
+    case homeView
+    case appInfo // A placeholder popup screen - mostly for tests.
 
     var id: Int {
-        popup.hashValue
-    }
-}
-
-extension PopupRoute {
-
-    static func makePopup(named popup: PopupRoute.Popup) -> PopupRoute {
-        PopupRoute(popup: popup)
-    }
-}
-
-extension PopupRoute {
-
-    enum Popup: Hashable, Codable {
-
-        case addAsset
-        case homeView
-        case appInfo // A placeholder popup screen - mostly for tests.
+        hashValue
     }
 }
