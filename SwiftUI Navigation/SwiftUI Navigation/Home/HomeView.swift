@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     @State private var isSwiftUINaviPresented = false
     @State private var isUIKitNaviPresented = false
-    @State private var isViewStateNaviPresented = false
 
     var body: some View {
         VStack(spacing: 30) {
@@ -47,17 +46,6 @@ struct HomeView: View {
                     }
                     let dependencyProvider = DefaultDependencyProvider(rootAppNavigator: rootViewController)
                     UIKitRouterHomeView(dependencyProvider: dependencyProvider, rootViewController: rootViewController)
-                }
-
-                Divider()
-                Button("View State (drill-down) navigation") {
-                    isViewStateNaviPresented.toggle()
-                }
-                .fullScreenCover(isPresented: $isViewStateNaviPresented) {
-                    // TODO: show SwiftUI View state-based navi showcase
-                    Button("Back") {
-                        isViewStateNaviPresented = false
-                    }
                 }
 
                 Divider()
